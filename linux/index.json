@@ -8,7 +8,7 @@
         "steps": [
             {
                 "title": "Документация",
-                "text": "step0.md"
+                "text": "step-linux-0.md"
             }
         ],
         "intro": {
