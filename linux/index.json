@@ -31,9 +31,13 @@
         }
     },
     "files": [
-        "dir",
-        "dir/file01.txt",
-        "dir/sub_dir01"
+        "prometheus.yml",
+        "./app/app.py",
+        "./app/Dockerfile",
+        "./app/pip.conf",
+        "./app/requirements.txt",
+        "./app/metrics.py",
+        "results.txt"
     ],
     "environment": {
         "showdashboard": true,
