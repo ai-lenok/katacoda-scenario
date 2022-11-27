@@ -31,6 +31,7 @@
         }
     },
     "files": [
+        "example.txt",
         "results.txt"
     ],
     "environment": {
