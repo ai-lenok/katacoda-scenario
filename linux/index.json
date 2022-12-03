@@ -21,6 +21,7 @@
         },
         "assets": {
             "host01": [
+                {"file": "00.sh", "target": "/root", "chmod": "+x"},
                 {"file": "01.sh", "target": "/root", "chmod": "+x"},
                 {"file": "02.sh", "target": "/root", "chmod": "+x"},
                 {"file": "03.sh", "target": "/root", "chmod": "+x"},
