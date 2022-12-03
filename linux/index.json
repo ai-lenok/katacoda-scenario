@@ -7,8 +7,12 @@
     "details": {
         "steps": [
             {
-                "title": "Документация",
+                "title": "Команды в консоли",
                 "text": "step-linux-0.md"
+            },
+            {
+                "title": "Скрипты",
+                "text": "step-linux-1.md"
             }
         ],
         "intro": {
@@ -17,6 +21,10 @@
         },
         "assets": {
             "host01": [
+                {"file": "01.sh", "target": "/root", "chmod": "+x"},
+                {"file": "02.sh", "target": "/root", "chmod": "+x"},
+                {"file": "03.sh", "target": "/root", "chmod": "+x"},
+                {"file": "04.sh", "target": "/root", "chmod": "+x"},
                 {"file": "send.sh", "target": "/root", "chmod": "+x"},
                 {"file": "courseBase.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
