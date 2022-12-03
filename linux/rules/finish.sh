@@ -2,6 +2,6 @@
 
 cat << EOF
 {
-    "script01": "OK",
+    "script01": "OK"
 }
 EOF
