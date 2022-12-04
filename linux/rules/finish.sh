@@ -89,8 +89,6 @@ class Checker:
         return "OK"
 
 
-
-
 if __name__ == '__main__':
     check_result = {}
     for file_name in ["00.sh", "01.sh", "02.sh", "03.sh", "04.sh", ]:

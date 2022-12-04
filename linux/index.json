@@ -25,13 +25,7 @@
                 {"file": "01.sh", "target": "/root", "chmod": "+x"},
                 {"file": "02.sh", "target": "/root", "chmod": "+x"},
                 {"file": "03.sh", "target": "/root", "chmod": "+x"},
-                {"file": "04.sh", "target": "/root", "chmod": "+x"},
-                {"file": "send.sh", "target": "/root", "chmod": "+x"},
-                {"file": "courseBase.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "verify.py", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "validate.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "load.sh", "target": "/root", "chmod": "+x"}
+                {"file": "04.sh", "target": "/root", "chmod": "+x"}
             ]
         },
         "finish": {
@@ -39,7 +33,6 @@
         }
     },
     "files": [
-        "example.txt"
     ],
     "environment": {
         "uilayout": "terminal",
