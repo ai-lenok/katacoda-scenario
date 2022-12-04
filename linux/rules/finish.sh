@@ -1,10 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-cat << EOF
-{
-    "script01": "OK",
-    "script02": "FAIL: File or directory does not exist: _file_name_",
-    "script03": "FAIL: I found the wrong text: _word_",
-    "script04": "FAIL: The filename is incorrect: _file_name_"
+import json
+
+# Data to be written
+check_result ={
+  "script01": "OK",
+  "script02": "FAIL: File or directory does not exist: _file_name_",
+  "script03": "FAIL: I found the wrong text: _word_",
+  "script04": "FAIL: The filename is incorrect: _file_name_"
 }
-EOF
+
+json_object = json.dumps(dictionary, indent = 4)
+print(json_object)
