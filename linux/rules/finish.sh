@@ -93,10 +93,10 @@ class Checker:
 
 
 
-if __name__ == '__main__':
-    check_result = {}
+#if __name__ == '__main__':
+check_result = {}
 #    for file_name in ["00.sh", "01.sh", "02.sh", "03.sh", "04.sh", ]:
-    for file_name in ["00.sh", ]:
-        check_result[file_name] = Checker(file_name).check()
-    json_object = json.dumps(check_result, indent=4)
-    print(json_object)
+for file_name in ["00.sh", ]:
+    check_result[file_name] = Checker(file_name).check()
+json_object = json.dumps(check_result, indent=4)
+print(json_object)
