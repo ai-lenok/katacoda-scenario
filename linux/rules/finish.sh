@@ -29,8 +29,6 @@ class Checker:
 
         stdout = process.stdout.strip()
         stderr = process.stderr.strip()
-        print(stdout)
-        print(stderr)
         return stdout, stderr
 
     def __check_stop_words(self, words):
@@ -48,13 +46,12 @@ class Checker:
         return False
 
     def check(self):
-      return "OK"
-#        if not pathlib.Path(self.path).is_file():
-#            return f'FAIL: {self.path} does not exist'
-#
-#        self.stdout, self.stderr = self.__run_script()
-#
-#        return self.check_method()
+        if not pathlib.Path(self.path).is_file():
+            return f'FAIL: {self.path} does not exist'
+
+        self.stdout, self.stderr = self.__run_script()
+
+        return self.check_method()
 
     def check_script_00(self):
         if self.stdout == "Hello world":
