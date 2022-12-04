@@ -94,9 +94,14 @@ class Checker:
 
 
 #if __name__ == '__main__':
-check_result = {}
+check_result = {
+    "script01": "OK",
+    "script02": "FAIL: File or directory does not exist: _file_name_",
+    "script03": "FAIL: I found the wrong text: _word_",
+    "script04": "FAIL: The filename is incorrect: _file_name_"
+}
 #    for file_name in ["00.sh", "01.sh", "02.sh", "03.sh", "04.sh", ]:
-for file_name in ["00.sh", ]:
-    check_result[file_name] = Checker(file_name).check()
+#for file_name in ["00.sh", ]:
+#    check_result[file_name] = Checker(file_name).check()
 json_object = json.dumps(check_result, indent=4)
 print(json_object)
