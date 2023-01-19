@@ -42,8 +42,8 @@
     "./src/main/java/org/example/1",
     "./src/main/java/org/example/addressbook/AddressBookApplication.java",
     "./src/main/java/org/example/addressbook/controller/AddressBookController.java",
-    "./src/main/java/org/example/addressbook/model/AddressBookController.java",
-    "./src/main/java/org/example/addressbook/repository/AddressBookController.java"
+    "./src/main/java/org/example/addressbook/model/AddressBook.java",
+    "./src/main/java/org/example/addressbook/repository/AddressBookRepository.java"
   ],
   "environment": {
     "uilayout": "terminal",
