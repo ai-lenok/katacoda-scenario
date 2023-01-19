@@ -35,8 +35,15 @@
     }
   },
   "files": [
-    "./src",
-    "./src/model/file.txt"
+    "./src/1",
+    "./src/main/1",
+    "./src/main/java/1",
+    "./src/main/java/org/1",
+    "./src/main/java/org/example/1",
+    "./src/main/java/org/example/addressbook/AddressBookApplication.java",
+    "./src/main/java/org/example/addressbook/controller/AddressBookController.java",
+    "./src/main/java/org/example/addressbook/model/AddressBookController.java",
+    "./src/main/java/org/example/addressbook/repository/AddressBookController.java"
   ],
   "environment": {
     "uilayout": "terminal",
