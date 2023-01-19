@@ -29,7 +29,6 @@
     }
   },
   "files": [
-    "./src/file.txt",
     "./src/model/file.txt"
   ],
   "environment": {
