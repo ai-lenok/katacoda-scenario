@@ -29,7 +29,7 @@
     }
   },
   "files": [
-    "./src/"
+    "./src"
   ],
   "environment": {
     "uilayout": "terminal",
