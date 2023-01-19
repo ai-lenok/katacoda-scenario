@@ -29,7 +29,8 @@
     }
   },
   "files": [
-    "./src"
+    "./src/file.txt",
+    "./src/model/file.txt"
   ],
   "environment": {
     "uilayout": "terminal",
