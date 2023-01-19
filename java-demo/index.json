@@ -29,7 +29,7 @@
     }
   },
   "files": [
-    "./src/main/AddressBook.java"
+    "./src/AddressBook.java"
   ],
   "environment": {
     "uilayout": "terminal",
