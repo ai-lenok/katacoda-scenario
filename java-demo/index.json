@@ -23,7 +23,7 @@
           "chmod": "+x"
         },
         {
-          "file": "./src/model/AddressBook.java",
+          "file": "./src/AddressBook.java",
           "target": "/root",
           "chmod": "+x"
         }
