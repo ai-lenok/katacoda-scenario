@@ -34,6 +34,7 @@
     }
   },
   "files": [
+    "./src/main/java/org/example/addressbook/model/AddressBook.java"
   ],
   "environment": {
     "uilayout": "terminal",
