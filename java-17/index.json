@@ -1,0 +1,78 @@
+{
+  "pathwayTitle": "Java 17",
+  "title": "Java 17",
+  "description": "Java 17",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "R2DBC",
+        "text": "step-1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "src/main/java/org/example/addressbook/controller/AddressBookController.java",
+          "target": "/root/src/main/java/org/example/addressbook/controller/AddressBookController.java",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/java/org/example/addressbook/model/AddressBook.java",
+          "target": "/root/src/main/java/org/example/addressbook/model/AddressBook.java",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/java/org/example/addressbook/repository/AddressBookRepository.java",
+          "target": "/root/src/main/java/org/example/addressbook/repository/AddressBookRepository.java",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/java/org/example/addressbook/AddressBookApplication.java",
+          "target": "/root/src/main/java/org/example/addressbook/AddressBookApplication.java",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/resources/application.yaml",
+          "target": "/root/src/main/resources/application.yaml",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/resources/data.sql",
+          "target": "/root/src/main/resources/data.sql",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/main/resources/schema.sql",
+          "target": "/root/src/main/resources/schema.sql",
+          "chmod": "+x"
+        },
+        {
+          "file": "src/test/java/org/example/addressbook/controller/AddressBookControllerTest.java",
+          "target": "/root/src/test/java/org/example/addressbook/controller/AddressBookControllerTest.java",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [
+  ],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "jdk17"
+  }
+}
