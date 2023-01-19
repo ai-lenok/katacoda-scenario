@@ -18,7 +18,7 @@
     "assets": {
       "host01": [
         {
-          "file": "src/main/java/org/example/addressbook/controller/AddressBookController.java",
+          "file": "AddressBookController.java",
           "target": "/root/AddressBookController.java",
           "chmod": "+x"
         }
