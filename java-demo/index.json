@@ -19,7 +19,7 @@
       "host01": [
         {
           "file": "AddressBookController.java",
-          "target": "/root/AddressBookController.java",
+          "target": "/root",
           "chmod": "+x"
         }
       ]
