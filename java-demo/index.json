@@ -21,6 +21,11 @@
           "file": "AddressBookController.java",
           "target": "/root",
           "chmod": "+x"
+        },
+        {
+          "file": "/src/model/AddressBook.java",
+          "target": "/root",
+          "chmod": "+x"
         }
       ]
     },
@@ -29,6 +34,7 @@
     }
   },
   "files": [
+    "./src/file.txt",
     "./src/model/file.txt"
   ],
   "environment": {
