@@ -18,6 +18,11 @@
     "assets": {
       "host01": [
         {
+          "file": "pom.xml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
           "file": "AddressBookController.java",
           "target": "/root/src/main/java/org/example/addressbook/controller/",
           "chmod": "+x"
