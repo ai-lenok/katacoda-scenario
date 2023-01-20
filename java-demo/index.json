@@ -63,17 +63,7 @@
       "text": "finish.md"
     }
   },
-  "files": [
-    "./src/1",
-    "./src/main/1",
-    "./src/main/java/1",
-    "./src/main/java/org/1",
-    "./src/main/java/org/example/1",
-    "./src/main/java/org/example/addressbook/AddressBookApplication.java",
-    "./src/main/java/org/example/addressbook/controller/AddressBookController.java",
-    "./src/main/java/org/example/addressbook/model/AddressBook.java",
-    "./src/main/java/org/example/addressbook/repository/AddressBookRepository.java"
-  ],
+  "files": [],
   "environment": {
     "uilayout": "terminal",
     "uisettings": "yaml",
