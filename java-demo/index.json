@@ -49,7 +49,7 @@
         },
         {
           "file": "schema.sql",
-          "target": "/root/src/main/resources/s",
+          "target": "/root/src/main/resources/",
           "chmod": "+x"
         },
         {
