@@ -1,1 +1,0 @@
-mkdir -p /root/src/main/java/org

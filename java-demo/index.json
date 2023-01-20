@@ -13,19 +13,48 @@
     ],
     "intro": {
       "text": "intro.md",
-      "background": "courseBase.sh",
       "credits": ""
     },
     "assets": {
       "host01": [
         {
           "file": "AddressBookController.java",
-          "target": "/root",
+          "target": "/root/src/main/java/org/example/addressbook/controller/",
           "chmod": "+x"
         },
         {
-          "file": "./src/AddressBook.java",
-          "target": "/root",
+          "file": "AddressBook.java",
+          "target": "/root/src/main/java/org/example/addressbook/model/",
+          "chmod": "+x"
+        },
+        {
+          "file": "AddressBookRepository.java",
+          "target": "/root/src/main/java/org/example/addressbook/repository/",
+          "chmod": "+x"
+        },
+        {
+          "file": "AddressBookApplication.java",
+          "target": "/root/src/main/java/org/example/addressbook/",
+          "chmod": "+x"
+        },
+        {
+          "file": "application.yaml",
+          "target": "/root/src/main/resources/",
+          "chmod": "+x"
+        },
+        {
+          "file": "data.sql",
+          "target": "/root/src/main/resources/",
+          "chmod": "+x"
+        },
+        {
+          "file": "schema.sql",
+          "target": "/root/src/main/resources/s",
+          "chmod": "+x"
+        },
+        {
+          "file": "AddressBookControllerTest.java",
+          "target": "/root/src/test/java/org/example/addressbook/controller/",
           "chmod": "+x"
         }
       ]
