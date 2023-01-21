@@ -15,7 +15,7 @@ public interface AddressBookRepository extends ReactiveCrudRepository<AddressBoo
 2. Подключите `AddressBookRepository` в `AddressBookController`
 
 <pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="    // ------------->">
-    final AddressBookRepository repository;
+final AddressBookRepository repository;
 
     @Autowired
     public AddressBookController(AddressBookRepository repository) {
@@ -26,7 +26,7 @@ public interface AddressBookRepository extends ReactiveCrudRepository<AddressBoo
 3. Перепишите вывод в методе `AddressBookController::getAddressBook`
 
 <pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="return Flux.empty();">
-    return repository.findAll();
+return repository.findAll();
 </pre>
 
 5. Запустите Unit тесты и убедитесь, что приложение собирается без ошибок
