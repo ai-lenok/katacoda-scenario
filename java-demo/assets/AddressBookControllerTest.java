@@ -25,6 +25,7 @@ class AddressBookControllerTest {
     @Test
     void contextLoads() {
         assertThat(webTestClient).isNotNull();
+        assertThat(repository).isNotNull();
     }
 
     @Test
