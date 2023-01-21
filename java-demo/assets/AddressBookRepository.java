@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 @Repository
-public interface AddressBookRepository extends ReactiveCrudRepository<AddressBook, Long> {
-    Flux<AddressBook> findAllBy(Pageable pageable);
+public interface AddressBookRepository {
 }

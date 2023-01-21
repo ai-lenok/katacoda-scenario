@@ -28,65 +28,17 @@ class AddressBookControllerTest {
     }
 
     @Test
-    void testSaving() {
-        AddressBook request = generateAddressBook();
-
-        final long sizeBefore = repository.findAll().count().block();
-
-        webTestClient.post()
-                .uri("/api/v1/addressbook")
-                .bodyValue(request)
-                .header("Content-Type", "application/json")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(AddressBook.class);
-
-        final long sizeAfter = repository.findAll().count().block();
-        assertEquals(sizeBefore + 1, sizeAfter);
-
-        webTestClient.get()
-                .uri("/api/v1/addressbook")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .json("[{\"id\":-3,\"firstName\":\"Petr\",\"lastName\":\"Petrov\",\"phone\":\"+79222222222\",\"birthday\":\"1990-01-01\"}," +
-                        "{\"id\":-2,\"firstName\":\"Ivan\",\"lastName\":\"Ivanov\",\"phone\":\"+79111111111\",\"birthday\":\"2000-01-01\"}," +
-                        "{\"id\":-1,\"firstName\":\"Aleksey\",\"lastName\":\"Alekseev\",\"phone\":\"+79000000000\",\"birthday\":\"1980-01-01\"}," +
-                        "{\"id\":1,\"firstName\":\"Test\",\"lastName\":\"Testerov\",\"phone\":\"+79999999999\",\"birthday\":\"2000-01-01\"}]");
-
-    }
-
-    @Test
     void testFindAll() {
         webTestClient.get()
                 .uri("/api/v1/addressbook")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .json("[{\"id\":-3,\"firstName\":\"Petr\",\"lastName\":\"Petrov\",\"phone\":\"+79222222222\",\"birthday\":\"1990-01-01\"}," +
-                        "{\"id\":-2,\"firstName\":\"Ivan\",\"lastName\":\"Ivanov\",\"phone\":\"+79111111111\",\"birthday\":\"2000-01-01\"}," +
-                        "{\"id\":-1,\"firstName\":\"Aleksey\",\"lastName\":\"Alekseev\",\"phone\":\"+79000000000\",\"birthday\":\"1980-01-01\"}]");
+                .json("""
+                        [{"id":-3,"firstName":"Petr","lastName":"Petrov","phone":"+79222222222","birthday":"1990-01-01"},
+                        {"id":-2,"firstName":"Ivan","lastName":"Ivanov","phone":"+79111111111","birthday":"2000-01-01"},
+                        {"id":-1,"firstName":"Aleksey","lastName":"Alekseev","phone":"+79000000000","birthday":"1980-01-01"}]
+                        """);
 
     }
-
-    @Test
-    void testFindAllPagination() {
-        webTestClient.get()
-                .uri(uriBuilder ->
-                        uriBuilder
-                                .path("/api/v1/addressbook")
-                                .queryParam("page", "2")
-                                .queryParam("size", "1")
-                                .build())
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .json("[{\"id\":-1,\"firstName\":\"Aleksey\",\"lastName\":\"Alekseev\",\"phone\":\"+79000000000\",\"birthday\":\"1980-01-01\"}]");
-
-    }
-
-    private AddressBook generateAddressBook() {
-        return new AddressBook(null, "Test", "Testerov", "+79999999999", LocalDate.parse("2000-01-01"));
-    }
-
 }
