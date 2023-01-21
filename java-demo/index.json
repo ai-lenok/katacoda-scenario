@@ -7,8 +7,12 @@
   "details": {
     "steps": [
       {
-        "title": "R2DBC",
+        "title": "Task",
         "text": "step-1.md"
+      },
+      {
+        "title": "Solution",
+        "text": "step-2.md"
       }
     ],
     "intro": {

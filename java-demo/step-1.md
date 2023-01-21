@@ -4,32 +4,14 @@
 
 Добавьте в поддержку базы данных
 
-## Решение
+## Детализация задания
 
-1. Добавьте в файл `AddressBookRepository` поддержку реактивного общение с базой данных
+- Модель данных уже создана в классе `model.AddressBook`
+- Сделана заготовка repository в интерфейсе `repository.AddressBookRepository`. Её необходимо доработать.
+- Сделана заготовка controller в классе `controller.AddressBookController`. Её необходимо доработать.
+- В каталоге `test` находится код Unit теста, который проверяет код. Добейтесь, чтобы Unit тесты проходили без ошибок.
 
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/repository/AddressBookRepository.java" data-target="insert" data-marker="public interface AddressBookRepository {">
-public interface AddressBookRepository extends ReactiveCrudRepository<AddressBook, Long> {
-</pre>
-
-2. Подключите `AddressBookRepository` в `AddressBookController`
-
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="    // ------------->">
-final AddressBookRepository repository;
-
-    @Autowired
-    public AddressBookController(AddressBookRepository repository) {
-        this.repository = repository;
-    }
-</pre>
-
-3. Перепишите вывод в методе `AddressBookController::getAddressBook`
-
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="return Flux.empty();">
-return repository.findAll();
-</pre>
-
-5. Запустите Unit тесты и убедитесь, что приложение собирается без ошибок
+Для проверки выполните команду
 
 ```
 mvn verify
