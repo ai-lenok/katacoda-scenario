@@ -7,7 +7,7 @@
 ### Детализация задания
 
 - Модель данных уже создана в классе `model.AddressBook`
-  `/root`{{open}}
+  `AddressBookController.java`{{open}}
   `/root/src/main/java/org/example/addressbook/model/AddressBook.java`{{open}}
 - Сделана заготовка repository в интерфейсе `repository.AddressBookRepository`. Её необходимо доработать.
   `/root/src/main/java/org/example/addressbook/repository/AddressBookRepository.java`{{open}}
