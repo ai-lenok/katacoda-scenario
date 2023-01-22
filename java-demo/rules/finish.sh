@@ -4,5 +4,5 @@ if mvn verify
 then
   echo "OK"
 else
-  echo "FAIL"
+  echo "FAIL: unit test unsuccessful"
 fi
