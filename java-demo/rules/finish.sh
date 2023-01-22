@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "OK"
+echo '{"result":"OK"}'
 #if mvn test
 #then
 #  echo "OK"
