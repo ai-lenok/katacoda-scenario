@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if pwd >> /root/out.txt ; ls -lah >> /root/out.txt
+if mvn verify &> /root/out.txt
 then
   echo '{"result":"FAIL"}'
 #  echo '{"result":"OK"}'
