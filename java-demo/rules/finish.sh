@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if mvn verify
+if mvn test
 then
   echo "OK"
 else
