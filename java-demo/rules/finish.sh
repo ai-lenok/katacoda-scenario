@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if mvn test
+if cd /root; mvn test
 then
   echo '{"result":"OK"}'
 else
