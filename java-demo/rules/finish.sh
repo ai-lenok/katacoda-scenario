@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-if mvn verify &> /root/out.txt
+if mvn verify &> /dev/null
 then
-  echo '{"result":"FAIL"}'
-#  echo '{"result":"OK"}'
+  echo '{"result":"OK"}'
 else
-  echo '{"result":"FAIL"}'
+  echo '{"result":"FAIL: BUILD FAILURE"}'
 fi
