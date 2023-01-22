@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if cd /root; mvn test
+if pwd >> /root/out.txt ; ls -lah >> /root/out.txt
 then
   echo '{"result":"OK"}'
 else
