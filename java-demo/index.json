@@ -7,11 +7,11 @@
   "details": {
     "steps": [
       {
-        "title": "Task",
+        "title": "Задание",
         "text": "step-1.md"
       },
       {
-        "title": "Solution",
+        "title": "Решение",
         "text": "step-2.md"
       }
     ],
