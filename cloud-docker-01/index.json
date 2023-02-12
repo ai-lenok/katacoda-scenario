@@ -9,10 +9,6 @@
       {
         "title": "Задание",
         "text": "step-1.md"
-      },
-      {
-        "title": "Решение",
-        "text": "step-2.md"
       }
     ],
     "intro": {
@@ -22,13 +18,13 @@
     "assets": {
       "host01": [
         {
-          "file": "pom.xml",
+          "file": "Dockerfile",
           "target": "/root/",
           "chmod": "+x"
         },
         {
-          "file": "AddressBookController.java",
-          "target": "/root/src/main/java/org/example/addressbook/controller/",
+          "file": "pom.xml",
+          "target": "/root/",
           "chmod": "+x"
         },
         {
@@ -37,33 +33,13 @@
           "chmod": "+x"
         },
         {
-          "file": "AddressBookRepository.java",
-          "target": "/root/src/main/java/org/example/addressbook/repository/",
+          "file": "AddressBookController.java",
+          "target": "/root/src/main/java/org/example/addressbook/controller/",
           "chmod": "+x"
         },
         {
           "file": "AddressBookApplication.java",
           "target": "/root/src/main/java/org/example/addressbook/",
-          "chmod": "+x"
-        },
-        {
-          "file": "application.yaml",
-          "target": "/root/src/main/resources/",
-          "chmod": "+x"
-        },
-        {
-          "file": "data.sql",
-          "target": "/root/src/main/resources/",
-          "chmod": "+x"
-        },
-        {
-          "file": "schema.sql",
-          "target": "/root/src/main/resources/",
-          "chmod": "+x"
-        },
-        {
-          "file": "AddressBookControllerTest.java",
-          "target": "/root/src/test/java/org/example/addressbook/controller/",
           "chmod": "+x"
         }
       ]
