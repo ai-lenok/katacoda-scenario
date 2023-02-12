@@ -2,21 +2,18 @@
 
 ### Кратко
 
-Добавьте поддержку базы данных
+1. Соберите Docker-образ
+2. Запустите его
 
 ### Детализация задания
 
-- Модель данных уже создана в классе `model.AddressBook`
-  `src/main/java/org/example/addressbook/model/AddressBook.java`{{open}}
-- Сделана заготовка repository в интерфейсе `repository.AddressBookRepository`. Её необходимо доработать.
-  `src/main/java/org/example/addressbook/repository/AddressBookRepository.java`{{open}}
-- Сделана заготовка controller в классе `controller.AddressBookController`. Её необходимо доработать.
-  `src/main/java/org/example/addressbook/controller/AddressBookController.java`{{open}}
-- В каталоге `test` находится код Unit теста, который проверяет код. Добейтесь, чтобы Unit тесты проходили без ошибок.
-  `src/test/java/org/example/addressbook/controller/AddressBookControllerTest.java`{{open}}
+Минимальное приложение уже написано
 
-Для проверки выполните команду
+1. Ваша задача написать `Dockerfile`
+   `Dockerfile`{{open}}
+2. Собрать Docker-образ с названием `addressbook:1`
+3. Запустить `addressbook:1`, так, чтобы к нему можно было обратиться по HTTP
 
-```
-mvn verify
-```{{execute}}
+### Важное замечание
+
+В этом образе сборку образа надо начинать с `sudo docker ...`

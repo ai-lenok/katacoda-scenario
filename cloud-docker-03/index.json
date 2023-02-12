@@ -28,6 +28,11 @@
           "chmod": "+x"
         },
         {
+          "file": "AddressBook.java",
+          "target": "/root/src/main/java/org/example/addressbook/model/",
+          "chmod": "+x"
+        },
+        {
           "file": "AddressBookController.java",
           "target": "/root/src/main/java/org/example/addressbook/controller/",
           "chmod": "+x"
