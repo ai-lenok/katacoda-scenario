@@ -7,7 +7,7 @@
   "details": {
     "steps": [
       {
-        "title": "Задание",
+        "title": "Создание Docker-образа",
         "text": "step-1.md"
       }
     ],
