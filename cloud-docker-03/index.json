@@ -17,6 +17,21 @@
     },
     "assets": {
       "host01": [
+        {
+          "file": "compose.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "application.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "init-db.sql",
+          "target": "/root/",
+          "chmod": "+x"
+        }
       ]
     },
     "finish": {
