@@ -38,9 +38,9 @@ class Checker:
         command = ["docker", "container", "ls"]
         self.stdout, self.stderr = self.__run_script(command)
 
-        inet = re.compile(r'^\s*\w*\s*localhost/addressbook:1')
+        docker_container = re.compile(r'^\s*\w*\s*localhost/addressbook:1')
         for line in self.stdout.split("\n"):
-            match = re.match(inet, line)
+            match = re.match(docker_container, line)
             if match:
                 return "OK"
         return f"FAIL: Does not have correct docker container"
