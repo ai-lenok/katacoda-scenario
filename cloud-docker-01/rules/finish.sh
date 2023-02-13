@@ -46,10 +46,13 @@ class Checker:
         return f"FAIL: Does not have correct docker container"
 
     def check_port(self):
-      res = requests.get("http://localhost:8080/api/v1/addressbooks")
-      if res.status_code == 200:
-        return "OK"
-      else:
+      try:
+        res = requests.get("http://localhost:8080/api/v1/addressbooks")
+        if res.status_code == 200:
+          return "OK"
+        else:
+          return "FAIL: Port does not open"
+      except:
         return "FAIL: Port does not open"
 
 if __name__ == '__main__':
