@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import json
-import sys
 import subprocess
-import pathlib
 import re
+import time
+
 import requests
 
 
@@ -71,13 +71,36 @@ class Checker:
 
     def check_db(self):
         try:
-            res = requests.get("http://localhost:8080/api/v1/addressbooks")
-            if res.status_code == 200:
+            rows_start = self.__count_rows()
+            need_rows_after_put = rows_start + 1
+
+            self.__add_row()
+            rows_added = self.__count_rows()
+
+            self.__restart_compose()
+            time.sleep(5)
+
+            rows_end = self.__count_rows()
+
+            if need_rows_after_put == rows_added and \
+                    rows_added == rows_end:
                 return "OK"
             else:
-                return "FAIL: Port does not open"
-        except:
-            return "FAIL: Port does not open"
+                return "FAIL: Storage check failed"
+        except Exception as e:
+            return f"FAIL: {e}"
+
+    def __add_row(self):
+        data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
+        requests.post("http://localhost:8080/api/v1/addressbook", json=data)
+
+    def __count_rows(self):
+        addressbooks = requests.get("http://localhost:8080/api/v1/addressbooks")
+        return len(addressbooks.json())
+
+    def __restart_compose(self):
+        self.__run_script(["docker-compose", "down"])
+        self.__run_script(["docker-compose", "up", "-d"])
 
 
 if __name__ == '__main__':
@@ -86,5 +109,6 @@ if __name__ == '__main__':
     check_result["docker image"] = checker.check_image()
     check_result["docker-compose ps"] = checker.check_compose_ps()
     check_result["open port"] = checker.check_port()
+    check_result["storage"] = checker.check_db()
     json_object = json.dumps(check_result, indent=4)
     print(json_object)
