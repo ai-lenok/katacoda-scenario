@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Cloud docker 01",
-  "title": "Cloud docker 01",
-  "description": "Cloud docker 01",
+  "pathwayTitle": "Создание Docker-образа",
+  "title": "Создание Docker-образа",
+  "description": "Создание Docker-образа",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
