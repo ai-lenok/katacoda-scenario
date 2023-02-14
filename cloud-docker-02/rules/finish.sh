@@ -8,6 +8,10 @@ import time
 import requests
 
 
+class WrongTypeAnswerException(Exception):
+    pass
+
+
 class Checker:
     def __init__(self):
         self.stdout = ''
@@ -62,12 +66,14 @@ class Checker:
     def check_port(self):
         try:
             res = requests.get("http://localhost:8080/api/v1/addressbooks")
+            if type(res.json()) != list:
+                return f"FAIL: Application returned bad answer. {res.json()}"
             if res.status_code == 200:
                 return "OK"
             else:
-                return "FAIL: Port does not open"
+                return "FAIL: Port 8080 does not open"
         except:
-            return "FAIL: Port does not open"
+            return "FAIL: Port 8080 does not open"
 
     def check_db(self):
         try:
@@ -77,18 +83,32 @@ class Checker:
             self.__add_row()
             rows_added = self.__count_rows()
 
+            if need_rows_after_put != rows_added:
+                return f'FAIL: Before saving rows: {rows_start}, after: {rows_added}. ' \
+                       f'{need_rows_after_put} needs after saving.'
+        except requests.exceptions.RequestException:
+            return "FAIL: Port 8080 does not open"
+        except WrongTypeAnswerException as e:
+            return f"FAIL: Application returned bad answer: {e}"
+
+        return self.__check_after_restarting(rows_added)
+
+    def __check_after_restarting(self, rows_expected):
+        try:
             self.__restart_compose()
             time.sleep(5)
 
             rows_end = self.__count_rows()
 
-            if need_rows_after_put == rows_added and \
-                    rows_added == rows_end:
+            if rows_expected == rows_end:
                 return "OK"
             else:
-                return "FAIL: Storage check failed"
-        except Exception as e:
-            return f"FAIL: {e}"
+                return f'FAIL: Before restarting rows: {rows_expected}, after: {rows_end}. ' \
+                       f'They must be equal to each other.'
+        except requests.exceptions.RequestException:
+            return "FAIL: Port 8080 does not open after restarting docker-compose"
+        except WrongTypeAnswerException as e:
+            return f"FAIL: Application returned bad answer: {e}"
 
     def __add_row(self):
         data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
@@ -96,6 +116,8 @@ class Checker:
 
     def __count_rows(self):
         addressbooks = requests.get("http://localhost:8080/api/v1/addressbooks")
+        if type(addressbooks.json()) != list:
+            raise WrongTypeAnswerException(addressbooks.json())
         return len(addressbooks.json())
 
     def __restart_compose(self):
