@@ -1,0 +1,57 @@
+{
+  "pathwayTitle": "Баги в Docker-compose",
+  "title": "Баги в Docker-compose",
+  "description": "Баги в Docker-compose",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Баги в Docker-compose",
+        "text": "step-1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "compose.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "application.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "init-db.sql",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/root/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "jdk17"
+  }
+}

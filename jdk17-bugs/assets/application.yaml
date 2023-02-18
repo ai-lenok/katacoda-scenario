@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgres://db:5432/addressbook_db
+    username: addressbook
+    password: my_pass
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
