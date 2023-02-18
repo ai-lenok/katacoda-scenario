@@ -23,17 +23,17 @@
           "chmod": "+x"
         },
         {
-          "file": "application.yaml",
+          "file": "01-file.yaml",
           "target": "/root/",
           "chmod": "+x"
         },
         {
-          "file": "init-db.sql",
+          "file": "03-file.sql",
           "target": "/root/",
           "chmod": "+x"
         },
         {
-          "file": "finish.py",
+          "file": "02-file.py",
           "target": "/root/",
           "chmod": "+x"
         }
