@@ -7,8 +7,16 @@
   "details": {
     "steps": [
       {
-        "title": "Баги в Docker-compose",
+        "title": "Volume хранилище",
         "text": "step-1.md"
+      },
+      {
+        "title": "Монтирование volume папки к host системе",
+        "text": "step-2.md"
+      },
+      {
+        "title": "docker-compose up не возвращает управление в терминал",
+        "text": "step-3.md"
       }
     ],
     "intro": {
