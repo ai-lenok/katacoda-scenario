@@ -8,7 +8,7 @@
 Нажимаем Ctrl+C \
 Ввод в терминал не возвращается
 
-Если пару раз нажать на это сочетание, видим
+Если пару раз нажать на Ctrl+C, видим
 
 ```text
 ^CGracefully stopping... (press Ctrl+C again to force)
