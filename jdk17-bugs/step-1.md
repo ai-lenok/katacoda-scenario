@@ -101,10 +101,14 @@ volumes:
 Нажимаем Ctrl+C \
 Ввод в терминал не возвращается
 
-Видим надпись
+Если пару раз нажать на это сочетание, видим
 
 ```text
-no container to kill
+^CGracefully stopping... (press Ctrl+C again to force)
+Aborting on container exit...
+[+] Running 1/0
+ ⠿ Container root-db-1  Stopped                                                                                                                       0.0s
+^Cno container to kill
 ```
 
 ### Ожидаемое поведение
