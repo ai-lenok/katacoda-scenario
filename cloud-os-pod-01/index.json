@@ -9,6 +9,10 @@
       {
         "title": "Создание Pod в OpenShift",
         "text": "step-1.md"
+      },
+      {
+        "title": "Работа с Web console OpenShift",
+        "text": "step-2.md"
       }
     ],
     "intro": {
