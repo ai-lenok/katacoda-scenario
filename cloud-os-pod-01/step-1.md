@@ -2,10 +2,21 @@
 
 ### Кратко
 
-Напишите конфигурацию Pod, которая запустит приложение в OpenShift
+Разверните Pod с приложением addressbook
 
 ### Детализация
 
-Приложение можно скачать по адресу `nexus.local:5000/java-school/cloud/addressbook:1`
+1. Напишите конфигурацию Pod
 
-`oc apply -f pod.yaml`{{execute}}
+Откройте `pod.yaml`
+`pod.yaml`{{open}}
+
+- Pod name: `addressbook`
+- Docker-образ: `nexus.local:5000/java-school/cloud/addressbook:1`
+- В список labels добавьте
+
+```yaml
+app: addressbook
+```
+
+2. Запустите Pod используя написанную конфигурацию
