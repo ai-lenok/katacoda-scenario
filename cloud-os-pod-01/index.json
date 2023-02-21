@@ -44,19 +44,10 @@
       "clusterRoleNameForBinding": "admin",
       "projects": [
         {
-          "name": "infra",
-          "displayName": "infra",
-          "description": "Проект для окружения - брокера Kafka",
-          "uiRole": "admin"
-        },
-        {
           "name": "work",
           "displayName": "work",
-          "description": "Проект для упражнения",
-          "inServiceMeshControlPlane": {
-            "name": "basic",
-            "namespace": "istio-system"
-          }
+          "description": "This is project for exercise workloads",
+          "uiRole": "admin"
         }
       ]
     }
