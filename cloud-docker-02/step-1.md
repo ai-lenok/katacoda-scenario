@@ -43,7 +43,7 @@ volumes:
 
 ```yaml
 volumes:
-  - ./data:/var/lib/postgresql/data
+  - ./.data:/var/lib/postgresql/data
 ```
 
 Чтобы сохранять данные после перезагрузки Docker-compose
