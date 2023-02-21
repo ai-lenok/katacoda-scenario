@@ -46,22 +46,15 @@
         {
           "name": "infra",
           "displayName": "infra",
-          "description": "This is project for exercise dependencies workloads"
-        },
-        {
-          "name": "adm",
-          "displayName": "adm",
-          "description": "This is project for demo adm privs on ui",
-          "uiRole": "admin"
+          "description": "Проект для окружения - брокера Kafka"
         },
         {
           "name": "work",
           "displayName": "work",
-          "description": "This is project for exercise workloads",
-          "uiRole": "view",
+          "description": "Проект для упражнения",
           "inServiceMeshControlPlane": {
             "name": "basic",
-            "namespace": "java-school-os-pod-01"
+            "namespace": "istio-system"
           }
         }
       ]
