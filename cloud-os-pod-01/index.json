@@ -1,0 +1,70 @@
+{
+  "pathwayTitle": "Создание Pod в OpenShift",
+  "title": "Создание Pod в OpenShift",
+  "description": "Создание Pod в OpenShift",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Создание Pod в OpenShift",
+        "text": "step-1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "pod.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "openshift-client",
+    "openShift": {
+      "enable": true,
+      "serviceAccountNameInProject": "student",
+      "clusterRoleNameForBinding": "admin",
+      "projects": [
+        {
+          "name": "infra",
+          "displayName": "infra",
+          "description": "This is project for exercise dependencies workloads"
+        },
+        {
+          "name": "adm",
+          "displayName": "adm",
+          "description": "This is project for demo adm privs on ui",
+          "uiRole": "admin"
+        },
+        {
+          "name": "work",
+          "displayName": "work",
+          "description": "This is project for exercise workloads",
+          "uiRole": "view",
+          "inServiceMeshControlPlane": {
+            "name": "basic",
+            "namespace": "java-school-os-pod-01"
+          }
+        }
+      ]
+    }
+  }
+}
