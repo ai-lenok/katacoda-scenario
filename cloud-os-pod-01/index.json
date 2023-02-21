@@ -55,7 +55,7 @@
           "uiRole": "admin",
           "inServiceMeshControlPlane": {
             "name": "basic",
-            "namespace": "istio-system"
+            "namespace": "os-system"
           }
         }
       ]
