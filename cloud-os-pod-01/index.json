@@ -52,6 +52,7 @@
           "name": "work",
           "displayName": "work",
           "description": "Проект для упражнения",
+          "uiRole": "admin",
           "inServiceMeshControlPlane": {
             "name": "basic",
             "namespace": "istio-system"
