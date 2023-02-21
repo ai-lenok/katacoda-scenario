@@ -46,13 +46,13 @@
         {
           "name": "infra",
           "displayName": "infra",
-          "description": "Проект для окружения - брокера Kafka"
+          "description": "Проект для окружения - брокера Kafka",
+          "uiRole": "admin"
         },
         {
           "name": "work",
           "displayName": "work",
           "description": "Проект для упражнения",
-          "uiRole": "admin",
           "inServiceMeshControlPlane": {
             "name": "basic",
             "namespace": "istio-system"
