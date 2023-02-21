@@ -13,10 +13,6 @@
 
 - Pod name: `addressbook`
 - Docker-образ: `nexus.local:5000/java-school/cloud/addressbook:1`
-- В список labels добавьте
-
-```yaml
-app: addressbook
-```
+- В список labels добавьте `app: addressbook`
 
 2. Запустите Pod используя написанную конфигурацию
