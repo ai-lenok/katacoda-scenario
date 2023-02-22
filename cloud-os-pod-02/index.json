@@ -71,6 +71,11 @@
           "file": "03-delete.sh",
           "target": "/root/",
           "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
         }
       ]
     },
