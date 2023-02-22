@@ -32,7 +32,7 @@
         },
         {
           "file": "finish.py",
-          "target": "/root/",
+          "target": "/usr/lib/",
           "chmod": "+x"
         }
       ]
