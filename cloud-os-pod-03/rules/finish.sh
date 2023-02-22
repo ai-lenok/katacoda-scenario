@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-printf "{\"Message\": \"FAIL: $(oc get pods)\"}"
+PS1=1
+source /root/.bashrc
+
+python3 finish.py
