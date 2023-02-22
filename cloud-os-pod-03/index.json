@@ -32,7 +32,7 @@
         },
         {
           "file": "finish.py",
-          "target": "/usr/lib/",
+          "target": "/usr/lib/checker/",
           "chmod": "+x"
         }
       ]
