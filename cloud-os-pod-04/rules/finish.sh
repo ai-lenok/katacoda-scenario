@@ -11,8 +11,8 @@ class Checker:
     def __init__(self):
         self.stdout = ''
         self.stderr = ''
-        os.environ['PS1'] = 1
-        self.__run_script(["source", "/root/.bashrc"])
+        os.environ['PS1'] = "1"
+#        self.__run_script(["source", "/root/.bashrc"])
 
     @staticmethod
     def __run_script(command):
