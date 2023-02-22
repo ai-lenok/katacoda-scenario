@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import os
 import re
 import subprocess
 
@@ -64,9 +63,8 @@ class Checker:
 
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {}
-    check_result["Pod"] = checker.has_pod()
-    check_result["Label"] = checker.has_label()
-    check_result["Image"] = checker.check_image()
+    check_result = {"Pod": checker.has_pod(),
+                    "Label": checker.has_label(),
+                    "Image": checker.check_image()}
     json_object = json.dumps(check_result, indent=4)
     print(json_object)
