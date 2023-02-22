@@ -1,22 +1,30 @@
 {
-  "pathwayTitle": "Создание Pod в OpenShift-Debug-2",
-  "title": "Создание Pod в OpenShift-Debug-2",
-  "description": "Создание Pod в OpenShift-Debug-2",
+  "pathwayTitle": "Простейшие команды OpenShift CLI-Debug",
+  "title": "Простейшие команды OpenShift CLI-Debug",
+  "description": "Простейшие команды OpenShift CLI-Debug",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
     "steps": [
       {
-        "title": "Создание Pod в OpenShift",
+        "title": "Описание",
         "text": "step-1.md"
       },
       {
-        "title": "Авторизация в Web console OpenShift",
+        "title": "Работающий пример",
         "text": "step-2.md"
       },
       {
-        "title": "Работа с Web console OpenShift",
+        "title": "Список Pod'ов",
         "text": "step-3.md"
+      },
+      {
+        "title": "Логи",
+        "text": "step-4.md"
+      },
+      {
+        "title": "Удаление Pod'а",
+        "text": "step-5.md"
       }
     ],
     "intro": {
@@ -31,8 +39,42 @@
           "chmod": "+x"
         },
         {
-          "file": "finish.py",
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "pod-example.yaml",
+          "target": "/usr/local/prepare"
+        },
+        {
+          "file": "pod.yaml",
           "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "00-print-hello-world.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "01-show-list-of-pods.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "02-print-logs.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "03-delete.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
           "chmod": "+x"
         }
       ]
@@ -59,11 +101,8 @@
         {
           "name": "work",
           "displayName": "work",
-          "description": "Проект для упражнения",
-          "inServiceMeshControlPlane": {
-            "name": "basic",
-            "namespace": "istio-system"
-          }
+          "description": "This is project for exercise workloads",
+          "uiRole": "admin"
         }
       ]
     }
