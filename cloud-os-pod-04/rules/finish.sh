@@ -12,7 +12,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         os.environ['PS1'] = "1"
-#        self.__run_script(["source", "/root/.bashrc"])
+        self.__run_script(["sudo", "/root/.bashrc"])
 
     @staticmethod
     def __run_script(command):
