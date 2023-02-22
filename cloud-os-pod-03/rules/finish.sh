@@ -65,6 +65,8 @@ if __name__ == '__main__':
 #    check_result = {"Pod": checker.has_pod(),
 #                    "Label": checker.has_label(),
 #                    "Image": checker.check_image()}
-    check_result = {"result":"OK"}
+
+    check_result = {"Pod": checker.has_pod()}
+#    check_result = {"result":"OK"}
     json_object = json.dumps(check_result, indent=4)
     print(json_object)
