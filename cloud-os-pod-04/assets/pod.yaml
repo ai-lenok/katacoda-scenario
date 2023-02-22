@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: addressbook
+  labels:
+    app: addressbook
+spec:
+  containers:
+    - name: addressbook
+      image: nexus.local:5000/java-school/cloud/addressbook:1
