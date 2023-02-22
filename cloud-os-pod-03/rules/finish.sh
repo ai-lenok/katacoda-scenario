@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 #printf '{"Message": "FAIL: %s"}' $(oc get pods)
-printf '{"Message": "FAIL: %s"}' $(date)
+echo '{' '"Message"' ':' '"FAIL:"' '"' $(date) '"' '}'
