@@ -3,4 +3,4 @@
 PS1=1
 source /root/.bashrc
 
-python3 finish.py
+python3 /usr/lib/checker/finish.py

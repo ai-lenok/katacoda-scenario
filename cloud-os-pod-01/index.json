@@ -29,6 +29,11 @@
           "file": "pod.yaml",
           "target": "/root/",
           "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
         }
       ]
     },
