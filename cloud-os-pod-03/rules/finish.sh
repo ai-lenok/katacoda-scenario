@@ -22,10 +22,10 @@ class Checker:
         return stdout, stderr
 
     def has_pod(self):
-        return "OK"
-#        command = ["oc", "get", "pods"]
-#        self.stdout, self.stderr = self.__run_script(command)
-#
+        command = ["oc", "get", "pods"]
+        stdout, stderr = self.__run_script(command)
+        return f"FAIL: {stdout} {stderr}"
+
 #        addressbook = re.compile(r'^\s*addressbook\s+1/1')
 #        for line in self.stdout.split("\n"):
 #            if re.match(addressbook, line):
