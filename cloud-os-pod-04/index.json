@@ -59,7 +59,11 @@
         {
           "name": "work",
           "displayName": "work",
-          "description": "This is project for exercise workloads"
+          "description": "Проект для упражнения",
+          "inServiceMeshControlPlane": {
+            "name": "basic",
+            "namespace": "istio-system"
+          }
         }
       ]
     }
