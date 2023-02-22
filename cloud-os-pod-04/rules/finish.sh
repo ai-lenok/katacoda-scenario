@@ -4,7 +4,7 @@ source /root/.bashrc
 
 #ADDRESS_BOOK_POD=$(oc get pods -o name | grep addressbook | wc -l)
 
-printf "{\"Message\": \"FAIL: $(oc get pods)\"}"
+printf "{\"Message\": \"FAIL: $(oc get pods -o name | grep addressbook | wc -l)\"}"
 
 #jq --null-input \
 #--arg ADDRESS_BOOK_POD "$ADDRESS_BOOK_POD" \
