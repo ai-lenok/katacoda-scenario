@@ -3,4 +3,4 @@
 PS1=1
 source /root/.bashrc
 
-/root/finis.py
+python3 finis.py
