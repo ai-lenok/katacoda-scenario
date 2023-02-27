@@ -31,7 +31,8 @@
 Где `NAME_SPACE` - Project / namespace, созданный под это упражнение
 
 Команда, чтобы узнать namespace:
-```shell
+
+```
 config view --output='json' | jq '.contexts[0].context.namespace'
 ```{{execute}}
 
