@@ -1,0 +1,35 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: python-requests
+data:
+  get-request.py: |
+    import json
+    import os
+    import requests
+    
+    def get_request() -> dict:
+      answer = {'status': False, 'size': 0}
+      host = f"{os.environ['ADDRESSBOOK_SERVICE_HOST']}:{os.environ['ADDRESSBOOK_SERVICE_PORT']}"
+      try:
+        res = requests.get(f"http://{host}/api/v1/addressbooks")
+        if type(res.json()) == list and res.status_code == 200:
+          answer['status'] = True
+          answer['size'] = len(res.json())
+      except:
+        pass
+      
+      return answer
+    
+    answer_json = json.dumps(get_request())
+    print(answer_json)
+
+  add-row.py: |
+    import os
+    import requests
+    
+    host = f"{os.environ['ADDRESSBOOK_SERVICE_HOST']}:{os.environ['ADDRESSBOOK_SERVICE_PORT']}"
+    data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
+    res = requests.post(f"http://{host}/api/v1/addressbook", json=data)
+    print(f"Status: {res.status_code}")
+    print(f"Response: {res.json()}")

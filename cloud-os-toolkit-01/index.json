@@ -22,7 +22,27 @@
     "assets": {
       "host01": [
         {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "python-config-map.yaml",
+          "target": "/usr/local/prepare/",
+          "chmod": "+x"
+        },
+        {
           "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        },
+        {
+          "file": "python-add-row.yaml",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        },
+        {
+          "file": "python-get-rows.yaml",
           "target": "/usr/lib/checker/",
           "chmod": "+x"
         },

@@ -17,7 +17,7 @@
       `nexus.local:5000/java-school/cloud/addressbook:1`
     - Приложение должно уметь пережить падение Pod\
       То есть, сохраненные данные в БД не должны потеряться
-- StatefulSet или Deployment с 1-ой репликой базы данных `PosgreSQL`
+- StatefulSet с 1-ой репликой базы данных `PosgreSQL`
     - Имя: `db`
     - Docker-образ базы данных: \
       `bitnami/postgresql:15`

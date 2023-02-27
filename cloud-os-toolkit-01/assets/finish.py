@@ -5,7 +5,7 @@ import subprocess
 
 import json
 
-
+# python:alpine3.17
 class Checker:
     def __init__(self):
         self.stdout = ''
@@ -44,6 +44,7 @@ class Checker:
 
         return "FAIL: Don't have label Pod."
 
+# oc get pods --output='json' | jq '.items[0].metadata.name'
     def check_image(self):
         command = ["oc", "get", "pods", "addressbook", "-ojson"]
         self.stdout, self.stderr = self.__run_script(command)
