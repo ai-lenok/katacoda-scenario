@@ -33,7 +33,7 @@
 Команда, чтобы узнать namespace:
 
 ```
-config view --output='json' | jq '.contexts[0].context.namespace'
+oc config view --output='json' | jq '.contexts[0].context.namespace'
 ```{{execute}}
 
 Чего делать не надо:
