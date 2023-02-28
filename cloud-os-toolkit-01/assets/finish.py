@@ -3,15 +3,19 @@
 import json
 import re
 import subprocess
+import time
 
 
 class Checker:
     def __init__(self):
         self.stdout = ''
         self.stderr = ''
+        self.command_run_rows_checker = ["oc", "apply", "--filename", "/usr/lib/checker/python-checker.yaml"]
+        self.command_clean_rows_checker = ["oc", "delete", "--filename", "/usr/lib/checker/python-checker.yaml"]
+        self.rows_before_restart = -1
 
     @staticmethod
-    def __run_script(command):
+    def run(command):
         process = subprocess.run(command,
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE,
@@ -23,7 +27,7 @@ class Checker:
 
     def check_deployment(self):
         command = ["oc", "get", "deployment", "-ojson"]
-        self.stdout, self.stderr = self.__run_script(command)
+        self.stdout, _ = self.run(command)
 
         try:
             info = json.loads(self.stdout)
@@ -48,7 +52,7 @@ class Checker:
 
     def check_stateful_set(self):
         command = ["oc", "get", "statefulset", "-ojson"]
-        self.stdout, self.stderr = self.__run_script(command)
+        self.stdout, _ = self.run(command)
 
         try:
             info = json.loads(self.stdout)
@@ -71,37 +75,120 @@ class Checker:
         except:
             return "FAIL: Couldn't find StatefulSet at all."
 
-    def has_label(self):
-        command = ["oc", "get", "pods", "--selector", "app=addressbook"]
-        self.stdout, self.stderr = self.__run_script(command)
+    def check_rows(self):
+        self.clear_pod_check_rows()
 
-        addressbook = re.compile(r'^\s*addressbook\s+1/1')
-        for line in self.stdout.split("\n"):
-            if re.match(addressbook, line):
-                return "OK"
+        self.run(self.command_run_rows_checker)
+        for i in range(60):
+            try:
+                time.sleep(1)
 
-        return "FAIL: Don't have label Pod."
+                self.stdout, _ = self.run(["oc", "logs", "check-rows"])
 
-    def check_image(self):
-        command = ["oc", "get", "pods", "addressbook", "-ojson"]
-        self.stdout, self.stderr = self.__run_script(command)
+                if self.stdout:
+                    info = json.loads(self.stdout)
+                    self.run(self.command_clean_rows_checker)
+                    if not info['before']['status']:
+                        return "FAIL: Couldn't get answer from addressbook"
+                    self.rows_before_restart = info['after']['size']
+                    if self.rows_before_restart != info['after']['size']:
+                        return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
+                               f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
 
+                    return "OK"
+            except:
+                pass
+        return "FAIL: Couldn't get answer from addressbook"
+
+    def clear_pod_check_rows(self):
+        if self.has_pod_check_rows():
+            self.run(self.command_clean_rows_checker)
+            for i in range(10):
+                if self.has_pod_check_rows():
+                    time.sleep(1)
+                else:
+                    return
+
+    def has_pod_check_rows(self):
+        self.stdout, _ = self.run(["oc", "get", "pods", "check-rows"])
+        return not self.stdout.startswith('Error from server (NotFound)')
+
+    def wait_addressbook_available(self):
+        for i in range(60):
+            if not self.addressbook_is_available():
+                time.sleep(1)
+            else:
+                return
+
+    def addressbook_is_available(self):
+        names, status = self.get_pods_name()
+        if not status:
+            return False
+
+        for name in names:
+            self.stdout, _ = self.run(["oc", "logs", name])
+            is_started = re.findall(r"Started AddressbookApplication in", self.stdout)
+            if not is_started:
+                return False
+        return True
+
+    def check_pods_by_selector(self):
+        names, status = self.get_pods_name()
+        if not status:
+            return "FAIL: Couldn't find Pods by selector 'app=addressbook'"
+        if len(names) != 2:
+            return f"FAIL: Wrong number of Pods by selector 'app=addressbook': {len(names)}. Two needs."
+        return "OK"
+
+    def check_pod_drops(self):
+        self.run(["oc", "delete", "pods", "--selector", "app=addressbook"])
+        self.wait_addressbook_available()
+        self.clear_pod_check_rows()
+
+        self.run(self.command_run_rows_checker)
+        for i in range(60):
+            try:
+                time.sleep(1)
+
+                self.stdout, _ = self.run(["oc", "logs", "check-rows"])
+
+                if self.stdout:
+                    info = json.loads(self.stdout)
+                    self.run(self.command_clean_rows_checker)
+                    if not info['before']['status']:
+                        return "FAIL: Couldn't get answer from addressbook after Pods drops"
+
+                    if self.rows_before_restart != info['before']['size']:
+                        return f"FAIL: There was {self.rows_before_restart} rows before the Pod drops. " \
+                               f"Now there are: {info['before']['size']}. It must be equals."
+
+                    if info['before']['size'] + 1 != info['after']['size']:
+                        return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
+                               f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
+
+                    return "OK"
+            except:
+                pass
+        return "FAIL: Couldn't get answer from addressbook"
+
+    def get_pods_name(self):
+        names = []
+        self.stdout, _ = self.run(["oc", "get", "pods", "--selector", "app=addressbook", "-ojson"])
         try:
             info = json.loads(self.stdout)
-
-            image_name = info["spec"]["containers"][0]["image"]
-
-            if image_name == "nexus.local:5000/java-school/cloud/addressbook:1":
-                return "OK"
-            else:
-                return f"FAIL: Wrong image: {image_name}"
+            for pod in info['items']:
+                names.append(pod['metadata']['name'])
+            return names, True
         except:
-            return "FAIL: Do not find Pod addressbook."
+            return names, False
 
 
 if __name__ == '__main__':
     checker = Checker()
     check_result = {"Deployment": checker.check_deployment(),
-                    "StatefulSet": checker.check_stateful_set()}
+                    "StatefulSet": checker.check_stateful_set(),
+                    "Selector": checker.check_pods_by_selector(),
+                    "Application available": checker.check_rows(),
+                    "Available after drops": checker.check_pod_drops()}
     json_object = json.dumps(check_result, indent=4)
     print(json_object)

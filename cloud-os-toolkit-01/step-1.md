@@ -27,6 +27,8 @@
 - Service, для доступа к `addressbook`
     - Адрес доступа: \
       `addressbook.NAME_SPACE.svc.cluster.local:9090`
+    - Selector для поиска Pod: \
+      `app: addressbook`
 
 Где `NAME_SPACE` - Project / namespace, созданный под это упражнение
 
@@ -58,6 +60,8 @@ oc config view --output='json' | jq '.contexts[0].context.namespace'
 Это большое задание, которое подразумевает, что вы вдумчиво его выполняете
 
 SberCode не сохраняет файлы и выключает виртуальную машину, после долгого простоя
+
+Полная проверка занимает 2 минуты
 
 Рекомендуется хранить наработки на локальном компьютере, а SberCode использовать для отладки и проверки
 
