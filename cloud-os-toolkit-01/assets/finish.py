@@ -77,7 +77,7 @@ class Checker:
 
     def check_rows(self):
         self.clear_pod_check_rows()
-
+        self.wait_addressbook_available()
         self.run(self.command_run_rows_checker)
         for i in range(60):
             try:
