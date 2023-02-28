@@ -195,6 +195,8 @@ if __name__ == '__main__':
         check_result['Application available'] = checker.check_rows()
         if check_result['Application available'] == "OK":
             check_result['Available after drops'] = checker.check_pod_drops()
+        else:
+            check_result['Available after drops'] = "FAIL: Didn't run checker"
     else:
         check_result['Application available'] = "FAIL: Didn't run checker"
         check_result['Available after drops'] = "FAIL: Didn't run checker"

@@ -42,11 +42,6 @@
           "chmod": "+x"
         },
         {
-          "file": "checker.py",
-          "target": "/root/",
-          "chmod": "+x"
-        },
-        {
           "file": "all.yaml",
           "target": "/root/",
           "chmod": "+x"
