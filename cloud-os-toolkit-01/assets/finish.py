@@ -188,13 +188,16 @@ if __name__ == '__main__':
     check_result = {"Deployment": checker.check_deployment(),
                     "StatefulSet": checker.check_stateful_set(),
                     "Selector": checker.check_pods_by_selector(), }
+
     if check_result["Deployment"] == "OK" \
             and check_result["StatefulSet"] == "OK" \
             and check_result["Selector"] == "OK":
         check_result['Application available'] = checker.check_rows()
-        check_result['Available after drops'] = checker.check_pod_drops()
+        if check_result['Application available'] == "OK":
+            check_result['Available after drops'] = checker.check_pod_drops()
     else:
         check_result['Application available'] = "FAIL: Didn't run checker"
         check_result['Available after drops'] = "FAIL: Didn't run checker"
+
     json_object = json.dumps(check_result, indent=4)
     print(json_object)
