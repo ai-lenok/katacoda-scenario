@@ -37,13 +37,13 @@
           "chmod": "+x"
         },
         {
-          "file": "python-add-row.yaml",
+          "file": "python-checker.yaml",
           "target": "/usr/lib/checker/",
           "chmod": "+x"
         },
         {
-          "file": "python-get-rows.yaml",
-          "target": "/usr/lib/checker/",
+          "file": "checker.py",
+          "target": "/root/",
           "chmod": "+x"
         },
         {

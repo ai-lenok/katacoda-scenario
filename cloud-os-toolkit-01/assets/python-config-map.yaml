@@ -3,33 +3,36 @@ apiVersion: v1
 metadata:
   name: python-requests
 data:
-  get-request.py: |
+  checker.py: |
     import json
     import os
     import requests
-    
-    def get_request() -> dict:
-      answer = {'status': False, 'size': 0}
-      host = f"{os.environ['ADDRESSBOOK_SERVICE_HOST']}:{os.environ['ADDRESSBOOK_SERVICE_PORT']}"
-      try:
-        res = requests.get(f"http://{host}/api/v1/addressbooks")
-        if type(res.json()) == list and res.status_code == 200:
-          answer['status'] = True
-          answer['size'] = len(res.json())
-      except:
-        pass
-      
-      return answer
-    
-    answer_json = json.dumps(get_request())
-    print(answer_json)
 
-  add-row.py: |
-    import os
-    import requests
-    
-    host = f"{os.environ['ADDRESSBOOK_SERVICE_HOST']}:{os.environ['ADDRESSBOOK_SERVICE_PORT']}"
-    data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
-    res = requests.post(f"http://{host}/api/v1/addressbook", json=data)
-    print(f"Status: {res.status_code}")
-    print(f"Response: {res.json()}")
+    class Client:
+        def __init__(self):
+            self.host = f"{os.environ['ADDRESSBOOK_SERVICE_HOST']}:{os.environ['ADDRESSBOOK_SERVICE_PORT']}"
+            self.url_get_addressbooks = f"http://{self.host}/api/v1/addressbooks"
+            self.url_add_addressbook = f"http://{self.host}/api/v1/addressbook"
+
+        def get_count_rows(self) -> dict:
+            answer = {'status': False, 'size': 0}
+            try:
+                res = requests.get(self.url_get_addressbooks)
+                if type(res.json()) == list and res.status_code == 200:
+                    answer['status'] = True
+                    answer['size'] = len(res.json())
+            except:
+                pass
+            return answer
+
+        def add_row(self) -> dict:
+            data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
+            res = requests.post(self.url_add_addressbook, json=data)
+            return {'status': res.status_code == 200}
+
+    client = Client()
+    answer = {"before": client.get_count_rows(),
+              "add_row": client.add_row(),
+              "after": client.get_count_rows(), }
+    answer_json = json.dumps(answer)
+    print(answer_json)
