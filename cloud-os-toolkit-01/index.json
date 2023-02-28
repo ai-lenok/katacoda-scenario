@@ -1,13 +1,13 @@
 {
-  "pathwayTitle": "Развертывание микросервисной системы в OpenShift",
-  "title": "Развертывание микросервисной системы в OpenShift",
-  "description": "Развертывание микросервисной системы в OpenShift",
+  "pathwayTitle": "Установка микросервисной системы в OpenShift",
+  "title": "Установка микросервисной системы в OpenShift",
+  "description": "Установка микросервисной системы в OpenShift",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
     "steps": [
       {
-        "title": "Развертывание микросервисной системы в OpenShift",
+        "title": "Установка микросервисной системы в OpenShift",
         "text": "step-1.md"
       },
       {
