@@ -99,7 +99,7 @@ class Checker:
 
         self.rows_before_restart = info['after']['size']
 
-        if self.rows_before_restart != info['after']['size']:
+        if info['before']['size'] + 1 != info['after']['size']:
             return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
                    f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
 
