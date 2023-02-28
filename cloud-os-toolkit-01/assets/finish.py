@@ -79,26 +79,31 @@ class Checker:
         self.clear_pod_check_rows()
         self.wait_addressbook_available()
         self.run(self.command_run_rows_checker)
-        for i in range(60):
-            try:
+        try:
+            for i in range(60):
                 time.sleep(1)
 
                 self.stdout, _ = self.run(["oc", "logs", "check-rows"])
-
                 if self.stdout:
                     info = json.loads(self.stdout)
-                    self.run(self.command_clean_rows_checker)
-                    if not info['before']['status']:
-                        return "FAIL: Couldn't get answer from addressbook"
-                    self.rows_before_restart = info['after']['size']
-                    if self.rows_before_restart != info['after']['size']:
-                        return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
-                               f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
-
-                    return "OK"
-            except:
-                pass
+                    return self.check_result_after_adding_row(info)
+        except:
+            return "FAIL: Couldn't get answer from addressbook"
         return "FAIL: Couldn't get answer from addressbook"
+
+    def check_result_after_adding_row(self, info):
+        self.run(self.command_clean_rows_checker)
+
+        if not info['before']['status']:
+            return "FAIL: Couldn't get answer from addressbook"
+
+        self.rows_before_restart = info['after']['size']
+
+        if self.rows_before_restart != info['after']['size']:
+            return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
+                   f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
+
+        return "OK"
 
     def clear_pod_check_rows(self):
         if self.has_pod_check_rows():
@@ -146,30 +151,32 @@ class Checker:
         self.clear_pod_check_rows()
 
         self.run(self.command_run_rows_checker)
-        for i in range(60):
-            try:
+        try:
+            for i in range(60):
                 time.sleep(1)
 
                 self.stdout, _ = self.run(["oc", "logs", "check-rows"])
-
                 if self.stdout:
                     info = json.loads(self.stdout)
-                    self.run(self.command_clean_rows_checker)
-                    if not info['before']['status']:
-                        return "FAIL: Couldn't get answer from addressbook after Pods drops"
-
-                    if self.rows_before_restart != info['before']['size']:
-                        return f"FAIL: There was {self.rows_before_restart} rows before the Pod drops. " \
-                               f"Now there are: {info['before']['size']}. It must be equals."
-
-                    if info['before']['size'] + 1 != info['after']['size']:
-                        return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
-                               f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
-
-                    return "OK"
-            except:
-                pass
+                    return self.check_result_after_restart_pods(info)
+        except:
+            return "FAIL: Couldn't get answer from addressbook"
         return "FAIL: Couldn't get answer from addressbook"
+
+    def check_result_after_restart_pods(self, info):
+        self.run(self.command_clean_rows_checker)
+        if not info['before']['status']:
+            return "FAIL: Couldn't get answer from addressbook after Pods drops"
+
+        if self.rows_before_restart != info['before']['size']:
+            return f"FAIL: There was {self.rows_before_restart} rows before the Pod drops. " \
+                   f"Now there are: {info['before']['size']}. It must be equals."
+
+        if info['before']['size'] + 1 != info['after']['size']:
+            return f"FAIL: Before add rows: {info['before']['size']}, after: {info['after']['size']}. " \
+                   f"It must be: {info['before']['size']} and {info['before']['size'] + 1}"
+
+        return "OK"
 
     def get_pods_name(self):
         names = []
