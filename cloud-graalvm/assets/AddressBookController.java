@@ -28,7 +28,6 @@ public class AddressBookController {
                                             @RequestParam("size") Optional<Integer> sizeOpt) {
         final Integer page = pageOpt.orElse(0);
         final Integer size = sizeOpt.orElse(100);
-        Integer.MAX_VALUE
         logger.info("getAddressBook, page: {}, size: {}", page, size);
 
 
