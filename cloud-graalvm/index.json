@@ -29,32 +29,32 @@
         },
         {
           "file": "pom.xml",
-          "target": "/root/addressbook/",
+          "target": "/root/",
           "chmod": "+x"
         },
         {
           "file": "AddressBook.java",
-          "target": "/root/addressbook/src/main/java/org/example/addressbook/model/",
+          "target": "/root/src/main/java/org/example/addressbook/model/",
           "chmod": "+x"
         },
         {
           "file": "AddressBookController.java",
-          "target": "/root/addressbook/src/main/java/org/example/addressbook/controller/",
+          "target": "/root/src/main/java/org/example/addressbook/controller/",
           "chmod": "+x"
         },
         {
           "file": "AddressBookRepository.java",
-          "target": "/root/addressbook/src/main/java/org/example/addressbook/repository/",
+          "target": "/root/src/main/java/org/example/addressbook/repository/",
           "chmod": "+x"
         },
         {
           "file": "AddressBookApplication.java",
-          "target": "/root/addressbook/src/main/java/org/example/addressbook/",
+          "target": "/root/src/main/java/org/example/addressbook/",
           "chmod": "+x"
         },
         {
           "file": "application.yaml",
-          "target": "/root/addressbook/src/main/resources/",
+          "target": "/root/src/main/resources/",
           "chmod": "+x"
         }
       ]

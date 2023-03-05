@@ -1,9 +1,11 @@
-FROM registry.access.redhat.com/quarkus/mandrel-22-rhel8:22.3-10.1675794341 AS builder
+FROM vegardit/graalvm-maven:22.3.1-java11 AS builder
 WORKDIR /build
 COPY addressbook .
-RUN ./mvnw -Pnative native:compile
+RUN mkdir src
+RUN mv main/ src/
+RUN mvn -Pnative native:compile -s settings.xml
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal:9.1.0-1793
+FROM alpine
 WORKDIR /app
 RUN mkdir /app/config
 COPY --from=builder /build/target/addressbook /app/app
