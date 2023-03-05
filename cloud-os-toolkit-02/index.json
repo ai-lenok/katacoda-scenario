@@ -1,0 +1,119 @@
+{
+  "pathwayTitle": "Установка микросервисной системы в OpenShift - 2",
+  "title": "Установка микросервисной системы в OpenShift - 2",
+  "description": "Установка микросервисной системы в OpenShift - 2",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Установка микросервисной системы в OpenShift",
+        "text": "step-1.md"
+      },
+      {
+        "title": "Доступ в Web console OpenShift",
+        "text": "step-2.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "python-config-map.yaml",
+          "target": "/usr/local/prepare/",
+          "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        },
+        {
+          "file": "python-checker.yaml",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        },
+        {
+          "file": "all.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "config-app.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "config-db.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "config-init-db.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "config-secret-db.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "deployment-app.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "deployment-stateful-set-db.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "service-app.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "service-db.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "openshift-client",
+    "openShift": {
+      "enable": true,
+      "serviceAccountNameInProject": "student",
+      "clusterRoleNameForBinding": "admin",
+      "projects": [
+        {
+          "name": "work",
+          "displayName": "work",
+          "description": "This is project for exercise workloads",
+          "uiRole": "admin"
+        }
+      ]
+    }
+  }
+}

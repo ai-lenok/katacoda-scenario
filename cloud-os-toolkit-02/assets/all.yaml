@@ -1,0 +1,159 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: addressbook-config
+data:
+  application.yaml: |
+    spring:
+      r2dbc:
+        url: r2dbc:postgres://db.java-middle.svc.cluster.local:5432/${POSTGRESQL_DATABASE}
+        username: ${POSTGRESQL_USERNAME}
+        password: ${POSTGRESQL_PASSWORD}
+      jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: db-config
+data:
+  POSTGRESQL_USERNAME: addressbook
+  POSTGRESQL_DATABASE: addressbook_db
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: db-secret
+stringData:
+  POSTGRESQL_PASSWORD: my_pass
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: db-init-config
+data:
+  init-db.sql: |
+    DROP TABLE IF EXISTS ADDRESS_BOOK;
+    CREATE TABLE ADDRESS_BOOK
+    (
+        ID         BIGSERIAL PRIMARY KEY,
+        FIRST_NAME VARCHAR(50) NOT NULL,
+        LAST_NAME  VARCHAR(50) NOT NULL,
+        PHONE      VARCHAR(20),
+        BIRTHDAY   DATE
+    )
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: db
+spec:
+  selector:
+    app: db-selector
+  ports:
+    - name: postgres
+      protocol: TCP
+      port: 5432
+      targetPort: tcp-postgres
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: addressbook
+spec:
+  selector:
+    app: addressbook
+  ports:
+    - name: addressbook-api
+      protocol: TCP
+      port: 9090
+      targetPort: http
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: addressbook-ingress
+  labels:
+    app: addressbook
+spec:
+  rules:
+    - host: addressbook.apps.sbc-okd.pcbltools.ru
+      http:
+        paths:
+          - path: /api/v1
+            pathType: Prefix
+            backend:
+              service:
+                name: addressbook
+                port:
+                  name: addressbook-api
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: db
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-selector
+  template:
+    metadata:
+      labels:
+        app: db-selector
+    spec:
+      containers:
+        - name: postgres-cont
+          image: bitnami/postgresql:15
+          ports:
+            - name: tcp-postgres
+              containerPort: 5432
+          volumeMounts:
+            - name: db-init-volume
+              mountPath: /docker-entrypoint-initdb.d/
+          envFrom:
+            - configMapRef:
+                name: db-config
+            - secretRef:
+                name: db-secret
+      volumes:
+        - name: db-init-volume
+          configMap:
+            name: db-init-config
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: addressbook
+  labels:
+    app: addressbook-label-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: addressbook
+  template:
+    metadata:
+      labels:
+        app: addressbook
+    spec:
+      containers:
+        - name: addressbook-cont
+          image: dzx912/addressbook-native:1
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: addressbook-config-volume
+              mountPath: /app/config/
+          envFrom:
+            - configMapRef:
+                name: db-config
+            - secretRef:
+                name: db-secret
+      volumes:
+        - name: addressbook-config-volume
+          configMap:
+            name: addressbook-config

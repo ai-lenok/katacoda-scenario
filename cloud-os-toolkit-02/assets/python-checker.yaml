@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: check-rows
+spec:
+  restartPolicy: Never
+  containers:
+    - name: test-container
+      image: broadinstitute/python-requests:3
+      command: [ "/bin/sh", "-c", "python /app/checker.py" ]
+      volumeMounts:
+        - name: python-requests-volume
+          mountPath: /app/
+  volumes:
+    - name: python-requests-volume
+      configMap:
+        name: python-requests
+
