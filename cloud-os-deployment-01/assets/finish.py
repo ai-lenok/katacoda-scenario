@@ -80,13 +80,24 @@ class Checker:
             return f"FAIL: Must be 'green'. Wrong answer from server: {res.text}"
 
 
+def print_result(dict_result):
+    json_object = json.dumps(dict_result, indent=4)
+    print(json_object)
+
+
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {"Deployment": checker.check_deployment(),
-                    "Request to blue first": checker.check_switch_to_blue(),
-                    "Request to green first": checker.check_switch_to_green(),
-                    "Request to blue second": checker.check_switch_to_blue(),
-                    "Request to green second": checker.check_switch_to_green(),
-                    }
-    json_object = json.dumps(check_result, indent=4)
-    print(json_object)
+    checker_list = [{"key": "Deployment", "func": checker.check_deployment},
+                    {"key": "Request to blue first", "func": checker.check_switch_to_blue},
+                    {"key": "Request to green first", "func": checker.check_switch_to_green},
+                    {"key": "Request to blue second", "func": checker.check_switch_to_blue},
+                    {"key": "Request to green second", "func": checker.check_switch_to_green}]
+
+    check_result = {}
+    for check in checker_list:
+        result = check["func"]()
+        check_result[check["key"]] = result
+        if result != "OK":
+            break
+
+    print_result(check_result)
