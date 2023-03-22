@@ -1,0 +1,94 @@
+{
+  "pathwayTitle": "Blue/green deployment в OpenShift",
+  "title": "Blue/green deployment в OpenShift",
+  "description": "Blue/green deployment в OpenShift",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Blue/green deployment в OpenShift",
+        "text": "step-1.md"
+      },
+      {
+        "title": "Доступ в Web console OpenShift",
+        "text": "step-2.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        },
+        {
+          "file": "all.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "deploy-blue.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "deploy-green.sh",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "deployments.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "ingress.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "service-blue.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "service-green.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "openshift-client",
+    "openShift": {
+      "enable": true,
+      "serviceAccountNameInProject": "student",
+      "clusterRoleNameForBinding": "admin",
+      "projects": [
+        {
+          "name": "work",
+          "displayName": "work",
+          "description": "This is project for exercise workloads",
+          "uiRole": "admin"
+        }
+      ]
+    }
+  }
+}
