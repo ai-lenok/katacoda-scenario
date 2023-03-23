@@ -13,8 +13,8 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.correct_images = ["dzx912/switch:blue", "dzx912/switch:green"]
-        self.switch_to_blue = ["sh", "/root/deploy-blue.sh"]
-        self.switch_to_green = ["sh", "/root/deploy-green.sh"]
+        self.switch_to_blue = ["/root/deploy-blue.sh"]
+        self.switch_to_green = ["/root/deploy-green.sh"]
         self.namespace = self.get_namespace()
         self.host = f"{self.namespace}.apps.sbc-okd.pcbltools.ru"
         self.url_version = f"http://{self.host}/api/v1/version"
