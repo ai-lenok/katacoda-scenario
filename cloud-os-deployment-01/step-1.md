@@ -20,22 +20,20 @@
     - Адрес в интернет:
 
 ```
-http://NAMESPACE.apps.sbc-okd.pcbltools.ru
+http://NAMESPACE.apps.sbc-okd.pcbltools.ru/api/v1/version
 ```
 
 Где `NAMESPACE` - имя проектной области, его можно узнать с помощью команды
 
-```
-oc config view --output='json' | jq '.contexts[0].context.namespace'
-```{{execute}}
+`oc config view --output='json' | jq '.contexts[0].context.namespace'`{{execute}}
 
 ### Способ проверки
 
-Автотест выполнит скрипт `deploy-blue.sh` \
+Автотест выполнит скрипт `deploy-blue.sh`{{open}}
 Тут же обратится на адрес `http://NAMESPACE.apps.sbc-okd.pcbltools.ru/api/v1/version` \
 Должен получить ответ `blue`
 
-Затем автотест выполнит скрипт `deploy-green.sh` \
+Затем автотест выполнит скрипт `deploy-blue.sh`{{open}}
 Тут же обратится на адрес `http://NAMESPACE.apps.sbc-okd.pcbltools.ru/api/v1/version` \
 Должен получить ответ `green`
 
