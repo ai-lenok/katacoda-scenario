@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-import json
 import subprocess
 import time
 
 import requests
+
+import json
 
 
 class Checker:
@@ -15,7 +16,8 @@ class Checker:
         self.switch_to_blue = ["sh", "/root/deploy-blue.sh"]
         self.switch_to_green = ["sh", "/root/deploy-green.sh"]
         self.namespace = self.get_namespace()
-        self.url_version = f"http://{self.namespace}.apps.sbc-okd.pcbltools.ru/api/v1/version"
+        self.host = f"{self.namespace}.apps.sbc-okd.pcbltools.ru"
+        self.url_version = f"http://{self.host}/api/v1/version"
 
     def get_namespace(self):
         self.stdout, _ = self.run(["oc", "config", "view", "-ojson"])
@@ -61,6 +63,26 @@ class Checker:
         except:
             return "FAIL: Couldn't find Deployment at all."
 
+    def check_ingress(self):
+        command = ["oc", "get", "ingress", "-ojson"]
+        self.stdout, _ = self.run(command)
+
+        try:
+            info = json.loads(self.stdout)
+            count_ingress = len(info["items"])
+            if count_ingress == 0:
+                return "FAIL: Couldn't find Ingress at all"
+            if 1 < count_ingress:
+                return f"FAIL: Too many Ingress: {count_ingress}. One needs."
+
+            host = info["items"][0]["spec"]["rules"][0]["host"]
+            if self.host == host:
+                return "OK"
+            else:
+                return f"FAIL: Wrong ingress host. Must be: '{self.host}'. Actual: '{host}'"
+        except:
+            return "FAIL: Couldn't find Ingress at all."
+
     def check_switch_to_blue(self):
         self.run(self.switch_to_blue)
         time.sleep(10)
@@ -88,6 +110,7 @@ def print_result(dict_result):
 if __name__ == '__main__':
     checker = Checker()
     checker_list = [{"key": "Deployment", "func": checker.check_deployment},
+                    {"key": "Ingress", "func": checker.check_ingress},
                     {"key": "Request to blue first", "func": checker.check_switch_to_blue},
                     {"key": "Request to green first", "func": checker.check_switch_to_green},
                     {"key": "Request to blue second", "func": checker.check_switch_to_blue},
