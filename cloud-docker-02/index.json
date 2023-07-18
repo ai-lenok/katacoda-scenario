@@ -24,12 +24,12 @@
         },
         {
           "file": "application.yaml",
-          "target": "/root/",
+          "target": "/root/configuration/",
           "chmod": "+x"
         },
         {
           "file": "init-db.sql",
-          "target": "/root/",
+          "target": "/root/db/",
           "chmod": "+x"
         }
       ]
