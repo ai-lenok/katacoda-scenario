@@ -48,7 +48,7 @@ class Checker:
         else:
             message = "FAIL: "
             if not find_addressbook:
-                message += "Отсутствует Docker образ addressbook. "
+                message += "Отсутствует Docker образ dzx912/addressbook. "
             if not find_postgres:
                 message += "Отсутствует Docker образ bitnami/postgresql. "
             return message
