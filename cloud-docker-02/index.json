@@ -31,6 +31,11 @@
           "file": "init-db.sql",
           "target": "/root/db/",
           "chmod": "+x"
+        },
+        {
+          "file": "empty-file.txt",
+          "target": "/root/.data/",
+          "chmod": "+x"
         }
       ]
     },
