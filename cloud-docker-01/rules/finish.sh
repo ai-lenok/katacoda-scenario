@@ -58,8 +58,8 @@ class Checker:
 if __name__ == '__main__':
     checker = Checker()
     check_result = {}
-    check_result["docker image"] = checker.check_image()
-    check_result["docker container"] = checker.check_container()
-    check_result["open port"] = checker.check_port()
+    check_result["Docker-образ"] = checker.check_image()
+    check_result["Контейнер с приложение"] = checker.check_container()
+    check_result["Проверка портов"] = checker.check_port()
     json_object = json.dumps(check_result, indent=4)
     print(json_object)
