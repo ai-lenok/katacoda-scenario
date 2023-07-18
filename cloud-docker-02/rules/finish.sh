@@ -61,7 +61,7 @@ class Checker:
         if count_containers_in_compose == 2:
             return "OK"
         else:
-            return f"FAIL: Не правильное количество контейнеров: {count_containers_in_compose}. А должно быть два."
+            return f"FAIL: Неправильное количество контейнеров: {count_containers_in_compose}. А должно быть два."
 
     def check_port(self):
         try:
