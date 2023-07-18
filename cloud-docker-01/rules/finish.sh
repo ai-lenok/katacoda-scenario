@@ -32,7 +32,7 @@ class Checker:
             match = re.match(inet, line)
             if match:
                 return "OK"
-        return f"FAIL: Does not have correct docker image"
+        return f'FAIL: Не нашел Docker-образ с именем "addressbook:1"'
 
     def check_container(self):
         command = ["docker", "container", "ls"]
