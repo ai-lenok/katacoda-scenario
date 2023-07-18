@@ -6,8 +6,6 @@
 
 ### Детализация
 
-Приложение можно скачать из docker.io по адресу `dzx912/addressbook:1`
-
 Ваша задача написать `compose.yaml`
 `compose.yaml`{{open}}
 
