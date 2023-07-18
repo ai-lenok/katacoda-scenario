@@ -43,7 +43,7 @@ class Checker:
             match = re.match(docker_container, line)
             if match:
                 return "OK"
-        return f"FAIL: Does not have correct docker container"
+        return f"FAIL: Контейнер с приложением не запущен"
 
     def check_port(self):
       try:
@@ -51,9 +51,9 @@ class Checker:
         if res.status_code == 200:
           return "OK"
         else:
-          return "FAIL: Port does not open"
+          return "FAIL: Порт 8080 закрыт"
       except:
-        return "FAIL: Port does not open"
+        return "FAIL: Порт 8080 закрыт"
 
 if __name__ == '__main__':
     checker = Checker()
