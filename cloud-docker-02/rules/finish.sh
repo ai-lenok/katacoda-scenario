@@ -32,7 +32,7 @@ class Checker:
         self.stdout, self.stderr = self.__run_script(command)
 
         addressbook = re.compile(r'^\s*docker.io/dzx912/addressbook\s+1')
-        postgres = re.compile(r'^\s*docker.io/library/postgres')
+        postgres = re.compile(r'^\s*docker.io/bitnami/postgresql')
         find_addressbook = False
         find_postgres = False
         for line in self.stdout.split("\n"):
@@ -48,9 +48,9 @@ class Checker:
         else:
             message = "FAIL: "
             if not find_addressbook:
-                message += "Don't have addressbook image. "
+                message += "Отсутствует Docker образ addressbook. "
             if not find_postgres:
-                message += "Don't have postgres image. "
+                message += "Отсутствует Docker образ bitnami/postgresql. "
             return message
 
     def check_compose_ps(self):
@@ -61,19 +61,19 @@ class Checker:
         if count_containers_in_compose == 2:
             return "OK"
         else:
-            return f"FAIL: Wrong count of compose containers: {count_containers_in_compose}. Two needed."
+            return f"FAIL: Не правильное количество контейнеров: {count_containers_in_compose}. А должно быть два."
 
     def check_port(self):
         try:
             res = requests.get("http://localhost:8080/api/v1/addressbooks")
             if type(res.json()) != list:
-                return f"FAIL: Application returned bad answer. {res.json()}"
+                return f"FAIL: Приложение addressbooks возвращает странный ответ. {res.json()}"
             if res.status_code == 200:
                 return "OK"
             else:
-                return "FAIL: Port 8080 does not open"
+                return "FAIL: Порт 8080 закрыт"
         except:
-            return "FAIL: Port 8080 does not open"
+            return "FAIL: Порт 8080 закрыт"
 
     def check_db(self):
         try:
@@ -84,12 +84,12 @@ class Checker:
             rows_added = self.__count_rows()
 
             if need_rows_after_put != rows_added:
-                return f'FAIL: Before saving rows: {rows_start}, after: {rows_added}. ' \
-                       f'{need_rows_after_put} needs after saving.'
+                return f'FAIL: Количество записей перед перезагрузкой: {rows_start}, после: {rows_added}. ' \
+                       f'Должно быть: {need_rows_after_put}.'
         except requests.exceptions.RequestException:
-            return "FAIL: Port 8080 does not open"
+            return "FAIL: Порт 8080 закрыт"
         except WrongTypeAnswerException as e:
-            return f"FAIL: Application returned bad answer: {e}"
+            return f"FAIL: Приложение addressbooks возвращает странный ответ: {e}"
 
         return self.__check_after_restarting(rows_added)
 
@@ -103,12 +103,12 @@ class Checker:
             if rows_expected == rows_end:
                 return "OK"
             else:
-                return f'FAIL: Before restarting rows: {rows_expected}, after: {rows_end}. ' \
-                       f'They must be equal to each other.'
+                return f'FAIL: Количество записей перед перезагрузкой: {rows_expected}, после: {rows_end}. ' \
+                       f'Они должны быть эквивалентны.'
         except requests.exceptions.RequestException:
-            return "FAIL: Port 8080 does not open after restarting docker-compose"
+            return "FAIL: После перезапуска docker-compose порт 8080 перестал отвечать"
         except WrongTypeAnswerException as e:
-            return f"FAIL: Application returned bad answer: {e}"
+            return f"FAIL: Приложение addressbooks возвращает странный ответ: {e}"
 
     def __add_row(self):
         data = {"firstName": "Ivan", "lastName": "Ivanov", "phone": "+79999999999", "birthday": "2000-01-01"}
