@@ -51,7 +51,7 @@
   "backend": {
     "imageid": "openshift-client",
     "openShift": {
-      "enable": true,
+      "enable": false,
       "serviceAccountNameInProject": "student",
       "clusterRoleNameForBinding": "admin",
       "projects": [
