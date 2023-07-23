@@ -31,7 +31,7 @@ class Checker:
             if re.match(addressbook, line):
                 return "OK"
 
-        return "FAIL: Don't have addressbook Pod."
+        return "FAIL: Не нашел Pod с именем addressbook."
 
     def has_label(self):
         command = ["oc", "get", "pods", "--selector", "app=addressbook"]
@@ -42,7 +42,7 @@ class Checker:
             if re.match(addressbook, line):
                 return "OK"
 
-        return "FAIL: Don't have label Pod."
+        return 'FAIL: Не нашел label "app=addressbook" у Pod.'
 
     def check_image(self):
         command = ["oc", "get", "pods", "addressbook", "-ojson"]
@@ -53,12 +53,14 @@ class Checker:
 
             image_name = info["spec"]["containers"][0]["image"]
 
-            if image_name == "nexus.local:5000/java-school/cloud/addressbook:1":
+            correct_image = "nexus.local:5000/java-school/cloud/addressbook:1"
+
+            if image_name == correct_image:
                 return "OK"
             else:
-                return f"FAIL: Wrong image: {image_name}"
+                return f'FAIL: Неправильный Docker-образ: "{image_name}". Должен быть: "{correct_image}"'
         except:
-            return "FAIL: Do not find Pod addressbook."
+            return "FAIL: Не нашел Pod с именем addressbook."
 
 
 if __name__ == '__main__':
