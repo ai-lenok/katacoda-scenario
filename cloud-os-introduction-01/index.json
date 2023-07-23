@@ -1,21 +1,21 @@
 {
-  "pathwayTitle": "Создание Pod в OpenShift-Debug",
-  "title": "Создание Pod в OpenShift-Debug",
-  "description": "Создание Pod в OpenShift-Debug",
+  "pathwayTitle": "Графический интерфейс OpenShift",
+  "title": "Графический интерфейс OpenShift",
+  "description": "Графический интерфейс OpenShift",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
     "steps": [
       {
-        "title": "Создание Pod в OpenShift",
+        "title": "Авторизация в Web console OpenShift",
         "text": "step-1.md"
       },
       {
-        "title": "Авторизация в Web console OpenShift",
+        "title": "Работа с Web console OpenShift",
         "text": "step-2.md"
       },
       {
-        "title": "Работа с Web console OpenShift",
+        "title": "Завершение работы",
         "text": "step-3.md"
       }
     ],
@@ -26,14 +26,13 @@
     "assets": {
       "host01": [
         {
-          "file": "pod.yaml",
-          "target": "/root/",
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
         },
         {
-          "file": "finish.py",
-          "target": "/usr/lib/checker/",
-          "chmod": "+x"
+          "file": "pod-example.yaml",
+          "target": "/usr/local/prepare"
         }
       ]
     },
