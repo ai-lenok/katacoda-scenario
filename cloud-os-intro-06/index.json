@@ -18,6 +18,11 @@
     "assets": {
       "host01": [
         {
+          "file": "pod.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
           "file": "autostart.sh",
           "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
