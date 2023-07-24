@@ -4,13 +4,15 @@
 
 ### Детали
 
-Откройте файл `script.sh`{{open}}
+1) Откройте файл `script.sh`{{open}}
 
-Раскомментируйте в нём строку 
+2) Раскомментируйте в нём строку 
 
 <pre class="file" data-filename="./script.sh" data-target="insert" data-marker="# echo 'Hello world'">
 echo 'Hello world'
 </pre>
+
+3) Нажмите на кнопку **Завершить**
 
 ### Способ проверки
 
