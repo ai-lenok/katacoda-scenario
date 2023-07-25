@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "OpenShift CLI: вывести логи Pod'а",
-  "title": "OpenShift CLI: вывести логи Pod'а",
-  "description": "OpenShift CLI: вывести логи Pod'а",
+  "pathwayTitle": "OpenShift CLI: удалить Pod",
+  "title": "OpenShift CLI: удалить Pod",
+  "description": "OpenShift CLI: удалить Pod",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -17,6 +17,11 @@
     },
     "assets": {
       "host01": [
+        {
+          "file": "pod.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
         {
           "file": "autostart.sh",
           "target": "/usr/local/autostart-scripts.d",

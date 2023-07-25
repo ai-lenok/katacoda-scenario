@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "OpenShift CLI: Пример выполнения задания",
-  "title": "OpenShift CLI: Пример выполнения задания",
-  "description": "OpenShift CLI: Пример выполнения задания",
+  "pathwayTitle": "OpenShift CLI: посмотреть список Pod'ов",
+  "title": "OpenShift CLI: посмотреть список Pod'ов",
+  "description": "OpenShift CLI: посмотреть список Pod'ов",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -17,6 +17,15 @@
     },
     "assets": {
       "host01": [
+        {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "pod-example.yaml",
+          "target": "/usr/local/prepare"
+        },
         {
           "file": "script.sh",
           "target": "/root/",

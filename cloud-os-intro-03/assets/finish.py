@@ -84,7 +84,8 @@ class Checker:
 
 if __name__ == '__main__':
     check_result = {}
-    file_name = "00_print_hello_world"
+    # for file_name in ["00_print_hello_world", "01_show_list_of_pods", "02_print_logs", "03_delete", ]:
+    file_name = "01_show_list_of_pods"
     check_result[file_name] = Checker(file_name).check()
     json_object = json.dumps(check_result)
     print(json_object)

@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "OpenShift CLI: посмотреть список Pod'ов",
-  "title": "OpenShift CLI: посмотреть список Pod'ов",
-  "description": "OpenShift CLI: посмотреть список Pod'ов",
+  "pathwayTitle": "OpenShift CLI: вывести логи Pod'а",
+  "title": "OpenShift CLI: вывести логи Pod'а",
+  "description": "OpenShift CLI: вывести логи Pod'а",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {

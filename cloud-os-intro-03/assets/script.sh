@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-# Выведите 'Hello world'
-# echo 'Hello world'
+# Выведите список запущенных Pod'ов
