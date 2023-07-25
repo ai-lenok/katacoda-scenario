@@ -2,7 +2,7 @@
 
 Для начала, можете посмотреть на код приложения
 
-
+`pom.xml`{{open}}
 
 DemoApplication
 
@@ -12,7 +12,7 @@ DemoController
 
 `src/main/java/org/example/demo/controller/DemoController.java`{{open}}
 
-`pom.xml`{{open}}
+
 
 
 ## Собрать Jar-файл
