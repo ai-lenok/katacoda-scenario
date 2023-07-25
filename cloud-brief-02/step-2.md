@@ -8,7 +8,7 @@
 
 `src/main/java/org/example/demo/controller/DemoController.java`{{open}}
 
-## Сборка Jar-файл
+## Сборка Jar-файла
 
 Выполните команду в терминале
 
