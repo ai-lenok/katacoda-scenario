@@ -1,22 +1,27 @@
-## Общение с базой данных
+Скомпилируйте и запустите Java приложение
 
-### Кратко
+## Детали
 
-Добавьте поддержку базы данных
+Код приложения уже написан
 
-### Детализация задания
+Ваша задача:
 
-- Модель данных уже создана в классе `model.AddressBook`
-  `src/main/java/org/example/addressbook/model/AddressBook.java`{{open}}
-- Сделана заготовка repository в интерфейсе `repository.AddressBookRepository`. Её необходимо доработать.
-  `src/main/java/org/example/addressbook/repository/AddressBookRepository.java`{{open}}
-- Сделана заготовка controller в классе `controller.AddressBookController`. Её необходимо доработать.
-  `src/main/java/org/example/addressbook/controller/AddressBookController.java`{{open}}
-- В каталоге `test` находится код Unit теста, который проверяет код. Добейтесь, чтобы Unit тесты проходили без ошибок.
-  `src/test/java/org/example/addressbook/controller/AddressBookControllerTest.java`{{open}}
+1) Собрать Jar-файл с приложением
 
-Для проверки выполните команду
+2) Запустить Jar-файл с приложением
 
-```
-mvn verify
-```{{execute}}
+На следующей странице - решение
+
+## Способ проверки
+
+Автотест проверит:
+
+1) Создан ли Jar-файл
+
+2) Отвечает ли приложение на 8080 порт
+
+## Примечание
+
+Это выполненное задание
+
+Цель - показать, как правильно выполнять домашнее задание

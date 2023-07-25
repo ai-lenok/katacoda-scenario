@@ -1,36 +1,37 @@
-## Общение с базой данных
+## Посмотрите код приложения
 
-### Задание
+Для начала, можете посмотреть на код приложения
 
-Добавьте поддержку базы данных
+`pom.xml`{{open}}
 
-### Решение
+`src/main/java/org/example/DemoApplication.java`{{open}}
 
-1. Добавьте в файл `AddressBookRepository` поддержку реактивного общение с базой данных
+`src/main/java/org/example/controller/DemoController.java`{{open}}
 
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/repository/AddressBookRepository.java" data-target="insert" data-marker="public interface AddressBookRepository {">
-public interface AddressBookRepository extends ReactiveCrudRepository<AddressBook, Long> {
-</pre>
+## Собрать Jar-файл
 
-2. Подключите `AddressBookRepository` в `AddressBookController`
+Выполните команду в терминале
 
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="    // ------------->">
-final AddressBookRepository repository;
+`mvn package`{{execute}}
 
-    @Autowired
-    public AddressBookController(AddressBookRepository repository) {
-        this.repository = repository;
-    }
-</pre>
+Можете нажать на символ `+` в правом верхнем углу плашки с командой и команда выполнится сама
 
-3. Перепишите вывод в методе `AddressBookController::getAddressBook`
+Дождитесь, когда процесс компиляции закончится
 
-<pre class="file" data-filename="./src/main/java/org/example/addressbook/controller/AddressBookController.java" data-target="insert" data-marker="return Flux.empty();">
-return repository.findAll();
-</pre>
+Проверить, что приложение собралось, можно при помощи команды
 
-5. Запустите Unit тесты и убедитесь, что приложение собирается без ошибок
+`ls -lh target/*.jar`{{execute}}
 
-```
-mvn verify
-```{{execute}}
+## Запустить приложение
+
+Выполните команду в терминале
+
+`java -jar target/demo-1.jar`{{execute}}
+
+Вы должны увидеть лог запуска приложения
+
+## Завершить упражнение
+
+Нажмите на кнопку **Завершить** в верхнем левом углу окна SberCode Academy
+
+Запустится автотест и проверит правильность выполнения
