@@ -2,15 +2,18 @@
 
 Для начала, можете посмотреть на код приложения
 
-`pom.xml`{{open}}
+
 
 DemoApplication
 
-`/root/src/main/java/org/example/demo/DemoApplication.java`{{open}}
+`src/main/java/org/example/demo/DemoApplication.java`{{open}}
 
 DemoController
 
-`/root/src/main/java/org/example/demo/controller/DemoController.java`{{open}}
+`src/main/java/org/example/demo/controller/DemoController.java`{{open}}
+
+`pom.xml`{{open}}
+
 
 ## Собрать Jar-файл
 
