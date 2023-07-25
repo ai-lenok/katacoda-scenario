@@ -79,7 +79,7 @@ class Checker:
         if re.match(r'pod "addressbook" deleted', self.stdout):
             return "OK"
         else:
-            return "FAIL"
+            return "FAIL: Команда в файле 'script.sh' выполнил что-то другое, а не удаление. Попробуйте ещё."
 
 
 if __name__ == '__main__':
