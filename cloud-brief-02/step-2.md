@@ -4,11 +4,7 @@
 
 `pom.xml`{{open}}
 
-DemoApplication
-
 `src/main/java/org/example/demo/DemoApplication.java`{{open}}
-
-DemoController
 
 `src/main/java/org/example/demo/controller/DemoController.java`{{open}}
 
