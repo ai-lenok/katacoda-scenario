@@ -4,9 +4,9 @@
 
 `pom.xml`{{open}}
 
-`src/main/java/org/example/demo/DemoApplication.java`{{open}}
+`/root/src/main/java/org/example/demo/DemoApplication.java`{{open}}
 
-`src/main/java/org/example/demo/controller/DemoController.java`{{open}}
+`/root/src/main/java/org/example/demo/controller/DemoController.java`{{open}}
 
 ## Собрать Jar-файл
 
