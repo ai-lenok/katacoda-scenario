@@ -8,9 +8,6 @@
 
 `src/main/java/org/example/demo/controller/DemoController.java`{{open}}
 
-
-
-
 ## Собрать Jar-файл
 
 Выполните команду в терминале
