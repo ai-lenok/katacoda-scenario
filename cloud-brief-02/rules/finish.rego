@@ -9,7 +9,7 @@ allow[msg] {
 deny[msg] {
 	res := input[key]
 	startswith(res, "FAIL")
-	msg := sprintf("%s", [res])
+	msg := sprintf("%s: %s", [res])
 }
 
 

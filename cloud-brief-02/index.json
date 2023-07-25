@@ -1,0 +1,56 @@
+{
+  "pathwayTitle": "Пример выполнения Java задания",
+  "title": "Пример выполнения Java задания",
+  "description": "Пример выполнения Java задания",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Задание",
+        "text": "step-1.md"
+      },
+      {
+        "title": "Решение",
+        "text": "step-2.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "pom.xml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "DemoController.java",
+          "target": "/root/src/main/java/org/example/demo/controller/",
+          "chmod": "+x"
+        },
+        {
+          "file": "DemoApplication.java",
+          "target": "/root/src/main/java/org/example/demo/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "jdk17"
+  }
+}
