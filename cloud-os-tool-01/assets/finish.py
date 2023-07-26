@@ -30,7 +30,7 @@ class Checker:
             info = json.loads(self.stdout)
             count_pods = len(info["items"])
             if count_pods == 0:
-                return "FAIL: В системе Pod'ов не обнаружено"
+                return "FAIL: Не обнаружено Pod'ов в системе"
             if 1 < count_pods:
                 return f"FAIL: Слишком много Pod'ов: {count_pods}. Должен быть один."
 
@@ -46,7 +46,7 @@ class Checker:
 
             return "OK"
         except:
-            return "FAIL: В системе Pod'ов не обнаружено"
+            return "FAIL: Не обнаружено Pod'ов в системе"
 
 
 if __name__ == '__main__':
