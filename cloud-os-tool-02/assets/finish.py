@@ -45,9 +45,9 @@ class Checker:
                 return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
-            ports = pod['spec']['containers'][0]['ports']
-            if not ports:
+            if not 'ports' in pod['spec']['containers'][0]:
                 return "FAIL: Не обнаружил открытых портов"
+            ports = pod['spec']['containers'][0]['ports']
             if 1 < len(ports):
                 return f"FAIL: Слишком много открытых портов: {ports}. Должен быть один."
             port_actual = ports[0]["containerPort"]
