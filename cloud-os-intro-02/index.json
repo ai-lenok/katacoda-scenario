@@ -7,7 +7,7 @@
   "details": {
     "steps": [
       {
-        "title": "Создание Pod в OpenShift",
+        "title": "Задание",
         "text": "step-1.md"
       }
     ],
