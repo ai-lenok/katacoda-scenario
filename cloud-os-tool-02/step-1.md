@@ -11,6 +11,6 @@
   `addressbook`
 - Docker-образ: \
   `nexus.local:5000/java-school/cloud/addressbook:1`
-- Откройте порт 8080
+- Открытый порт 8080
 
 2. Запустите Pod используя написанную конфигурацию `pod.yaml`

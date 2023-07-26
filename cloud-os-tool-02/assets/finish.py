@@ -9,7 +9,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.pod_name_expect = "addressbook"
-        self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1"'
+        self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
         self.port_expect = 8080
 
     @staticmethod
