@@ -10,6 +10,7 @@ class Checker:
         self.stderr = ''
         self.deployment_name_expect = "addressbook"
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
+        self.deployment = {}
 
     @staticmethod
     def run(command):
@@ -34,12 +35,12 @@ class Checker:
             if 1 < count_deployments:
                 return f"FAIL: Слишком много Deployments'ов: {count_deployments}. Должен быть один."
 
-            deployment = info["items"][0]
-            deployment_name_actual = deployment['metadata']['name']
+            self.deployment = info["items"][0]
+            deployment_name_actual = self.deployment['metadata']['name']
             if deployment_name_actual != self.deployment_name_expect:
                 return f"FAIL: Не правильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
 
-            image_actual = deployment['spec']['containers'][0]['image']
+            image_actual = self.deployment['template']['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
                 return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
@@ -48,9 +49,22 @@ class Checker:
         except:
             return "FAIL: Не обнаружено Deployments'ов в системе"
 
+    def check_selector(self):
+        if not 'app' in self.deployment['spec']['selector']['matchLabels']:
+            return 'FAIL: Отсутствуют selector "app"'
+        selector = self.deployment['spec']['selector']['matchLabels']
+        selector_actual = selector['app']
+        if selector_actual != "addressbook":
+            return f'FAIL: Не правильное значение у selector "app": "{selector_actual}"'
+
+        return "OK"
+
 
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {"Check deployment": checker.check_deployment()}
+    check_result = {}
+    check_result["Check deployment"] = checker.check_deployment()
+    if check_result["Check deployment"] == "OK":
+        check_result["Check selector"] = checker.check_selector()
     json_object = json.dumps(check_result)
     print(json_object)

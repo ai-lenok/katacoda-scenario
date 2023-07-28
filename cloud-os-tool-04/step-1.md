@@ -11,5 +11,7 @@
   `addressbook`
 - Docker-образ: \
   `nexus.local:5000/java-school/cloud/addressbook:1`
+- selector:
+  - app: addressbook
 
 2. Запустите Deployment используя написанную конфигурацию `deployment.yaml`
