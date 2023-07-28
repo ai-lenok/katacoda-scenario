@@ -12,7 +12,7 @@ class Checker:
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
         self.labels_expect = {"app": "addressbook", "environment": "dev", "release": "stable", }
         self.annotations_expect = {"documentation": "https://example.com/docs", "dependency": "postgres",
-                                   "author": "user", "email": "user@example.com", }
+                                   "author": "user", "email": "user@mail.com", }
         self.pod_data = {}
 
     @staticmethod
