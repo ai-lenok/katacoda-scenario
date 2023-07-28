@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Создание Pod c открытым портом в OpenShift",
-  "title": "Создание Pod c открытым портом в OpenShift",
-  "description": "Создание Pod c открытым портом в OpenShift",
+  "pathwayTitle": "Создание Pod c открытым портом",
+  "title": "Создание Pod c открытым портом",
+  "description": "Создание Pod c открытым портом",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {

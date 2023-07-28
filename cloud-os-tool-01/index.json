@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Создание простого Pod в OpenShift",
-  "title": "Создание простого Pod в OpenShift",
-  "description": "Создание простого Pod в OpenShift",
+  "pathwayTitle": "Создание простого Pod",
+  "title": "Создание простого Pod",
+  "description": "Создание простого Pod",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
