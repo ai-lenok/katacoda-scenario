@@ -13,6 +13,7 @@ class Checker:
         self.labels_expect = {"app": "addressbook", "environment": "dev", "release": "stable", }
         self.annotations_expect = {"documentation": "https://example.com/docs", "dependency": "postgres",
                                    "author": "user", "email": "user@example.com", }
+        self.pod_data = {}
 
     @staticmethod
     def run(command):
@@ -37,40 +38,42 @@ class Checker:
             if 1 < count_pods:
                 return f"FAIL: Слишком много Pod'ов: {count_pods}. Должен быть один."
 
-            pod = info["items"][0]
-            pod_name_actual = pod['metadata']['name']
+            self.pod_data = info["items"][0]
+            pod_name_actual = self.pod_data['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
                 return f"FAIL: Не правильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
 
-            image_actual = pod['spec']['containers'][0]['image']
+            image_actual = self.pod_data['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
                 return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
-            if not 'labels' in pod['metadata']:
-                return "FAIL: Отсутствуют labels"
-
-            if not 'annotations' in pod['metadata']:
-                return "FAIL: Отсутствуют annotations"
-
-            labels = self.check_tags(pod['metadata']['labels'], self.labels_expect)
-            check_labels = self.tags_checking_to_text(labels, "Не правильные labels:")
-
-            annotations = self.check_tags(pod['metadata']['annotations'], self.annotations_expect)
-            check_annotations = self.tags_checking_to_text(annotations, "Не правильные annotations:")
-
-            fail_msg = "FAIL: "
-            if check_labels:
-                fail_msg += check_labels
-            if check_annotations:
-                fail_msg += check_annotations
-
-            if check_labels or check_annotations:
-                return fail_msg
-
             return "OK"
         except:
             return "FAIL: Не обнаружено Pod'ов в системе"
+
+    def check_labels(self):
+        if not 'labels' in self.pod_data['metadata']:
+            return "FAIL: Отсутствуют labels"
+
+        labels = self.check_tags(self.pod_data['metadata']['labels'], self.labels_expect)
+        check_labels = self.tags_checking_to_text(labels, "Не правильные labels:")
+
+        if check_labels:
+            return f"FAIL: {check_labels}"
+
+        return "OK"
+
+    def check_annotations(self):
+        if not 'annotations' in self.pod_data['metadata']:
+            return "FAIL: Отсутствуют annotations"
+
+        annotations = self.check_tags(self.pod_data['metadata']['annotations'], self.annotations_expect)
+        check_annotations = self.tags_checking_to_text(annotations, "Не правильные annotations:")
+
+        if check_annotations:
+            return f"FAIL: {check_annotations}"
+        return "OK"
 
     def check_tags(self, tags_actual, tags_expect):
         dict_checking = {}
@@ -102,7 +105,11 @@ class Checker:
 
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {"Check pod": checker.check_pod(), }
+    check_result = {}
+    check_result["Check pod"] = checker.check_pod()
+    if check_result["Check pod"] == "OK":
+        check_result["labels"] = checker.check_labels()
+        check_result["annotations"] = checker.check_annotations()
 
     json_object = json.dumps(check_result)
     print(json_object)
