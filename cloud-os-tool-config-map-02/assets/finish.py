@@ -3,15 +3,16 @@
 import json
 import subprocess
 
+import yaml
+
 
 class Checker:
     def __init__(self):
         self.stdout = ''
         self.stderr = ''
         self.config_map_expect = "application-file-config"
-        self.config_map_data_expect = {"application.yaml": '''app:
-    userId: 123
-    host: https://example.com''', }
+        self.key_name_config_map_expect = "application.yaml"
+        self.application_yaml_app_expect = {"userId": 123, "host": "https://example.com", }
 
     @staticmethod
     def run(command):
@@ -31,8 +32,18 @@ class Checker:
         try:
             info = json.loads(self.stdout)
             data = info["data"]
-            configs = self.check_tags(data, self.config_map_data_expect)
-            result_check_configs = self.tags_checking_to_text(configs, "FAIL: Неправильные data:")
+            if self.key_name_config_map_expect not in data:
+                return f"FAIL: В ConfigMap {self.config_map_expect} отсутствует поле {self.key_name_config_map_expect}"
+            config_map_data_actual = yaml.safe_load(data["application.yaml"])
+            if "app" not in config_map_data_actual:
+                return f'FAIL: В ConfigMap {self.config_map_expect} -> {self.key_name_config_map_expect} ' \
+                       f'отсутствует поле "app".'
+
+            result_check_configs = \
+                self.compare_dict(config_map_data_actual["app"],
+                                  self.application_yaml_app_expect,
+                                  f"FAIL: В ConfigMap {self.config_map_expect} "
+                                  f'-> {self.key_name_config_map_expect} -> "app" неправильные поля. ')
 
             if result_check_configs:
                 return result_check_configs
@@ -41,32 +52,18 @@ class Checker:
         except:
             return f'FAIL: Не смог найти ConfigMap "{self.config_map_expect}"'
 
-    def check_tags(self, tags_actual, tags_expect):
-        dict_checking = {}
-        for key, value in tags_expect.items():
-            if key in tags_actual:
-                if tags_actual[key] == value:
-                    dict_checking[key] = {"status": "OK"}
-                else:
-                    dict_checking[key] = {"status": "incorrect", "value": tags_actual[key]}
-            else:
-                dict_checking[key] = {"status": "missing"}
-        return dict_checking
-
-    def tags_checking_to_text(self, tags_checking, fail_message_in):
-        is_ok = True
-        fail_msg = fail_message_in
-        for key, value in tags_checking.items():
-            if value["status"] != "OK":
-                is_ok = False
-                if value["status"] == "incorrect":
-                    fail_msg += f'Неправильное значение в "{key}".'
-                if value["status"] == "missing":
-                    fail_msg += f' Отсутствует "{key}".'
-        if is_ok:
+    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
+        diff = set(expect) - set(actual)
+        if not diff:
             return ""
-        else:
-            return fail_msg
+
+        fail_msg = prefix_msg
+        for key, value in dict(diff):
+            if key in actual:
+                fail_msg += f'Неправильное значение в "{key}": "{actual[key]}"'
+            else:
+                fail_msg += f' Отсутствует "{key}".'
+        return fail_msg
 
 
 if __name__ == '__main__':
