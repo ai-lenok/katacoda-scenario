@@ -64,6 +64,7 @@ class Checker:
         replicas_actual = self.deployment['spec']['replicas']
         if replicas_actual != self.replicas_expect:
             return f'FAIL: Неправильное количество Pod: {replicas_actual}. Должно быть: {self.replicas_expect}.'
+        return "OK"
 
 
 if __name__ == '__main__':
