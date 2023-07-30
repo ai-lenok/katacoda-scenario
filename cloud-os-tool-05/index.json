@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Увеличение Pod в Deployment",
-  "title": "Увеличение Pod в Deployment",
-  "description": "Увеличение Pod в Deployment",
+  "pathwayTitle": "Увеличить количество Pod в Deployment",
+  "title": "Увеличить количество Pod в Deployment",
+  "description": "Увеличить количество Pod в Deployment",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
