@@ -43,7 +43,7 @@ class Checker:
                 self.compare_dict(config_map_data_actual["app"],
                                   self.application_yaml_app_expect,
                                   f'FAIL: В ConfigMap "{self.config_map_expect}" '
-                                  f'-> "{self.key_name_config_map_expect}" -> "app" неправильные поля: ')
+                                  f'-> "{self.key_name_config_map_expect}" -> "app" неправильные поля: \n')
 
             if result_check_configs:
                 return result_check_configs
@@ -60,9 +60,9 @@ class Checker:
         fail_msg = prefix_msg
         for key in dict(diff):
             if key in actual:
-                fail_msg += f'Неправильное значение "{key}": "{actual[key]}", должен быть "{key}": "{expect[key]}". '
+                fail_msg += f'Неправильное значение "{key}": "{actual[key]}", должен быть "{key}": "{expect[key]}". \n'
             else:
-                fail_msg += f' Отсутствует "{key}". '
+                fail_msg += f' Отсутствует "{key}". \n'
         return fail_msg
 
 
