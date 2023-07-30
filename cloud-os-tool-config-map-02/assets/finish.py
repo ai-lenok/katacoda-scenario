@@ -53,12 +53,12 @@ class Checker:
             return f'FAIL: Не смог найти ConfigMap "{self.config_map_expect}"'
 
     def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
-        diff = set(expect) - set(actual)
+        diff = set(expect.items()) - set(actual.items())
         if not diff:
             return ""
 
         fail_msg = prefix_msg
-        for key in diff:
+        for key in dict(diff):
             if key in actual:
                 fail_msg += f'Неправильное значение в "{key}": "{actual[key]}", должен быть "{expect[key]}"'
             else:
