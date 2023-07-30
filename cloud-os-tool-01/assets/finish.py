@@ -42,7 +42,7 @@ class Checker:
 
             containers = pod['spec']['containers']
             if len(containers) != self.count_containers:
-                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
+                return f"FAIL: Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
             image_actual = pod['spec']['containers'][0]['image']
             if image_actual != self.image_expect:

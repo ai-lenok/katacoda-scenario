@@ -43,7 +43,7 @@ class Checker:
 
             containers = self.deployment['spec']['template']['spec']['containers']
             if len(containers) != self.count_containers:
-                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
+                return f"FAIL: Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
             image_actual = self.deployment['spec']['template']['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
