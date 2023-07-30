@@ -40,7 +40,7 @@ class Checker:
             if deployment_name_actual != self.deployment_name_expect:
                 return f"FAIL: Не правильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
 
-            image_actual = self.deployment['template']['spec']['containers'][0]['image']
+            image_actual = self.deployment['spec']['template']['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
                 return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
