@@ -56,7 +56,7 @@ class Checker:
         if self.stdout == "Hello world":
             return "OK"
         else:
-            return f"FAIL: Не правильный ответ: {self.stdout}"
+            return f"FAIL: Неправильный ответ: {self.stdout}"
 
     def check_script_01_show_list_of_pods(self):
         addressbook = re.compile(r'^\s*addressbook\s+1/1')

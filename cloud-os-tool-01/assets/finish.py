@@ -37,11 +37,11 @@ class Checker:
             pod = info["items"][0]
             pod_name_actual = pod['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
-                return f"FAIL: Не правильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
+                return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
 
             image_actual = pod['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
-                return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
+                return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
             return "OK"

@@ -37,7 +37,7 @@ class Checker:
         if self.stdout == "Hello world":
             return "OK"
         else:
-            return f"FAIL: Не правильный ответ: {self.stdout}"
+            return f"FAIL: Неправильный ответ: {self.stdout}"
 
 
 if __name__ == '__main__':

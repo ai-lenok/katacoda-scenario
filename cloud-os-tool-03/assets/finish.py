@@ -41,11 +41,11 @@ class Checker:
             self.pod_data = info["items"][0]
             pod_name_actual = self.pod_data['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
-                return f"FAIL: Не правильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
+                return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
 
             image_actual = self.pod_data['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
-                return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
+                return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
             return "OK"
@@ -57,7 +57,7 @@ class Checker:
             return "FAIL: Отсутствуют labels"
 
         labels = self.check_tags(self.pod_data['metadata']['labels'], self.labels_expect)
-        check_labels = self.tags_checking_to_text(labels, "Не правильные labels:")
+        check_labels = self.tags_checking_to_text(labels, "Неправильные labels:")
 
         if check_labels:
             return f"FAIL: {check_labels}"
@@ -69,7 +69,7 @@ class Checker:
             return "FAIL: Отсутствуют annotations"
 
         annotations = self.check_tags(self.pod_data['metadata']['annotations'], self.annotations_expect)
-        check_annotations = self.tags_checking_to_text(annotations, "Не правильные annotations:")
+        check_annotations = self.tags_checking_to_text(annotations, "Неправильные annotations:")
 
         if check_annotations:
             return f"FAIL: {check_annotations}"

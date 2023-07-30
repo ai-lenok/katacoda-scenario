@@ -38,11 +38,11 @@ class Checker:
             self.deployment = info["items"][0]
             deployment_name_actual = self.deployment['metadata']['name']
             if deployment_name_actual != self.deployment_name_expect:
-                return f"FAIL: Не правильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
+                return f"FAIL: Неправильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
 
             image_actual = self.deployment['spec']['template']['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
-                return f"FAIL: Не правильный Docker-образ: {image_actual}. " \
+                return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
             return "OK"
@@ -55,7 +55,7 @@ class Checker:
         selector = self.deployment['spec']['selector']['matchLabels']
         selector_actual = selector['app']
         if selector_actual != "addressbook":
-            return f'FAIL: Не правильное значение у selector "app": "{selector_actual}"'
+            return f'FAIL: Неправильное значение у selector "app": "{selector_actual}"'
 
         return "OK"
 
