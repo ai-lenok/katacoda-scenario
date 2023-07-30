@@ -60,9 +60,9 @@ class Checker:
         fail_msg = prefix_msg
         for key in dict(diff):
             if key in actual:
-                fail_msg += f'Неправильное значение "{key}": "{actual[key]}", должен быть "{key}": "{expect[key]}". \n'
+                fail_msg += f'  Неправильное значение "{key}": "{actual[key]}", должен быть\n    "{key}": "{expect[key]}". \n'
             else:
-                fail_msg += f' Отсутствует "{key}". \n'
+                fail_msg += f'  Отсутствует "{key}". \n'
         return fail_msg
 
 
