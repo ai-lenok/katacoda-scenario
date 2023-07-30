@@ -10,7 +10,7 @@
 - ConfigMap name: \
   `open-config`
 - Добавьте данные:
-  - APP_USER_ID: 123
+  - APP_USER_ID: "123"
   - APP_HOST: https://example.com
 
 2. Добавьте ConfigMap в OpenShift используя написанную конфигурацию `config-map.yaml`
