@@ -10,6 +10,7 @@ class Checker:
         self.stderr = ''
         self.pod_name_expect = "addressbook"
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
+        self.count_containers = 1
         self.labels_expect = {"app": "addressbook", "environment": "dev", "release": "stable", }
         self.annotations_expect = {"documentation": "https://example.com/docs", "dependency": "postgres",
                                    "author": "user", "email": "user@mail.com", }
@@ -42,6 +43,10 @@ class Checker:
             pod_name_actual = self.pod_data['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
                 return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
+
+            containers = self.pod_data['spec']['containers']
+            if len(containers) != self.count_containers:
+                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
             image_actual = self.pod_data['spec']['containers'][0]['image']
             if image_actual != self.image_expect:

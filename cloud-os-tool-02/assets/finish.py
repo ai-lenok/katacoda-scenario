@@ -11,6 +11,7 @@ class Checker:
         self.pod_name_expect = "addressbook"
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
         self.port_expect = 8080
+        self.count_containers = 1
 
     @staticmethod
     def run(command):
@@ -40,14 +41,18 @@ class Checker:
             if pod_name_actual != self.pod_name_expect:
                 return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
 
-            image_actual = pod['spec']['containers'][0]['image']
+            containers = pod['spec']['containers']
+            if len(containers) != self.count_containers:
+                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
+
+            image_actual = containers[0]['image']
             if image_actual != self.image_expect:
                 return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
-            if not 'ports' in pod['spec']['containers'][0]:
+            if not 'ports' in containers[0]:
                 return "FAIL: Не обнаружил открытых портов"
-            ports = pod['spec']['containers'][0]['ports']
+            ports = containers[0]['ports']
             if 1 < len(ports):
                 return f"FAIL: Слишком много открытых портов: {ports}. Должен быть один."
             port_actual = ports[0]["containerPort"]

@@ -10,6 +10,7 @@ class Checker:
         self.stderr = ''
         self.pod_name_expect = "my-application"
         self.image_expect = 'busybox'
+        self.count_containers = 1
 
     @staticmethod
     def run(command):
@@ -38,6 +39,10 @@ class Checker:
             pod_name_actual = pod['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
                 return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
+
+            containers = pod['spec']['containers']
+            if len(containers) != self.count_containers:
+                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
             image_actual = pod['spec']['containers'][0]['image']
             if image_actual != self.image_expect:

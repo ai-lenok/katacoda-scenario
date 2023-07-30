@@ -10,6 +10,7 @@ class Checker:
         self.stderr = ''
         self.deployment_name_expect = "addressbook"
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
+        self.count_containers = 1
         self.deployment = {}
 
     @staticmethod
@@ -39,6 +40,10 @@ class Checker:
             deployment_name_actual = self.deployment['metadata']['name']
             if deployment_name_actual != self.deployment_name_expect:
                 return f"FAIL: Неправильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
+
+            containers = self.deployment['spec']['template']['spec']['containers']
+            if len(containers) != self.count_containers:
+                return f"Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
             image_actual = self.deployment['spec']['template']['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
