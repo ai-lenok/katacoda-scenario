@@ -14,7 +14,7 @@ class Checker:
         self.labels_expect = {"app": "addressbook", "environment": "dev", "release": "stable", }
         self.annotations_expect = {"documentation": "https://example.com/docs", "dependency": "postgres",
                                    "author": "user", "email": "user@mail.com", }
-        self.pod_data = {}
+        self.pod = {}
 
     @staticmethod
     def run(command):
@@ -39,16 +39,16 @@ class Checker:
             if 1 < count_pods:
                 return f"FAIL: Слишком много Pod'ов: {count_pods}. Должен быть один."
 
-            self.pod_data = info["items"][0]
-            pod_name_actual = self.pod_data['metadata']['name']
+            self.pod = info["items"][0]
+            pod_name_actual = self.pod['metadata']['name']
             if pod_name_actual != self.pod_name_expect:
                 return f"FAIL: Неправильное имя Pod'а: {pod_name_actual}. Должно быть: '{self.pod_name_expect}'."
 
-            containers = self.pod_data['spec']['containers']
+            containers = self.pod['spec']['containers']
             if len(containers) != self.count_containers:
                 return f"FAIL: Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
 
-            image_actual = self.pod_data['spec']['containers'][0]['image']
+            image_actual = self.pod['spec']['containers'][0]['image']
             if image_actual != self.image_expect:
                 return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
@@ -58,11 +58,10 @@ class Checker:
             return "FAIL: Не обнаружено Pod'ов в системе"
 
     def check_labels(self):
-        if not 'labels' in self.pod_data['metadata']:
+        if 'labels' not in self.pod['metadata']:
             return "FAIL: Отсутствуют labels"
 
-        labels = self.check_tags(self.pod_data['metadata']['labels'], self.labels_expect)
-        check_labels = self.tags_checking_to_text(labels, "Неправильные labels:")
+        check_labels = self.compare_dict(self.pod['metadata']['labels'], self.labels_expect, "Неправильные labels:\n")
 
         if check_labels:
             return f"FAIL: {check_labels}"
@@ -70,48 +69,36 @@ class Checker:
         return "OK"
 
     def check_annotations(self):
-        if not 'annotations' in self.pod_data['metadata']:
+        if 'annotations' not in self.pod['metadata']:
             return "FAIL: Отсутствуют annotations"
 
-        annotations = self.check_tags(self.pod_data['metadata']['annotations'], self.annotations_expect)
-        check_annotations = self.tags_checking_to_text(annotations, "Неправильные annotations:")
+        check_annotations = self.compare_dict(self.pod['metadata']['annotations'], self.annotations_expect,
+                                              "Неправильные annotations:\n")
 
         if check_annotations:
             return f"FAIL: {check_annotations}"
         return "OK"
 
-    def check_tags(self, tags_actual, tags_expect):
-        dict_checking = {}
-        for key, value in tags_expect.items():
-            if key in tags_actual:
-                if tags_actual[key] == value:
-                    dict_checking[key] = {"status": "OK"}
-                else:
-                    dict_checking[key] = {"status": "incorrect", "value": tags_actual[key]}
-            else:
-                dict_checking[key] = {"status": "missing"}
-        return dict_checking
-
-    def tags_checking_to_text(self, tags_checking, fail_message_in):
-        is_ok = True
-        fail_msg = fail_message_in
-        for key, value in tags_checking.items():
-            if value["status"] != "OK":
-                is_ok = False
-                if value["status"] == "incorrect":
-                    fail_msg += f' "{key}": "{value["value"]}".'
-                if value["status"] == "missing":
-                    fail_msg += f' Отсутствует "{key}".'
-        if is_ok:
+    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
+        diff = set(expect.items()) - set(actual.items())
+        if not diff:
             return ""
-        else:
-            return fail_msg
+
+        fail_msg = prefix_msg
+        for key in dict(diff):
+            if key in actual:
+                fail_msg += f'- Неправильное значение\n    ' \
+                            f'"{key}": "{actual[key]}",\n    ' \
+                            f'должен быть\n    ' \
+                            f'"{key}": "{expect[key]}". \n'
+            else:
+                fail_msg += f'- Отсутствует "{key}". \n'
+        return fail_msg
 
 
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {}
-    check_result["Check pod"] = checker.check_pod()
+    check_result = {"Check pod": checker.check_pod()}
     if check_result["Check pod"] == "OK":
         check_result["labels"] = checker.check_labels()
         check_result["annotations"] = checker.check_annotations()
