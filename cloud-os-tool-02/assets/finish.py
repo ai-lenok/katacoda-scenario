@@ -50,7 +50,7 @@ class Checker:
                 return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
                        f"Должен быть: '{self.image_expect}'."
 
-            if not 'ports' in containers[0]:
+            if 'ports' not in containers[0]:
                 return "FAIL: Не обнаружил открытых портов"
             ports = containers[0]['ports']
             if 1 < len(ports):
