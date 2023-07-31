@@ -29,8 +29,7 @@ class Checker:
         try:
             info = json.loads(self.stdout)
             data = info["data"]
-            configs = self.check_tags(data, self.config_map_data_expect)
-            result_check_configs = self.tags_checking_to_text(configs, "FAIL: Неправильные data:")
+            result_check_configs = self.compare_dict(data, self.config_map_data_expect, "FAIL: Неправильные data:\n")
 
             if result_check_configs:
                 return result_check_configs
@@ -39,32 +38,21 @@ class Checker:
         except:
             return f'FAIL: Не смог найти ConfigMap "{self.config_map_expect}"'
 
-    def check_tags(self, tags_actual, tags_expect):
-        dict_checking = {}
-        for key, value in tags_expect.items():
-            if key in tags_actual:
-                if tags_actual[key] == value:
-                    dict_checking[key] = {"status": "OK"}
-                else:
-                    dict_checking[key] = {"status": "incorrect", "value": tags_actual[key]}
-            else:
-                dict_checking[key] = {"status": "missing"}
-        return dict_checking
-
-    def tags_checking_to_text(self, tags_checking, fail_message_in):
-        is_ok = True
-        fail_msg = fail_message_in
-        for key, value in tags_checking.items():
-            if value["status"] != "OK":
-                is_ok = False
-                if value["status"] == "incorrect":
-                    fail_msg += f' "{key}": "{value["value"]}".'
-                if value["status"] == "missing":
-                    fail_msg += f' Отсутствует "{key}".'
-        if is_ok:
+    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
+        diff = set(expect.items()) - set(actual.items())
+        if not diff:
             return ""
-        else:
-            return fail_msg
+
+        fail_msg = prefix_msg
+        for key in dict(diff):
+            if key in actual:
+                fail_msg += f'- Неправильное значение\n    ' \
+                            f'"{key}": "{actual[key]}",\n    ' \
+                            f'должен быть\n    ' \
+                            f'"{key}": "{expect[key]}". \n'
+            else:
+                fail_msg += f'- Отсутствует "{key}". \n'
+        return fail_msg
 
 
 if __name__ == '__main__':
