@@ -12,8 +12,7 @@ class Checker:
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
         self.count_containers = 1
         self.count_env = 2
-        self.config_map_data_expect = [{'name': 'APP_USER_ID', 'value': '123'},
-                                       {'name': 'APP_HOST', 'value': 'https://example.com'}]
+        self.config_map_data_expect = {"APP_USER_ID": "123", "APP_HOST": "https://example.com", }
         self.deployment = {}
 
     @staticmethod
@@ -65,7 +64,8 @@ class Checker:
         if len(env_conf) != self.count_env:
             return f'FAIL: В секции "env" неправильное количество настроек: {len(env_conf)}. ' \
                    f'Должно быть: {self.count_env}.'
-        result_check_envs = self.compare_dict(env_conf, self.config_map_data_expect,
+        result_check_envs = self.compare_dict(self.list_to_map(env_conf),
+                                              self.config_map_data_expect,
                                               "FAIL: Неправильные переменные окружения:\n")
 
         if result_check_envs:
@@ -73,24 +73,35 @@ class Checker:
 
         return "OK"
 
-    def compare_dict(self, actual, expect, prefix_msg: str) -> str:
-        frozenset_actual = [frozenset(d.items()) for d in actual]
-        frozenset_expect = [frozenset(d.items()) for d in expect]
-        diff = set(frozenset_expect) - set(frozenset_actual)
-
+    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
+        diff = set(expect.items()) - set(actual.items())
         if not diff:
             return ""
 
         fail_msg = prefix_msg
         for key in dict(diff):
+            print(key)
             if key in actual:
                 fail_msg += f'- Неправильное значение\n    ' \
                             f'"{key}": "{actual[key]}",\n    ' \
                             f'должен быть\n    ' \
                             f'"{key}": "{expect[key]}". \n'
             else:
-                fail_msg += f'- Отсутствует "{key}". \n'
+                fail_msg += f'- Отсутствует {key}. \n'
         return fail_msg
+
+    def list_to_map(self, data: list) -> dict:
+        result = {}
+        for d in data:
+            name, value = "", ""
+            if 'name' in d:
+                name = d['name']
+            if 'value' in d:
+                value = d['value']
+            if name and value:
+                result[name] = value
+
+        return result
 
 
 if __name__ == '__main__':
