@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Подключение ConfigMap с помощью envFrom",
-  "title": "Подключение ConfigMap с помощью envFrom",
-  "description": "Подключение ConfigMap с помощью envFrom",
+  "pathwayTitle": "Создание ConfigMap содержащий файл",
+  "title": "Создание ConfigMap содержащий файл",
+  "description": "Создание ConfigMap содержащий файл",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -18,16 +18,7 @@
     "assets": {
       "host01": [
         {
-          "file": "autostart.sh",
-          "target": "/usr/local/autostart-scripts.d",
-          "chmod": "+x"
-        },
-        {
-          "file": "config-map-example.yaml",
-          "target": "/usr/local/prepare"
-        },
-        {
-          "file": "deployment.yaml",
+          "file": "config-map.yaml",
           "target": "/root/",
           "chmod": "+x"
         },

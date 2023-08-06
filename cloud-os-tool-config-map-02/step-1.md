@@ -1,20 +1,20 @@
-Создайте ConfigMap содержащий файл
+Подключите ConfigMap с помощью envFrom
 
 ## Детали
 
-Откройте `config-map.yaml`
-`config-map.yaml`{{open}}
+В OpenShift уже установлен ConfigMap, который вы сделали в предыдущем упражнении
 
-1. Напишите конфигурацию ConfigMap
+Откройте `deployment.yaml`
+`deployment.yaml`{{open}}
 
-- ConfigMap name: \
-  `application-file-config`
-- Добавьте файл `application.yaml` со следующим содержанием:
+1. Напишите конфигурацию Deployment
 
-```text
-app:
-    userId: 123
-    host: https://example.com
-```
+- Deployment name: \
+  `addressbook`
+- Docker-образ: \
+  `nexus.local:5000/java-school/cloud/addressbook:1`
+- selector:
+    - app: addressbook
+- Подключите с помощью `envFrom` всё содержимое ConfigMap `open-config`
 
-2. Добавьте ConfigMap в OpenShift используя написанную конфигурацию `config-map.yaml`
+2. Запустите Deployment используя написанную конфигурацию `deployment.yaml`

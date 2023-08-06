@@ -3,16 +3,17 @@
 import json
 import subprocess
 
-import yaml
-
 
 class Checker:
     def __init__(self):
         self.stdout = ''
         self.stderr = ''
-        self.config_map_expect = "application-file-config"
-        self.key_name_config_map_expect = "application.yaml"
-        self.application_yaml_app_expect = {"userId": 123, "host": "https://example.com", }
+        self.deployment_name_expect = "addressbook"
+        self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
+        self.count_containers = 1
+        self.count_env_from = 1
+        self.config_name_expect = 'open-config'
+        self.deployment = {}
 
     @staticmethod
     def run(command):
@@ -25,53 +26,68 @@ class Checker:
         stderr = process.stderr.strip()
         return stdout, stderr
 
-    def check_config_map(self):
-        command = ["oc", "get", f"configmaps/{self.config_map_expect}", "-ojson"]
+    def check_deployment(self):
+        command = ["oc", "get", "deployments", "-o", "json"]
         self.stdout, _ = self.run(command)
 
         try:
             info = json.loads(self.stdout)
-            data = info["data"]
-            if self.key_name_config_map_expect not in data:
-                return f'FAIL: В ConfigMap {self.config_map_expect} отсутствует поле "{self.key_name_config_map_expect}".'
-            config_map_data_actual = yaml.safe_load(data["application.yaml"])
-            if "app" not in config_map_data_actual:
-                return f'FAIL: В ConfigMap "{self.config_map_expect}" -> "{self.key_name_config_map_expect}" ' \
-                       f'отсутствует поле "app".'
+            count_deployments = len(info["items"])
+            if count_deployments == 0:
+                return "FAIL: Не обнаружено Deployments'ов в системе"
+            if 1 < count_deployments:
+                return f"FAIL: Слишком много Deployments'ов: {count_deployments}. Должен быть один."
 
-            result_check_configs = \
-                self.compare_dict(config_map_data_actual["app"],
-                                  self.application_yaml_app_expect,
-                                  f'FAIL: В ConfigMap "{self.config_map_expect}" '
-                                  f'-> "{self.key_name_config_map_expect}" -> "app" неправильные поля: \n')
+            self.deployment = info["items"][0]
+            deployment_name_actual = self.deployment['metadata']['name']
+            if deployment_name_actual != self.deployment_name_expect:
+                return f"FAIL: Неправильное имя Deployments'а: {deployment_name_actual}. Должно быть: '{self.deployment_name_expect}'."
 
-            if result_check_configs:
-                return result_check_configs
+            containers = self.deployment['spec']['template']['spec']['containers']
+            if len(containers) != self.count_containers:
+                return f"FAIL: Неправильное количество контейнеров в Pod'е: {len(containers)}. Должно быть: {self.count_containers}."
+
+            image_actual = containers[0]['image']
+            if image_actual != self.image_expect:
+                return f"FAIL: Неправильный Docker-образ: {image_actual}. " \
+                       f"Должен быть: '{self.image_expect}'."
 
             return "OK"
         except:
-            return f'FAIL: Не смог найти ConfigMap "{self.config_map_expect}"'
+            return "FAIL: Не обнаружено Deployments'ов в системе"
 
-    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
-        diff = set(expect.items()) - set(actual.items())
-        if not diff:
-            return ""
+    def check_selector(self):
+        if not 'app' in self.deployment['spec']['selector']['matchLabels']:
+            return 'FAIL: Отсутствуют selector "app"'
+        selector = self.deployment['spec']['selector']['matchLabels']
+        selector_actual = selector['app']
+        if selector_actual != "addressbook":
+            return f'FAIL: Неправильное значение у selector "app": "{selector_actual}"'
 
-        fail_msg = prefix_msg
-        for key in dict(diff):
-            if key in actual:
-                fail_msg += f'- Неправильное значение\n    ' \
-                            f'"{key}": "{actual[key]}",\n    ' \
-                            f'должен быть\n    ' \
-                            f'"{key}": "{expect[key]}". \n'
-            else:
-                fail_msg += f'- Отсутствует "{key}". \n'
-        return fail_msg
+        return "OK"
+
+    def has_config_map(self):
+        container = self.deployment['spec']['template']['spec']['containers'][0]
+        if 'envFrom' is not container:
+            return f'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "envFrom".'
+        env_from = container['envFrom']
+        if len(env_from) != self.count_env_from:
+            return f'FAIL: В секции "envFrom" не правильное количество настроек: {len(env_from)}. ' \
+                   f'Должно быть: {self.count_env_from}.'
+        config = container['envFrom'][0]
+        if "configMapRef" is not config:
+            return 'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "configMapRef".'
+        config_name = config['configMapRef']['name']
+        if config_name != self.config_name_expect:
+            return f'FAIL: Подключена неправильная конфигурация: "{config_name}". Должна быть: "{self.config_name_expect}".'
+        return "OK"
 
 
 if __name__ == '__main__':
     checker = Checker()
-    check_result = {"Check config map": checker.check_config_map(), }
-
+    check_result = {"Check deployment": checker.check_deployment()}
+    if check_result["Check deployment"] == "OK":
+        check_result["Check selector"] = checker.check_selector()
+        check_result["ConfigMap"] = checker.has_config_map()
     json_object = json.dumps(check_result)
     print(json_object)
