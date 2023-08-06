@@ -12,7 +12,8 @@ class Checker:
         self.image_expect = 'nexus.local:5000/java-school/cloud/addressbook:1'
         self.count_containers = 1
         self.count_env = 2
-        self.config_map_data_expect = {"APP_USER_ID": "123", "APP_HOST": "https://example.com", }
+        self.config_map_data_expect = [{'name': 'APP_USER_ID', 'value': '123'},
+                                       {'name': 'APP_HOST', 'value': 'https://example.com'}]
         self.deployment = {}
 
     @staticmethod
@@ -72,8 +73,11 @@ class Checker:
 
         return "OK"
 
-    def compare_dict(self, actual: dict, expect: dict, prefix_msg: str) -> str:
-        diff = set(expect.items()) - set(actual.items())
+    def compare_dict(self, actual, expect, prefix_msg: str) -> str:
+        frozenset_actual = [frozenset(d.items()) for d in actual]
+        frozenset_expect = [frozenset(d.items()) for d in expect]
+        diff = set(frozenset_expect) - set(frozenset_actual)
+
         if not diff:
             return ""
 
