@@ -27,7 +27,7 @@ class Checker:
         return stdout, stderr
 
     def check_deployment(self):
-        command = ["oc", "get", "deployments", "-ojson"]
+        command = ["oc", "get", "deployments", "-o", "json"]
         self.stdout, _ = self.run(command)
 
         try:
@@ -68,14 +68,14 @@ class Checker:
 
     def has_config_map(self):
         container = self.deployment['spec']['template']['spec']['containers'][0]
-        if 'envFrom' is not container:
+        if 'envFrom' not in container:
             return f'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "envFrom".'
         env_from = container['envFrom']
         if len(env_from) != self.count_env_from:
             return f'FAIL: В секции "envFrom" не правильное количество настроек: {len(env_from)}. ' \
                    f'Должно быть: {self.count_env_from}.'
         config = container['envFrom'][0]
-        if "configMapRef" is not config:
+        if "configMapRef" not in config:
             return 'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "configMapRef".'
         config_name = config['configMapRef']['name']
         if config_name != self.config_name_expect:
