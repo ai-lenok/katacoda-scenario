@@ -86,7 +86,7 @@ class Checker:
                             f'должен быть\n    ' \
                             f'"{key}": "{expect[key]}". \n'
             else:
-                fail_msg += f'- Отсутствует {key}. \n'
+                fail_msg += f'- Отсутствует "{key}". \n'
         return fail_msg
 
     def list_to_map(self, data: list) -> dict:
