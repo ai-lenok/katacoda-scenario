@@ -80,7 +80,6 @@ class Checker:
 
         fail_msg = prefix_msg
         for key in dict(diff):
-            print(key)
             if key in actual:
                 fail_msg += f'- Неправильное значение\n    ' \
                             f'"{key}": "{actual[key]}",\n    ' \
