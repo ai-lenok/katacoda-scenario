@@ -27,7 +27,7 @@ class Checker:
         return stdout, stderr
 
     def check_deployment(self):
-        command = ["oc", "get", "deployments", "-o", "json"]
+        command = ["oc", "get", "deployments", "--output", "json"]
         self.stdout, _ = self.run(command)
 
         try:
