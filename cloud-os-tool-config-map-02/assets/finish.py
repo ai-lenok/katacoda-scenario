@@ -57,7 +57,7 @@ class Checker:
             return "FAIL: Не обнаружено Deployments'ов в системе"
 
     def check_selector(self):
-        if not 'app' in self.deployment['spec']['selector']['matchLabels']:
+        if 'app' not in self.deployment['spec']['selector']['matchLabels']:
             return 'FAIL: Отсутствуют selector "app"'
         selector = self.deployment['spec']['selector']['matchLabels']
         selector_actual = selector['app']
