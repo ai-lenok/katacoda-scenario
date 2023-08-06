@@ -72,7 +72,7 @@ class Checker:
             return f'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "envFrom".'
         env_from = container['envFrom']
         if len(env_from) != self.count_env_from:
-            return f'FAIL: В секции "envFrom" не правильное количество настроек: {len(env_from)}. ' \
+            return f'FAIL: В секции "envFrom" неправильное количество настроек: {len(env_from)}. ' \
                    f'Должно быть: {self.count_env_from}.'
         config = container['envFrom'][0]
         if "configMapRef" not in config:

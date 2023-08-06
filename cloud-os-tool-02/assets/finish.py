@@ -57,7 +57,7 @@ class Checker:
                 return f"FAIL: Слишком много открытых портов: {ports}. Должен быть один."
             port_actual = ports[0]["containerPort"]
             if port_actual != self.port_expect:
-                return f"FAIL: Открыт не правильный порт: {port_actual}. Должно быть: '{self.port_expect}'."
+                return f"FAIL: Открыт неправильный порт: {port_actual}. Должно быть: '{self.port_expect}'."
 
             return "OK"
         except:

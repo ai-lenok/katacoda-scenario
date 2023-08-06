@@ -62,7 +62,7 @@ class Checker:
             return f'FAIL: В конфигурации deployment.spec.template.spec.containers отсутствует "env".'
         env_conf = container['env']
         if len(env_conf) != self.count_env:
-            return f'FAIL: В секции "env" не правильное количество настроек: {len(env_conf)}. ' \
+            return f'FAIL: В секции "env" неправильное количество настроек: {len(env_conf)}. ' \
                    f'Должно быть: {self.count_env}.'
         result_check_envs = self.compare_dict(env_conf, self.config_map_data_expect,
                                               "FAIL: Неправильные переменные окружения:\n")
