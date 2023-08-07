@@ -68,13 +68,16 @@ class Checker:
                    f'Должно быть: {self.count_volumes}.'
         volume = volumes[0]
         if volume['name'] != self.volume_name_expect:
-            return f'FAIL: Неправильное имя в секции deployment.spec.template.spec.volumes: "{volume["name"]}". ' \
+            return f'FAIL: Неправильное имя в секции deployment.spec.template.spec.volumes:\n' \
+                   f'  "{volume["name"]}".\n' \
                    f'Должно быть: "{self.volume_name_expect}".'
         if 'configMap' not in volume:
             return 'FAIL: В конфигурации deployment.spec.template.spec.volumes отсутствует "configMap".'
         config_map = volume['configMap']
         if config_map['name'] != self.config_map_with_file_expect:
-            return f'FAIL: В секции deployment.spec.template.spec.volumes.configMap объявлен неправильный ConfigMap: "{config_map["name"]}".' \
+            return f'FAIL: В секции deployment.spec.template.spec.volumes.configMap ' \
+                   f'объявлен неправильный ConfigMap:\n' \
+                   f'  "{config_map["name"]}".\n' \
                    f'Должен быть: "{self.config_map_with_file_expect}".'
         return "OK"
 
@@ -94,8 +97,11 @@ class Checker:
         if 'mountPath' not in config_map:
             return 'FAIL: В конфигурации deployment.spec.template.spec.containers.volumeMounts отсутствует "mountPath".'
         if config_map['mountPath'] != self.config_mount_path_expect:
-            return f'FAIL: Неправильная точка монтирования в секции deployment.spec.template.spec.containers.volumeMounts: "{config_map["mountPath"]}".' \
+            return f'FAIL: Неправильная точка монтирования в секции\n' \
+                   f'deployment.spec.template.spec.containers.volumeMounts:\n' \
+                   f'  "{config_map["mountPath"]}".\n' \
                    f'Должна быть: "{self.config_mount_path_expect}".'
+        return "OK"
 
 
 if __name__ == '__main__':
