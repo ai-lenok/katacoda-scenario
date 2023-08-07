@@ -1,0 +1,69 @@
+{
+  "pathwayTitle": "Монтирование файла из ConfigMap",
+  "title": "Монтирование файла из ConfigMap",
+  "description": "Монтирование файла из ConfigMap",
+  "difficulty": "beginner",
+  "time": "30 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Задание",
+        "text": "step-1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "config-map-example.yaml",
+          "target": "/usr/local/prepare"
+        },
+        {
+          "file": "deployment.yaml",
+          "target": "/root/",
+          "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
+        }
+      ]
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "openshift-client",
+    "openShift": {
+      "enable": true,
+      "serviceAccountNameInProject": "student",
+      "clusterRoleNameForBinding": "admin",
+      "projects": [
+        {
+          "name": "work",
+          "displayName": "work",
+          "description": "This is project for exercise workloads",
+          "uiRole": "admin"
+        }
+      ]
+    }
+  }
+}
