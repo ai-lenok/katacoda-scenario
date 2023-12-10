@@ -39,10 +39,10 @@
   "backend": {
     "imageid": "ubuntu:2004",
     "userid": 1000,
-    "groupid": 1000,
+    "groupid": 1002,
     "envs": [
-      {"name": "HOME", "value": "/home/user"},
-      {"name": "USER", "value": "user"}
+      {"name": "HOME", "value": "/home/ubuntu"},
+      {"name": "USER", "value": "ubuntu"}
     ]
   }
 }
