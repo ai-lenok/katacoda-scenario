@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Переместить файл",
-  "title": "Переместить файл",
-  "description": "Переместить файл",
+  "pathwayTitle": "Переместить каталог",
+  "title": "Переместить каталог",
+  "description": "Переместить каталог",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {

@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Переименовать файл",
-  "title": "Переименовать файл",
-  "description": "Переименовать файл",
+  "pathwayTitle": "Переименовать каталог",
+  "title": "Переименовать каталог",
+  "description": "Переименовать каталог",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {

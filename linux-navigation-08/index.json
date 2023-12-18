@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Удалить файл",
-  "title": "Удалить файл",
-  "description": "Удалить файл",
+  "pathwayTitle": "Удалить каталог",
+  "title": "Удалить каталог",
+  "description": "Удалить каталог",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {

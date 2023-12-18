@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Скопировать каталог",
-  "title": "Скопировать каталог",
-  "description": "Скопировать каталог",
+  "pathwayTitle": "Переименовать файл",
+  "title": "Переименовать файл",
+  "description": "Переименовать файл",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
