@@ -9,7 +9,7 @@ class Checker:
     def __init__(self):
         self.stdout = ''
         self.stderr = ''
-        self.path = f'/root/script.sh'
+        self.path = f'/home/ubuntu/script.sh'
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.path])
