@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Вывод IP адреса рабочей машины",
-  "title": "Вывод IP адреса рабочей машины",
-  "description": "Вывод IP адреса рабочей машины",
+  "pathwayTitle": "Отобразить IP адрес рабочей машины",
+  "title": "Отобразить IP адрес рабочей машины",
+  "description": "Отобразить IP адрес рабочей машины",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
