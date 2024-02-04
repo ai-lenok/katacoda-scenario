@@ -7,10 +7,6 @@
     "details": {
         "steps": [
             {
-                "title": "Создаем и запускаем сервис",
-                "text": "step0.md"
-            },
-            {
                 "title": "Задание",
                 "text": "step1.md"
             },
