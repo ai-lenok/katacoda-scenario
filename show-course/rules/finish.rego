@@ -17,5 +17,5 @@ error[msg] {
 	res := input[key]
     res != "OK"
     not startswith(res, "FAIL")
-    msg := sprintf("%s: %s", [key, res])
+    msg := sprintf("%s", [res])
 }
