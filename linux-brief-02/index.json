@@ -15,15 +15,7 @@
       "text": "intro.md",
       "credits": ""
     },
-    "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        }
-      ]
-    },
+    "assets": {},
     "finish": {
       "text": "finish.md"
     }
