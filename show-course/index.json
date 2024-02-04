@@ -23,13 +23,18 @@
         "assets": {
             "host01": [
                 {
+                    "file": "script.sh",
+                    "target": "/root",
+                    "chmod": "+x"
+                },
+                {
                     "file": "autostart.sh",
                     "target": "/usr/local/autostart-scripts.d",
                     "chmod": "+x"
                 },
                 {
                     "file": "prometheus.yml",
-                    "target": "/root"
+                    "target": "/usr/local/prepare"
                 }
             ]
         },

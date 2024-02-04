@@ -5,7 +5,7 @@
 DONE_FILE=/usr/local/etc/autostart.sh.done
 
 docker run -d --net=host --name=prometheus \
-   -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
+   -v /usr/local/prepare/prometheus.yml:/etc/prometheus/prometheus.yml \
    prom/prometheus \
    --config.file=/etc/prometheus/prometheus.yml \
    --storage.tsdb.path=/prometheus \
