@@ -9,7 +9,7 @@ allow[msg] {
 deny[msg] {
 	res := input[key]
 	startswith(res, "FAIL")
-	msg := sprintf("%s", [res])
+	msg := substring(res, 6, -1)
 }
 
 
@@ -17,5 +17,5 @@ error[msg] {
 	res := input[key]
     res != "OK"
     not startswith(res, "FAIL")
-    msg := sprintf("%s", [res])
+    msg := sprintf("%s: %s", [key, res])
 }
