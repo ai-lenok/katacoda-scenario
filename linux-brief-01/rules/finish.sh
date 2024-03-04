@@ -6,10 +6,10 @@ import subprocess
 
 
 class Checker:
-    def __init__(self):
+    def __init__(self, path='/home/ubuntu/script.sh'):
         self.stdout = ''
         self.stderr = ''
-        self.path = f'/home/ubuntu/script.sh'
+        self.path = path
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.path])

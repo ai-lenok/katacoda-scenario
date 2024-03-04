@@ -1,2 +1,4 @@
 .idea
+.git
+.DS_Store
 temp_test

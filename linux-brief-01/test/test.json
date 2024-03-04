@@ -1,8 +1,7 @@
 {
-  "results": [
-    {"ok.sh": "OK"},
-    {"fail1.sh": "FAIL: Скрипт ничего не вывел"},
-    {"fail2.sh": "FAIL: Неправильный ответ: Hello"},
-    {"fail3.sh": "FAIL: /home/ubuntu/script.sh не существует"}
-  ]
+  "results": {
+    "ok.sh": "OK",
+    "fail1.sh": "FAIL: Скрипт ничего не вывел",
+    "fail2.sh": "FAIL: Неправильный ответ: Hello"
+  }
 }
