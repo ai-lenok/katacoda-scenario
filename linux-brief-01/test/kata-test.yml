@@ -1,0 +1,15 @@
+script-before-each: tearDown.py
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-test-case: ok.sh
+    result-text: OK
+  - name: without print
+    script-test-case: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: wrong output
+    script-test-case: wrong-output.sh
+    result-text: 'FAIL: Неправильный ответ: "Hello"'
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"

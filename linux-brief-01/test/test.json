@@ -1,7 +1,0 @@
-{
-  "results": {
-    "ok.sh": "OK",
-    "fail1.sh": "FAIL: Скрипт ничего не вывел",
-    "fail2.sh": "FAIL: Неправильный ответ: Hello"
-  }
-}

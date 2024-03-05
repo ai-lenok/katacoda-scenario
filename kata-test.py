@@ -2,8 +2,7 @@
 
 import os
 import contextlib
-import json
-import pathlib
+import yaml
 import subprocess
 from pathlib import Path
 import importlib.util
@@ -15,34 +14,38 @@ from importlib.machinery import SourceFileLoader
 class Tester:
 
     def __init__(self):
-        self.ignore_dirs = Tester.__read_ignore()
+        self.ignore_dirs = Tester.__read_ignore(Path(".kata-test-ignore"))
         self.root_dir = Path.cwd() / "temp_test"
         self.root_dir.mkdir(parents=True, exist_ok=True)
         self.log = logging.getLogger(__name__)
         logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
         self.m = object
-        self.suite = {}
+        self.metadata = {}
         self.dir_tests = Path
         self.checker = Path
-        self.init = Path
-        self.tear_down = Path
+        self.checker_new = Path
+        self.init = {}
+        self.tear_down = {}
 
     @staticmethod
-    def __read_ignore() -> set:
-        file = Path(".testignore")
+    def __read_ignore(file: Path) -> set:
         if file.exists():
             with open(file) as f:
                 return set(f.read().splitlines())
         else:
             return set()
 
-    @staticmethod
-    def __read_metadata(path: Path) -> dict:
-        file_metadata = path / "test" / "test.json"
-        metadata = {}
-        with open(file_metadata) as f:
-            metadata = json.load(f)
-        return metadata
+    def __read_metadata(self, path: Path):
+        path_metadata = path / "test" / "kata-test.yml"
+        self.metadata = {}
+        with open(path_metadata) as f:
+            self.metadata = yaml.safe_load(f)
+
+    def run_debug(self, path: Path):
+        out = os.popen(str(path)).read()
+        self.log.debug(f"Run: {out}")
+
+        print(os.popen(str(path)).read())
 
     def __run_script(self, path: Path):
         try:
@@ -66,7 +69,7 @@ class Tester:
 
     def traverse(self):
         """Go through all folders with exercises and complete the checks"""
-        for d in pathlib.Path(".").iterdir():
+        for d in Path(".").iterdir():
             if d.is_dir() and d.name not in self.ignore_dirs:
                 dir_with_tests = d / "test"
                 if dir_with_tests.is_dir():
@@ -75,37 +78,53 @@ class Tester:
     def run_suite(self, path: Path):
         """Run all exercise checks"""
         self.log.info(f"Run tests: {path}")
-
-        metadata = self.__read_metadata(path)
-        self.suite = metadata["results"]
-        self.log.debug(self.suite)
-
-        self.init_path_file(path)
+        self.__read_metadata(path)
+        self.init_path_files(path)
 
         with self.working_directory(self.root_dir):
-            self.run_script("Init", self.init)
-
             self.m = self.dynamic_module(self.checker)
-            for script_name in self.suite:
-                self.__run_test(script_name)
+            for suite in self.metadata["suites"]:
+                self.__run_test(suite)
 
-            self.run_script("Tear down", self.tear_down)
+            self.__after_all()
 
-    def init_path_file(self, path: Path):
+    def init_path_files(self, path: Path):
         self.dir_tests = path.absolute() / "test"
-        self.checker = path.absolute() / "rules" / "finish.sh"
-        self.init = self.dir_tests / "init.py"
-        self.tear_down = self.dir_tests / "tearDown.py"
+        if "path-to-checking-script" in self.metadata:
+            self.checker = path.absolute() / self.metadata["path-to-checking-script"]
+        else:
+            self.checker = path.absolute() / "rules" / "finish.sh"
+        if "script-before-each" in self.metadata:
+            self.init = self.dir_tests / self.metadata["script-before-each"]
+        if "script-after-all" in self.metadata:
+            self.tear_down = self.dir_tests / self.metadata["script-after-all"]
 
-    def __run_test(self, script_name: str):
-        script_path = self.dir_tests / "map" / script_name
-        self.log.debug(script_path)
-        checker = self.m.Checker(script_path)
+    def __run_test(self, suite: dict):
+        self.__before_each()
+
+        path_script_test_case = self.__get_path_to_script_test_case(suite)
+
+        checker = self.m.Checker(path_script_test_case)
         actual = checker.check()
         self.log.debug(f"Actual: {actual}")
-        expected = self.suite[script_name]
+        expected = suite["result-text"]
         if expected != actual:
-            self.log.warning(f"Script: {script_name}\nExpected: {expected}\n  Actual: {actual}")
+            self.log.warning(f'Script: {suite["name"]}\nExpected: {expected}\n  Actual: {actual}')
+
+    def __get_path_to_script_test_case(self, suite):
+        if "script-test-case" in suite:
+            path_script_test_case = self.dir_tests / "suites" / suite["script-test-case"]
+        else:
+            path_script_test_case = "script.sh"
+        return path_script_test_case
+
+    def __before_each(self):
+        if self.init:
+            self.run_script("Init", self.init)
+
+    def __after_all(self):
+        if self.tear_down:
+            self.run_script("Tear down", self.tear_down)
 
     @staticmethod
     def dynamic_module(path: Path):
