@@ -6,7 +6,7 @@ import subprocess
 
 
 class Checker:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.stdout = ''
         self.stderr = ''
         self.path = f'/home/ubuntu/script.sh'
@@ -21,6 +21,9 @@ class Checker:
         stdout = process.stdout.strip()
         stderr = process.stderr.strip()
         return stdout, stderr
+
+    def debug(self):
+        return f"FAIL: {Path.cwd()}"
 
     def check(self):
         if not pathlib.Path(self.path).is_file():
@@ -41,6 +44,6 @@ class Checker:
 
 
 if __name__ == '__main__':
-    check_result = {"echo": Checker().check()}
+    check_result = {"echo": Checker().debug()}
     json_object = json.dumps(check_result)
     print(json_object)
