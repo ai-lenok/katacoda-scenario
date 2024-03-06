@@ -100,20 +100,21 @@ class Tester:
             self.tear_down = self.dir_tests / self.metadata["script-after-all"]
 
     def __run_test(self, suite: dict):
+        self.log.debug(f'Start "{suite["name"]}"')
         self.__before_each()
 
-        path_script_test_case = self.__get_path_to_script_test_case(suite)
+        path_script_test_case = self.__get_path_to_script_for_putting_to_checker(suite)
 
         checker = self.m.Checker(path_script_test_case)
         actual = checker.check()
-        self.log.debug(f"Actual: {actual}")
+        self.log.debug(f"Result: {actual}")
         expected = suite["result-text"]
         if expected != actual:
             self.log.warning(f'Script: {suite["name"]}\nExpected: {expected}\n  Actual: {actual}')
 
-    def __get_path_to_script_test_case(self, suite):
-        if "script-test-case" in suite:
-            path_script_test_case = self.dir_tests / "suites" / suite["script-test-case"]
+    def __get_path_to_script_for_putting_to_checker(self, suite):
+        if "script-put-to-checker" in suite:
+            path_script_test_case = self.dir_tests / "suites" / suite["script-put-to-checker"]
         else:
             path_script_test_case = "script.sh"
         return path_script_test_case
