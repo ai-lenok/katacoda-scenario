@@ -4,10 +4,10 @@ import json
 import pathlib
 
 class Checker:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.stdout = ''
         self.stderr = ''
-        self.path = f'/home/ubuntu/file.txt'
+        self.path = kwargs.get("check_path_exists", '/home/ubuntu/file.txt')
 
     def check(self):
         if not pathlib.Path(self.path).is_file():

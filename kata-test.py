@@ -79,7 +79,7 @@ class Tester:
         """Run all exercise checks"""
         self.log.info(f"Run tests: {path}")
         self.__read_metadata(path)
-        self.init_path_files(path)
+        self.__init_path_files(path)
 
         with self.working_directory(self.root_dir):
             self.m = self.dynamic_module(self.checker)
@@ -88,12 +88,10 @@ class Tester:
 
             self.__after_all()
 
-    def init_path_files(self, path: Path):
+    def __init_path_files(self, path: Path):
         self.dir_tests = path.absolute() / "test"
-        if "path-to-checking-script" in self.metadata:
-            self.checker = path.absolute() / self.metadata["path-to-checking-script"]
-        else:
-            self.checker = path.absolute() / "rules" / "finish.sh"
+        self.checker = path.absolute() / self.metadata.get("path-to-checking-script", "rules/finish.sh")
+
         if "script-before-each" in self.metadata:
             self.init = self.dir_tests / self.metadata["script-before-each"]
         if "script-after-all" in self.metadata:
@@ -102,10 +100,11 @@ class Tester:
     def __run_test(self, suite: dict):
         self.log.debug(f'Start "{suite["name"]}"')
         self.__before_each()
+        self.__run_script_before_checker(suite)
 
-        path_script_test_case = self.__get_path_to_script_for_putting_to_checker(suite)
-
-        checker = self.m.Checker(path_script_test_case)
+        params = suite.get("params", {})
+        params["checking_script"] = self.__get_path_to_script_for_putting_to_checker(suite)
+        checker = self.m.Checker(**params)
         actual = checker.check()
         self.log.debug(f"Result: {actual}")
         expected = suite["result-text"]
@@ -118,6 +117,11 @@ class Tester:
         else:
             path_script_test_case = "script.sh"
         return path_script_test_case
+
+    def __run_script_before_checker(self, suite):
+        if "script-run-before-checker" in suite:
+            path = self.dir_tests / "suites" / suite["script-run-before-checker"]
+            self.run_script("Run script", path)
 
     def __before_each(self):
         if self.init:
