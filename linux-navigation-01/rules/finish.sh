@@ -23,7 +23,7 @@ class Checker:
         return stdout, stderr
 
     def debug(self):
-        return f"FAIL: {Path.cwd()}"
+        return f"FAIL: {pathlib.Path.cwd()}"
 
     def check(self):
         if not pathlib.Path(self.path).is_file():
