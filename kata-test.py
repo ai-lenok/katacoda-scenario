@@ -41,12 +41,6 @@ class Tester:
         with open(path_metadata) as f:
             self.metadata = yaml.safe_load(f)
 
-    def run_debug(self, path: Path):
-        out = os.popen(str(path)).read()
-        self.log.debug(f"Run: {out}")
-
-        print(os.popen(str(path)).read())
-
     def __run_script(self, path: Path):
         try:
             subprocess.run(['chmod', '+x', path])
