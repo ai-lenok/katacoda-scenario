@@ -3,6 +3,7 @@
 import json
 import pathlib
 import subprocess
+import os
 
 
 class Checker:
@@ -23,7 +24,7 @@ class Checker:
         return stdout, stderr
 
     def debug(self):
-        return f"FAIL: {pathlib.Path.cwd()}"
+        return f"FAIL: {os.getcwd()}"
 
     def check(self):
         if not pathlib.Path(self.path).is_file():
