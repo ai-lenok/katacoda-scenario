@@ -21,6 +21,11 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "finish.py",
+          "target": "/usr/lib/checker/",
+          "chmod": "+x"
         }
       ]
     },
