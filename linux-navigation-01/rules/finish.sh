@@ -2,4 +2,6 @@
 
 #python3 /usr/lib/checker/finish.py
 
-printf '{"echo": "FAIL: %s"}' "error"
+#printf '{"echo": "FAIL: %s"}' "error"
+#echo '{"echo": "FAIL: ' $(date) '"}'
+echo '{"echo": "FAIL: error"}'
