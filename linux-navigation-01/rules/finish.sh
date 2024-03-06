@@ -2,4 +2,4 @@
 
 #python3 /usr/lib/checker/finish.py
 
-printf '{"echo": "FAIL: %s"}' "$(whoami)"
+printf '{"echo": "FAIL: %s"}' "$(date)"
