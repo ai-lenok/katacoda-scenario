@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 import os
 import contextlib
 import yaml
@@ -21,6 +22,7 @@ class Tester:
         logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
         self.m = object
         self.metadata = {}
+        self.exercise_data = {}
         self.dir_tests = Path
         self.checker = Path
         self.checker_new = Path
@@ -40,6 +42,12 @@ class Tester:
         self.metadata = {}
         with open(path_metadata) as f:
             self.metadata = yaml.safe_load(f)
+
+    def __read_index_json(self, path: Path):
+        path_index = path / "index.json"
+        self.exercise_data = {}
+        with open(path_index) as f:
+            self.exercise_data = json.load(f)
 
     def __run_script(self, path: Path):
         try:
@@ -71,7 +79,8 @@ class Tester:
 
     def run_suite(self, path: Path):
         """Run all exercise checks"""
-        self.log.info(f"Run tests: {path}")
+        self.__read_index_json(path)
+        self.log.info(f'Suite: {path}. {self.exercise_data["title"]}')
         self.__read_metadata(path)
         self.__init_path_files(path)
 
