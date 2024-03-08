@@ -5,8 +5,8 @@ suites:
     script-run-before-checker: ok.sh
     result-text: OK
     params:
-      check_path_exists: directory
+      check_path_exists: dir_one/dir_two/dir_three
   - name: The file does not exist
-    result-text: 'FAIL: Каталог "directory" не существует'
+    result-text: 'FAIL: Каталог "dir" не существует'
     params:
-      check_path_exists: directory
+      check_path_exists: dir
