@@ -26,13 +26,8 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        },
-        {
-          "file": "autostart.sh",
-          "target": "/usr/local/autostart-scripts.d",
+          "file": "file",
+          "target": "/home/ubuntu/dir",
           "chmod": "+x"
         }
       ]
