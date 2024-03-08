@@ -4,6 +4,7 @@ import json
 import re
 import subprocess
 from pathlib import Path
+import os
 
 
 class Checker:
@@ -12,6 +13,8 @@ class Checker:
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
         self.reference_output = kwargs.get("reference_output", r'file1\sfile2')
+        self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
+        os.chdir(self.current_dir)
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.checking_script])
