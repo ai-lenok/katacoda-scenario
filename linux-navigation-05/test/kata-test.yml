@@ -6,6 +6,11 @@ suites:
     result-text: OK
     params:
       check_path_exists: directory
+  - name: wrong type
+    script-run-before-checker: wrong-type.sh
+    result-text: 'FAIL: "directory" существует, но у него неправильный тип'
+    params:
+      check_path_exists: directory
   - name: The file does not exist
     result-text: 'FAIL: Каталог "directory" не существует'
     params:

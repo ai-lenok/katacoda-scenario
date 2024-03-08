@@ -6,6 +6,11 @@ suites:
     result-text: OK
     params:
       check_path_exists: file.txt
+  - name: wrong type
+    script-run-before-checker: wrong-type.sh
+    result-text: 'FAIL: Файл "file.txt" существует, но у него неправильный тип'
+    params:
+      check_path_exists: file.txt
   - name: The file does not exist
     result-text: 'FAIL: Файл "file.txt" не существует'
     params:

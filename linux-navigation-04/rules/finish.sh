@@ -13,8 +13,10 @@ class Checker:
         os.chdir(self.current_dir)
 
     def check(self):
-        if not pathlib.Path(self.path).is_file():
+        if not pathlib.Path(self.path).exists():
             return f'FAIL: Файл "{self.path}" не существует'
+        if not pathlib.Path(self.path).is_file():
+            return f'FAIL: Файл "{self.path}" существует, но у него неправильный тип'
 
         return "OK"
 
