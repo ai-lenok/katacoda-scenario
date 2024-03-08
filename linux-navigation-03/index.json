@@ -33,7 +33,7 @@
           "chmod": "+x"
         },
         {
-          "file": "file1",
+          "file": "file3",
           "target": "/root/wrong_dir",
           "chmod": "+x"
         }
