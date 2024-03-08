@@ -16,13 +16,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
