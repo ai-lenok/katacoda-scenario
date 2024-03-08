@@ -23,11 +23,6 @@
           "chmod": "+x"
         },
         {
-          "file": "finish.py",
-          "target": "/usr/lib/checker/",
-          "chmod": "+x"
-        },
-        {
           "file": "autostart.sh",
           "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
