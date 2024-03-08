@@ -1,0 +1,12 @@
+script-before-each: cleaner.sh
+script-after-all: cleaner.sh
+suites:
+  - name: success
+    script-run-before-checker: ok.sh
+    result-text: OK
+    params:
+      check_path_exists: dir
+  - name: The file does not exist
+    result-text: 'FAIL: Каталог "dir" не существует'
+    params:
+      check_path_exists: dir
