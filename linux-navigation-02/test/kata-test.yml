@@ -1,4 +1,4 @@
-script-before-each: tearDown.py
+script-before-each: cleaner.sh
 script-after-all: cleaner.sh
 path-to-checking-script: rules/finish.sh
 suites:
