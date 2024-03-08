@@ -18,8 +18,8 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
+          "file": "file",
+          "target": "/home/ubuntu/my_dir",
           "chmod": "+x"
         }
       ]
