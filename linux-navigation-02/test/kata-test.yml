@@ -5,11 +5,15 @@ suites:
   - name: success
     script-put-to-checker: ok.sh
     result-text: OK
+    params:
+      reference_output: "{{ pwd }}"
+  - name: wrong output
+    script-put-to-checker: wrong-output.sh
+    result-jinja: 'FAIL: Неправильный ответ: "{{ pwd }}/dir"'
+    params:
+      reference_output: "{{ pwd }}"
   - name: without print
     script-put-to-checker: without-print.sh
     result-text: "FAIL: Скрипт ничего не вывел"
-  - name: wrong output
-    script-put-to-checker: wrong-output.sh
-    result-text: 'FAIL: Неправильный ответ: "/home/ubuntu/dir"'
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"

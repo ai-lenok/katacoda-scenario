@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 
-import json
-import os
 import contextlib
-import yaml
-import subprocess
-from pathlib import Path
 import importlib.util
-import sys
+import json
 import logging
+import os
+import subprocess
+import sys
 from importlib.machinery import SourceFileLoader
+from pathlib import Path
+
+import yaml
+from jinja2 import Environment
 
 
 class Tester:
@@ -105,14 +107,20 @@ class Tester:
         self.__before_each()
         self.__run_script_before_checker(suite)
 
-        params = suite.get("params", {})
-        params["checking_script"] = self.__get_path_to_script_for_putting_to_checker(suite)
+        params = self.__get_params(suite)
         checker = self.m.Checker(**params)
         actual = checker.check()
         self.log.debug(f"Result: {actual}")
-        expected = suite["result-text"]
+        expected = self.__get_expected(suite)
         if expected != actual:
             self.log.warning(f'Script: {suite["name"]}\nExpected: {expected}\n  Actual: {actual}')
+
+    def __get_params(self, suite):
+        params = suite.get("params", {})
+        for key, value in params.items():
+            params[key] = self.__render_jinja(value)
+        params["checking_script"] = self.__get_path_to_script_for_putting_to_checker(suite)
+        return params
 
     def __get_path_to_script_for_putting_to_checker(self, suite):
         if "script-put-to-checker" in suite:
@@ -120,6 +128,17 @@ class Tester:
         else:
             path_script_test_case = "script.sh"
         return path_script_test_case
+
+    def __get_expected(self, suite):
+        if "result-jinja" in suite:
+            return self.__render_jinja(suite["result-jinja"])
+        else:
+            return suite["result-text"]
+
+    def __render_jinja(self, template: str) -> str:
+        environment = Environment()
+        template = environment.from_string(template)
+        return template.render(pwd=Path.cwd())
 
     def __run_script_before_checker(self, suite):
         if "script-run-before-checker" in suite:
