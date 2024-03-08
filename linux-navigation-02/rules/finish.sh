@@ -10,7 +10,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", '/home/ubuntu')
+        self.reference_output = kwargs.get("reference_output", '/root')
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.checking_script])
