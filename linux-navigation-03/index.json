@@ -31,16 +31,6 @@
           "file": "file2",
           "target": "/home/ubuntu/dir",
           "chmod": "+x"
-        },
-        {
-          "file": "file3",
-          "target": "/root/wrong_dir",
-          "chmod": "+x"
-        },
-        {
-          "file": "file4",
-          "target": "/root/dir/wrong_dir",
-          "chmod": "+x"
         }
       ]
     },
