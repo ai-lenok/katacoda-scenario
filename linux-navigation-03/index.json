@@ -21,6 +21,16 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "file1",
+          "target": "/home/ubuntu/dir",
+          "chmod": "+x"
+        },
+        {
+          "file": "file2",
+          "target": "/home/ubuntu/dir",
+          "chmod": "+x"
         }
       ]
     },

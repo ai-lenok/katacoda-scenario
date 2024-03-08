@@ -1,0 +1,15 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: wrong output
+    script-put-to-checker: wrong-output.sh
+    result-jinja: 'FAIL: Неправильный ответ: "dir"'
+  - name: without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"

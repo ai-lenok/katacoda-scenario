@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 import json
-from pathlib import Path
+import re
 import subprocess
+from pathlib import Path
 
 
 class Checker:
@@ -10,7 +11,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.reference_output = kwargs.get("reference_output", r'file1\sfile2')
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.checking_script])
@@ -35,7 +36,7 @@ class Checker:
         if not self.stdout:
             return f"FAIL: Скрипт ничего не вывел"
 
-        if self.stdout == self.reference_output:
+        if re.match(self.reference_output, self.stdout):
             return "OK"
         else:
             return f'FAIL: Неправильный ответ: "{self.stdout}"'
