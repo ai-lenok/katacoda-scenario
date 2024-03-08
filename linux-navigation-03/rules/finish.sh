@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
-import os
 
 
 class Checker:
