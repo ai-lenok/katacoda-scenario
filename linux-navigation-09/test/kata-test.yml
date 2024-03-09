@@ -3,42 +3,37 @@ script-after-all: cleaner.sh
 path-to-checking-script: rules/finish.sh
 suites:
   - name: success
-    script-put-to-checker: ok.sh
+    script-run-before-checker: ok.sh
     result-text: OK
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
   - name: new_file does not exist
-    script-put-to-checker: empty-script.sh
+    script-run-before-checker: empty-script.sh
     result-text: 'FAIL: Файл "new_file.txt" не существует'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
   - name: wrong source type
-    script-put-to-checker: wrong-type.sh
+    script-run-before-checker: wrong-type.sh
     result-text: 'FAIL: Файл "file.txt" существует, но у него неправильный тип'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
   - name: wrong destination type
-    script-put-to-checker: create-dir.sh
+    script-run-before-checker: create-dir.sh
     result-text: 'FAIL: Файл "new_file.txt" существует, но у него неправильный тип'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
-  - name: The script file does not exist
-    result-text: 'FAIL: script.sh не существует'
-    params:
-      check_path_source: file.txt
-      check_path_dest: new_file.txt
   - name: Move file
-    script-put-to-checker: move.sh
+    script-run-before-checker: move.sh
     result-text: 'FAIL: Файл "file.txt" перестал существовать'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
   - name: Create file
-    script-put-to-checker: create.sh
+    script-run-before-checker: create.sh
     result-text: 'FAIL: У файлов разное содержание'
     params:
       check_path_source: file.txt

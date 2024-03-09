@@ -4,7 +4,6 @@ import filecmp
 import json
 import os
 from pathlib import Path
-import subprocess
 
 
 class Checker:
@@ -17,22 +16,7 @@ class Checker:
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
-
     def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
-
-        self.__run_script()
         if not Path(self.path_source).exists():
             return f'FAIL: Файл "{self.path_source}" перестал существовать'
         if not Path(self.path_source).is_file():
