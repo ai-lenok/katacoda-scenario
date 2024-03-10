@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
+import filecmp
 import json
 import os
-import subprocess
 from pathlib import Path
 
 
@@ -11,40 +11,32 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.path_source = kwargs.get("check_path_source", '/home/ubuntu/my_dir/file.txt')
+        self.path_dest = kwargs.get("check_path_dest", '/home/ubuntu/new_dir/file.txt')
+        self.reference_file = kwargs.get("reference_file", '/root/text/poems.txt')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
-
     def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
+        if not Path(self.path_source).exists():
+            return f'FAIL: Файл "{self.path_source}" перестал существовать'
+        if not Path(self.path_source).is_file():
+            return f'FAIL: Файл "{self.path_source}" существует, но у него неправильный тип'
 
-        self.stdout, self.stderr = self.__run_script()
+        if not Path(self.path_dest).exists():
+            return f'FAIL: Файл "{self.path_dest}" не существует'
+        if not Path(self.path_dest).is_file():
+            return f'FAIL: Файл "{self.path_dest}" существует, но у него неправильный тип'
 
-        return self.check_script_output()
+        if not filecmp.cmp(self.path_source, self.reference_file):
+            return f'FAIL: У файла "{self.path_source}" поменялось исходное состояние'
 
-    def check_script_output(self):
-        if not self.stdout:
-            return f"FAIL: Скрипт ничего не вывел"
-
-        if self.stdout == self.reference_output:
-            return "OK"
-        else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+        if not filecmp.cmp(self.path_source, self.path_dest):
+            return f'FAIL: У файлов разное содержание'
+        return "OK"
 
 
 if __name__ == '__main__':
-    check_result = {"echo": Checker().check()}
+    check_result = {"create": Checker().check()}
     json_object = json.dumps(check_result)
     print(json_object)

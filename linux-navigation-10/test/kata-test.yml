@@ -1,0 +1,53 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-run-before-checker: ok.sh
+    result-text: OK
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: new_file does not exist
+    script-run-before-checker: empty-script.sh
+    result-text: 'FAIL: Файл "new_dir/file.txt" не существует'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: wrong source type
+    script-run-before-checker: wrong-type.sh
+    result-text: 'FAIL: Файл "my_dir/file.txt" существует, но у него неправильный тип'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: wrong destination type
+    script-run-before-checker: create-dir.sh
+    result-text: 'FAIL: Файл "new_dir/file.txt" существует, но у него неправильный тип'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Move file
+    script-run-before-checker: move.sh
+    result-text: 'FAIL: Файл "my_dir/file.txt" перестал существовать'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Create file
+    script-run-before-checker: create.sh
+    result-text: 'FAIL: У файлов разное содержание'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Change source file
+    script-run-before-checker: clear-source.sh
+    result-text: 'FAIL: У файла "my_dir/file.txt" поменялось исходное состояние'
+    params:
+      check_path_source: my_dir/file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
