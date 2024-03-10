@@ -13,6 +13,7 @@ class Checker:
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
         self.path_source = kwargs.get("check_path_source", '/home/ubuntu/file.txt')
         self.path_dest = kwargs.get("check_path_dest", '/home/ubuntu/new_file.txt')
+        self.reference_file = kwargs.get("reference_file", '/root/text/poems.txt')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
@@ -26,6 +27,9 @@ class Checker:
             return f'FAIL: Файл "{self.path_dest}" не существует'
         if not Path(self.path_dest).is_file():
             return f'FAIL: Файл "{self.path_dest}" существует, но у него неправильный тип'
+
+        if not filecmp.cmp(self.path_source, self.reference_file):
+            return f'FAIL: У файла "{self.path_source}" поменялось исходное состояние'
 
         if not filecmp.cmp(self.path_source, self.path_dest):
             return f'FAIL: У файлов разное содержание'

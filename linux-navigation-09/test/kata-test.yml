@@ -8,33 +8,46 @@ suites:
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
   - name: new_file does not exist
     script-run-before-checker: empty-script.sh
     result-text: 'FAIL: Файл "new_file.txt" не существует'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
   - name: wrong source type
     script-run-before-checker: wrong-type.sh
     result-text: 'FAIL: Файл "file.txt" существует, но у него неправильный тип'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
   - name: wrong destination type
     script-run-before-checker: create-dir.sh
     result-text: 'FAIL: Файл "new_file.txt" существует, но у него неправильный тип'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
   - name: Move file
     script-run-before-checker: move.sh
     result-text: 'FAIL: Файл "file.txt" перестал существовать'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
   - name: Create file
     script-run-before-checker: create.sh
     result-text: 'FAIL: У файлов разное содержание'
     params:
       check_path_source: file.txt
       check_path_dest: new_file.txt
+      reference_file: reference.txt
+  - name: Change source file
+    script-run-before-checker: clear-source.sh
+    result-text: 'FAIL: У файла "file.txt" поменялось исходное состояние'
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_file.txt
+      reference_file: reference.txt
