@@ -13,7 +13,7 @@ class Checker:
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
         self.path_source = kwargs.get("check_path_source", '/home/ubuntu/file.txt')
         self.path_dest = kwargs.get("check_path_dest", '/home/ubuntu/new_file.txt')
-        self.reference_file = kwargs.get("reference_file", '/root/text/poems.txt')
+        self.reference_file = kwargs.get("reference_file", '/root/text/poem.txt')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 

@@ -23,7 +23,7 @@
           "chmod": "+x"
         },
         {
-          "file": "poems.txt",
+          "file": "poem.txt",
           "target": "/root/text/",
           "chmod": "+x"
         }
