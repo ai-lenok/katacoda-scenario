@@ -19,8 +19,7 @@
       "host01": [
         {
           "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
+          "target": "/home/ubuntu/"
         }
       ]
     },
