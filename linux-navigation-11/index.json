@@ -18,8 +18,13 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
+          "file": "file.txt",
           "target": "/home/ubuntu/",
+          "chmod": "+x"
+        },
+        {
+          "file": "poem.txt",
+          "target": "/root/text/",
           "chmod": "+x"
         }
       ]
