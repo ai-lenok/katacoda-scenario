@@ -5,6 +5,7 @@ import importlib.util
 import json
 import logging
 import os
+import re
 import subprocess
 import sys
 from importlib.machinery import SourceFileLoader
@@ -111,8 +112,8 @@ class Tester:
         checker = self.m.Checker(**params)
         actual = checker.check()
         self.log.debug(f"Result: {actual}")
-        expected = self.__get_expected(suite)
-        if expected != actual:
+        ok, expected = self.__compare_answers(actual, suite)
+        if not ok:
             self.log.warning(f'Script: {suite["name"]}\nExpected: {expected}\n  Actual: {actual}')
 
     def __get_params(self, suite):
@@ -129,6 +130,14 @@ class Tester:
         else:
             path_script_test_case = "script.sh"
         return path_script_test_case
+
+    def __compare_answers(self, actual: str, suite: dict):
+        if "result-regex" in suite:
+            pattern = suite["result-regex"]
+            return re.match(pattern, actual), pattern
+        else:
+            expected = self.__get_expected(suite)
+            return expected == actual, expected
 
     def __get_expected(self, suite):
         if "result-jinja" in suite:
