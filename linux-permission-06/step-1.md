@@ -7,7 +7,7 @@
 В начале посмотрите права доступ на файл:
 
 ```
-ls -l file.txt
+ls -l script.sh
 ```{{execute}}
 
 Попробуем запустить файл:
@@ -19,13 +19,13 @@ ls -l file.txt
 Добавим право выполнения:
 
 ```
-chmod +x file.txt
+chmod +x script.sh
 ```{{execute}}
 
 Посмотрим новые права:
 
 ```
-ls -l file.txt
+ls -l script.sh
 ```{{execute}}
 
 Ещё раз попробуем запустить файл:
