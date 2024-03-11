@@ -2,6 +2,6 @@
 
 DONE_FILE=/usr/local/etc/autostart.sh.done
 
-chmod 760 /home/ubuntu/my_dir/file.txt
+chmod 000 /home/ubuntu/file.txt
 
 touch $DONE_FILE
