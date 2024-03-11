@@ -1,0 +1,39 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: Success
+    script-run-before-checker: ok.sh
+    result-text: OK
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Empty script
+    script-run-before-checker: empty-script.sh
+    result-text: 'FAIL: Изначальный файл "file.txt" существует'
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Wrong destination type
+    script-run-before-checker: wrong-type.sh
+    result-text: 'FAIL: Файл "new_dir/file.txt" существует, но у него неправильный тип'
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Copy file
+    script-run-before-checker: copy.sh
+    result-text: 'FAIL: Изначальный файл "file.txt" существует'
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
+  - name: Create file
+    script-run-before-checker: create.sh
+    result-text: 'FAIL: У файла "new_dir/file.txt" поменялось исходное состояние'
+    params:
+      check_path_source: file.txt
+      check_path_dest: new_dir/file.txt
+      reference_file: reference.txt
