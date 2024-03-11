@@ -1,0 +1,15 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: wrong output
+    script-put-to-checker: wrong-output.sh
+    result-regex: '^FAIL\: Неправильный ответ\: "total 4\sdrwxrwxr\-x[\w\s\:]+my_dir'
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"
