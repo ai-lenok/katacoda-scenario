@@ -25,7 +25,7 @@
         {
           "file": "file.txt",
           "target": "/home/ubuntu/my_dir/",
-          "chmod": "+rwx"
+          "chmod": "+x"
         }
       ]
     },
