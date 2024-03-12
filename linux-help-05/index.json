@@ -37,7 +37,7 @@
     "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
   },
   "backend": {
-    "imageid": "ubuntu:2004",
+    "imageid": "jdk17",
     "userid": 1000,
     "groupid": 1002,
     "envs": [
