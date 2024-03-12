@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -11,7 +12,8 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.reference_output = kwargs.get("reference_output", r'^java: /usr/bin/java /usr/share/java')
+        self.reference_output_wrong = kwargs.get("reference_output_wrong", r'^/[/\w\.]+/java$')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
@@ -38,7 +40,10 @@ class Checker:
         if not self.stdout:
             return f"FAIL: Скрипт ничего не вывел"
 
-        if self.stdout == self.reference_output:
+        if re.match(self.reference_output_wrong, self.stdout):
+            return 'FAIL: Утилита "which" здесь не подходит'
+
+        if re.match(self.reference_output, self.stdout):
             return "OK"
         else:
             return f'FAIL: Неправильный ответ: "{self.stdout}"'
