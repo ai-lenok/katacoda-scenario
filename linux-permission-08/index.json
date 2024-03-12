@@ -9,6 +9,14 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Задание",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Задание",
+        "text": "step-3.md"
       }
     ],
     "intro": {
@@ -18,9 +26,8 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
+          "file": "file.txt",
+          "target": "/home/ubuntu/"
         }
       ]
     },
