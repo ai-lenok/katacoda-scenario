@@ -1,0 +1,18 @@
+script-before-each: tearDown.py
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: apropos
+    script-put-to-checker: apropos.sh
+    result-regex: '^FAIL: Неправильный ответ:'
+  - name: wrong output
+    script-put-to-checker: wrong-output.sh
+    result-regex: '^FAIL: Неправильный ответ: "chmod \(1\)\s'
+  - name: without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"
