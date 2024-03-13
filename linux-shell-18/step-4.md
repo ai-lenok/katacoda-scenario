@@ -4,16 +4,16 @@
 
 Запустите `my-app`:
 
-`my-app`{{open}}
+`my-app`{{execute}}
 
 Работает
 
 Перейдите в домашний каталог:
 
-`cd ~`{{open}}
+`cd ~`{{execute}}
 
 Повторите команду:
 
-`my-app`{{open}}
+`my-app`{{execute}}
 
 Тоже работает
