@@ -7,8 +7,24 @@
   "details": {
     "steps": [
       {
-        "title": "Задание",
+        "title": "Узнать PID",
         "text": "step-1.md"
+      },
+      {
+        "title": "Запуск Bash",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Покинуть Bash",
+        "text": "step-3.md"
+      },
+      {
+        "title": "Запуск sh",
+        "text": "step-4.md"
+      },
+      {
+        "title": "Покинуть sh",
+        "text": "step-5.md"
       }
     ],
     "intro": {
@@ -16,13 +32,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
