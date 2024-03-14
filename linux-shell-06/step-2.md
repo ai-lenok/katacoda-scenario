@@ -8,4 +8,4 @@
 
 И мы можем обратиться к серверу через `curl`:
 
-`curl [[UUID_SUBDOMAIN]]-80-[[HOST]]`{{execute}}
+`curl localhost`{{execute}}
