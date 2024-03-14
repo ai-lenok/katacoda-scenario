@@ -8,7 +8,6 @@ func (m msg) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
    fmt.Fprint(resp, m)
 }
 func main() {
-    msgHandler := msg("Простой web-сервер")
-    fmt.Println("Web-сервер запущен. Для остановки сервера нажмите CTRL+C")
+    msgHandler := msg("Простой web-сервер\n")
     http.ListenAndServe("localhost:80", msgHandler)
 }
