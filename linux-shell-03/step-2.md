@@ -8,8 +8,10 @@
 
 ```shell
 cd ~
-mkdir dir2
-cd dir2
+mkdir directory
+cd directory
 ```
 
-`cd ~; mkdir dir2; cd dir2`{{execute}}
+`cd ~; mkdir directory; cd directory`{{execute}}
+
+Мы создали и перешли в `directory`

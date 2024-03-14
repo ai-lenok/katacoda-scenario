@@ -15,8 +15,12 @@
         "text": "step-2.md"
       },
       {
-        "title": "Заключение",
+        "title": "Игнорирование ошибок",
         "text": "step-3.md"
+      },
+      {
+        "title": "Заключение",
+        "text": "step-4.md"
       }
     ],
     "intro": {
