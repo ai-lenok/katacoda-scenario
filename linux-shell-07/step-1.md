@@ -2,9 +2,9 @@
 
 ## Детали
 
-Откройте файл `script.sh`{{open}}
+`docker inspect cont`{{execute}}
 
-Напишите команду, которая
+`docker inspect cont | jq .`{{execute}}
 
 
 
