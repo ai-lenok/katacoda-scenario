@@ -2,6 +2,10 @@
 
 `docker inspect cont`{{execute}}
 
+---
+
+Мы получили подробный отчёт
+
 `docker inspect cont | jq .`{{execute}}
 
 `docker inspect cont | jq .[].Config`{{execute}}

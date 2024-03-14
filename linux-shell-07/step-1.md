@@ -8,7 +8,7 @@
 
 `docker container ls --all`{{execute}}
 
-###
+---
 
 Как видите, ранее был запущен контейнер с именем `cont`
 
