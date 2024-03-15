@@ -2,7 +2,6 @@
 
 import json
 import os
-import subprocess
 from pathlib import Path
 
 
@@ -10,38 +9,34 @@ class Checker:
     def __init__(self, **kwargs):
         self.stdout = ''
         self.stderr = ''
-        self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
+        self.count_files = kwargs.get("count_files", 99)
         os.chdir(self.current_dir)
 
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
-
     def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
+        files = [f for f in Path().iterdir()]
 
-        self.stdout, self.stderr = self.__run_script()
+        count = len(files)
 
-        return self.check_script_output()
+        if count == 0:
+            return f'FAIL: Ни одного файла нет'
 
-    def check_script_output(self):
-        if not self.stdout:
-            return f"FAIL: Скрипт ничего не вывел"
+        if count < self.count_files:
+            return f'FAIL: Файлов слишком мало: {count}'
 
-        if self.stdout == self.reference_output:
-            return "OK"
-        else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+        if self.count_files < count:
+            return f'FAIL: Файлов слишком много: {count}'
+
+        lost_files = []
+        for number in range(1, self.count_files + 1):
+            file_name = '{:02d}.txt'.format(number)
+            if not Path(file_name).is_file():
+                lost_files.append(file_name)
+
+        if len(lost_files) != 0:
+            return f'FAIL: Следующие файлы не найдены: {lost_files}'
+
+        return "OK"
 
 
 if __name__ == '__main__':
