@@ -119,7 +119,8 @@ class Tester:
     def __get_params(self, suite):
         params = suite.get("params", {})
         for key, value in params.items():
-            params[key] = self.__render_jinja(value)
+            if type(value) is str:
+                params[key] = self.__render_jinja(value)
         params["checking_script"] = self.__get_path_to_script_for_putting_to_checker(suite)
         params["current_dir"] = Path.cwd()
         return params
