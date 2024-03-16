@@ -10,17 +10,25 @@ suites:
     result-text: 'FAIL: Ни одного файла нет'
   - name: Too little count files
     script-run-before-checker: little.sh
-    result-text: 'FAIL: Файлов слишком мало: 10'
+    result-text: "FAIL: Неправильный количество файлов\nДолжно быть: 99\nУ вас: 10"
   - name: Too many count files
     script-run-before-checker: many.sh
-    result-text: 'FAIL: Файлов слишком много: 999'
+    result-text: "FAIL: Неправильный количество файлов\nДолжно быть: 99\nУ вас: 999"
   - name: Wrong type
     script-run-before-checker: wrong-type.sh
-    result-text: "FAIL: Следующие файлы не найдены: ['01.txt', '02.txt', '03.txt', '04.txt']"
+    result-text: "FAIL: Следующие файлы не найдены: 01.txt, 02.txt, 03.txt, 04.txt"
     params:
       count_files: 4
   - name: Not ok
     script-run-before-checker: not-ok.sh
-    result-text: "FAIL: Следующие файлы не найдены: ['03.txt', '04.txt']"
+    result-text: "FAIL: Следующие файлы не найдены: 03.txt, 04.txt"
     params:
       count_files: 4
+  - name: Wrong output min
+    script-run-before-checker: wrong-output-min.sh
+    result-text: "FAIL: Следующие файлы не найдены: 01.txt, 02.txt, 03.txt, 04.txt"
+  - name: Wrong output max
+    script-run-before-checker: wrong-output-max.sh
+    result-text: "FAIL: Следующие файлы не найдены: 01.txt, 02.txt, 03.txt, 04.txt, ..."
+    params:
+      count_files: 5

@@ -11,30 +11,40 @@ class Checker:
         self.stderr = ''
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         self.count_files = kwargs.get("count_files", 99)
+        self.reference_file_names = self.__generate_reference_set(self.count_files)
         os.chdir(self.current_dir)
 
+    @staticmethod
+    def __generate_reference_set(max_files: int) -> set:
+        reference = set()
+        for number in range(1, max_files + 1):
+            file_name = '{:02d}.txt'.format(number)
+            reference.add(file_name)
+        return reference
+
     def check(self):
-        files = [f for f in Path().iterdir()]
+        files_in_dir = [f for f in Path().iterdir()]
 
-        count = len(files)
+        count_files = len(files_in_dir)
 
-        if count == 0:
+        if count_files == 0:
             return f'FAIL: Ни одного файла нет'
 
-        if count < self.count_files:
-            return f'FAIL: Файлов слишком мало: {count}'
+        real_file_names = set([f.name for f in files_in_dir if f.is_file()])
+        count_real = len(real_file_names)
+        count_reference = len(self.reference_file_names)
+        if count_files != count_reference:
+            return f'FAIL: Неправильный количество файлов\nДолжно быть: {count_reference}\nУ вас: {count_real}'
 
-        if self.count_files < count:
-            return f'FAIL: Файлов слишком много: {count}'
+        diff_files = self.reference_file_names - real_file_names
 
-        lost_files = []
-        for number in range(1, self.count_files + 1):
-            file_name = '{:02d}.txt'.format(number)
-            if not Path(file_name).is_file():
-                lost_files.append(file_name)
-
-        if len(lost_files) != 0:
-            return f'FAIL: Следующие файлы не найдены: {lost_files}'
+        if len(diff_files) != 0:
+            lost_files = sorted(diff_files)
+            if 4 < len(lost_files):
+                text_files = ", ".join(lost_files[:4]) + ", ..."
+            else:
+                text_files = ", ".join(lost_files)
+            return f'FAIL: Следующие файлы не найдены: {text_files}'
 
         return "OK"
 
