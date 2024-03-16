@@ -1,0 +1,43 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: Success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: Correct output in one line
+    script-put-to-checker: ok-one-line.sh
+    result-text: OK
+    params:
+      count_files: 50
+  - name: Correct output in multiline
+    script-put-to-checker: ok-multiline.sh
+    result-text: OK
+    params:
+      count_files: 50
+  - name: Correct output in one line with tabulation
+    script-put-to-checker: ok-tabulation.sh
+    result-text: OK
+    params:
+      count_files: 50
+  - name: Without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"
+  - name: Wrong output
+    script-put-to-checker: wrong-output-min.sh
+    result-text: "FAIL: Следующие файлы не найдены: 005, 015"
+    params:
+      count_files: 20
+  - name: Wrong output
+    script-put-to-checker: wrong-output-max.sh
+    result-text: "FAIL: Следующие файлы не найдены: 005, 015, 025, 035, ..."
+    params:
+      count_files: 50
+  - name: Too little count files
+    script-put-to-checker: little.sh
+    result-text: "FAIL: Неправильный количество файлов\nДолжно быть: 20\nУ вас: 2"
+  - name: Too many count files
+    script-put-to-checker: many.sh
+    result-text: "FAIL: Неправильный количество файлов\nДолжно быть: 20\nУ вас: 99"
