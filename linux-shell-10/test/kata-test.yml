@@ -25,12 +25,12 @@ suites:
     result-text: "FAIL: Скрипт ничего не вывел"
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"
-  - name: Wrong output
+  - name: Wrong output min
     script-put-to-checker: wrong-output-min.sh
     result-text: "FAIL: Следующие файлы не найдены: 005, 015"
     params:
       count_files: 20
-  - name: Wrong output
+  - name: Wrong output max
     script-put-to-checker: wrong-output-max.sh
     result-text: "FAIL: Следующие файлы не найдены: 005, 015, 025, 035, ..."
     params:
