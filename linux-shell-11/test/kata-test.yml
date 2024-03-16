@@ -1,0 +1,18 @@
+script-before-each: cleaner.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: Success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: Without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"
+  - name: Wrong output
+    script-put-to-checker: wrong-output.sh
+    result-text: 'FAIL: Неправильный ответ: "Hello"'
+  - name: No arithmetic
+    script-put-to-checker: no-arithmetic.sh
+    result-text: 'FAIL: Пожалуйста, посчитайте ответ с помощью арифметических операций, а не сразу вводите его'

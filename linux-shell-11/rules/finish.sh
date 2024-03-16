@@ -11,7 +11,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.reference_output = kwargs.get("reference_output", '1783')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
@@ -30,9 +30,25 @@ class Checker:
         if not Path(self.checking_script).is_file():
             return f'FAIL: {self.checking_script} не существует'
 
+        if self.check_stop_words([self.reference_output]):
+            return f'FAIL: Пожалуйста, посчитайте ответ с помощью арифметических операций, а не сразу вводите его'
+
         self.stdout, self.stderr = self.__run_script()
 
         return self.check_script_output()
+
+    def check_stop_words(self, words: list):
+        """
+        Проверяем, что не используем команду echo или printf
+        :return: True - используется, False - не используется
+        """
+        with open(self.checking_script, mode='r') as fid:
+            text_file = fid.read()
+            for w in words:
+                if w in text_file:
+                    return True
+
+        return False
 
     def check_script_output(self):
         if not self.stdout:
