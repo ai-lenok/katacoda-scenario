@@ -21,6 +21,14 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "file.txt",
+          "target": "/home/ubuntu/dir/"
+        },
+        {
+          "file": ".file.txt",
+          "target": "/home/ubuntu/dir/"
         }
       ]
     },

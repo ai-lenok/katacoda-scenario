@@ -1,0 +1,19 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: Success
+    script-put-to-checker: ok.sh
+    result-text: OK
+  - name: without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: Not hide
+    script-put-to-checker: not-hide.sh
+    result-text: "FAIL: Скрытые файлы не видны"
+  - name: Wrong format
+    script-put-to-checker: list-files.sh
+    result-text: "FAIL: Нужно отобразить только имена файлов"
+  - name: Cheating
+    script-put-to-checker: cheating.sh
+    result-text: "FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами"
