@@ -2,7 +2,6 @@
 
 import json
 import os
-import subprocess
 from pathlib import Path
 
 
@@ -10,41 +9,30 @@ class Checker:
     def __init__(self, **kwargs):
         self.stdout = ''
         self.stderr = ''
-        self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
-
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
+        self.check_dir_path = kwargs.get("check_dir", f'{self.current_dir}/dir')
+        self.check_dir = Path(self.check_dir_path)
 
     def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
+        if not self.check_dir.is_dir():
+            return f'FAIL: Директория "{self.check_dir}" исчезла'
 
-        self.stdout, self.stderr = self.__run_script()
+        files = [f for f in self.check_dir.iterdir() if f.is_file()]
+        count_files = len(files)
 
-        return self.check_script_output()
+        if count_files == 0:
+            return f'FAIL: В директории "{self.check_dir}" нет файлов'
+        if 1 < count_files:
+            return f'FAIL: В директории "{self.check_dir}" больше одного файла'
 
-    def check_script_output(self):
-        if not self.stdout:
-            return f"FAIL: Скрипт ничего не вывел"
-
-        if self.stdout == self.reference_output:
+        if files[0].name[0] == ".":
             return "OK"
         else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+            return f'FAIL: Файл {files[0]} не скрыт'
 
 
 if __name__ == '__main__':
-    check_result = {"echo": Checker().check()}
+    check_result = {"create": Checker().check()}
     json_object = json.dumps(check_result)
     print(json_object)

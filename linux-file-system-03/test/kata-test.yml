@@ -1,0 +1,18 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: Success
+    script-run-before-checker: ok.sh
+    result-text: OK
+  - name: Not hide
+    script-run-before-checker: not-hide.sh
+    result-jinja: "FAIL: Файл {{ pwd }}/dir/file.txt не скрыт"
+  - name: The files does not exist
+    result-jinja: "FAIL: В директории \"{{ pwd }}/dir\" нет файлов"
+  - name: Too many files
+    script-run-before-checker: many.sh
+    result-jinja: "FAIL: В директории \"{{ pwd }}/dir\" больше одного файла"
+  - name: Remove dir
+    script-run-before-checker: remove-dir.sh
+    result-jinja: "FAIL: Директория \"{{ pwd }}/dir\" исчезла"
