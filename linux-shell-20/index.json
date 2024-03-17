@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Создание псевдонима",
-  "title": "Создание псевдонима",
-  "description": "Создание псевдонима",
+  "pathwayTitle": "Псевдонимы",
+  "title": "Псевдонимы",
+  "description": "Псевдонимы",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -18,9 +18,8 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
+          "file": "file.txt",
+          "target": "/home/ubuntu"
         }
       ]
     },
