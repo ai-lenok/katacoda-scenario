@@ -12,7 +12,7 @@
 
 ## Обратный слэш
 
-`echo text \~ \*.txt \{a\,b\} \$\(echo foo\) \$\(\(2+2\)\) \$USER`{{execute}}
+`echo text \~ \*.txt \{a,b\} \$\(echo foo\) \$\(\(2+2\)\) \$USER`{{execute}}
 
 ## Способ проверки
 
