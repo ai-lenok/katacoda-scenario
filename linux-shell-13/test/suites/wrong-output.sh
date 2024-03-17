@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rm -rf *
+echo "I user: $USER"

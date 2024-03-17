@@ -149,7 +149,7 @@ class Tester:
     def __render_jinja(self, template: str) -> str:
         environment = Environment()
         template = environment.from_string(template)
-        return template.render(pwd=Path.cwd())
+        return template.render(pwd=Path.cwd(), user=os.getlogin())
 
     def __run_script_before_checker(self, suite):
         if "script-run-before-checker" in suite:

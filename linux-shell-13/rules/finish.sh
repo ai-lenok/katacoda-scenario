@@ -11,7 +11,8 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.username = kwargs.get("username", 'root')
+        self.reference_output = kwargs.get("reference_output", f'I am user: {self.username}')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 
@@ -30,9 +31,25 @@ class Checker:
         if not Path(self.checking_script).is_file():
             return f'FAIL: {self.checking_script} не существует'
 
+        if self.check_stop_words([self.username]):
+            return f'FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами'
+
         self.stdout, self.stderr = self.__run_script()
 
         return self.check_script_output()
+
+    def check_stop_words(self, words: list):
+        """
+        Проверяем, что не используем команду echo или printf
+        :return: True - используется, False - не используется
+        """
+        with open(self.checking_script, mode='r') as fid:
+            text_file = fid.read()
+            for w in words:
+                if w in text_file:
+                    return True
+
+        return False
 
     def check_script_output(self):
         if not self.stdout:
@@ -41,7 +58,7 @@ class Checker:
         if self.stdout == self.reference_output:
             return "OK"
         else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+            return f"FAIL: Неправильный ответ:\n{self.stdout}\n\nОжидаемый ответ:\n{self.reference_output}"
 
 
 if __name__ == '__main__':

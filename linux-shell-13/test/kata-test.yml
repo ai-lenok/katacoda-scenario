@@ -1,0 +1,21 @@
+suites:
+  - name: Success
+    script-put-to-checker: ok.sh
+    result-text: OK
+    params:
+      username: "{{ user }}"
+  - name: Without print
+    script-put-to-checker: without-print.sh
+    result-text: "FAIL: Скрипт ничего не вывел"
+  - name: The file does not exist
+    result-text: "FAIL: script.sh не существует"
+  - name: Wrong output
+    script-put-to-checker: wrong-output.sh
+    result-jinja: "FAIL: Неправильный ответ:\nI user: {{ user }}\n\nОжидаемый ответ:\nI am user: {{ user }}"
+    params:
+      username: "{{ user }}"
+  - name: Cheating
+    script-put-to-checker: cheating.sh
+    result-text: 'FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами'
+    params:
+      username: "root"
