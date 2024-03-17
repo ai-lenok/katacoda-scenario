@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Аргументы командной строки: полная форма",
-  "title": "Аргументы командной строки: полная форма",
-  "description": "Аргументы командной строки: полная форма",
+  "pathwayTitle": "Аргументы командной строки",
+  "title": "Аргументы командной строки",
+  "description": "Аргументы командной строки",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -9,6 +9,14 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Сокращенная форма записи",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Объединение параметров",
+        "text": "step-3.md"
       }
     ],
     "intro": {
@@ -16,13 +24,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
