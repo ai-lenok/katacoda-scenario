@@ -11,16 +11,8 @@
         "text": "step-1.md"
       },
       {
-        "title": "Двойные кавычки",
+        "title": "Решение",
         "text": "step-2.md"
-      },
-      {
-        "title": "Одинарные кавычки",
-        "text": "step-3.md"
-      },
-      {
-        "title": "Обратный слэш",
-        "text": "step-4.md"
       }
     ],
     "intro": {
@@ -28,19 +20,13 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "autostart.sh",
-          "target": "/usr/local/autostart-scripts.d",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
     }
   },
-  "files": [],
+  "files": ["/home/ubuntu/file.txt"],
   "environment": {
     "uilayout": "terminal",
     "uisettings": "yaml",
