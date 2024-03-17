@@ -9,6 +9,18 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Двойные кавычки",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Одинарные кавычки",
+        "text": "step-3.md"
+      },
+      {
+        "title": "Обратный слэш",
+        "text": "step-4.md"
       }
     ],
     "intro": {
@@ -18,8 +30,8 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
         }
       ]
