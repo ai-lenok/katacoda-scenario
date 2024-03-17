@@ -9,6 +9,14 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Абсолютный путь",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Относительный путь",
+        "text": "step-3.md"
       }
     ],
     "intro": {
@@ -19,7 +27,7 @@
       "host01": [
         {
           "file": "script.sh",
-          "target": "/home/ubuntu/",
+          "target": "/home/ubuntu/dir",
           "chmod": "+x"
         }
       ]
