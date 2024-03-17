@@ -76,13 +76,33 @@ class Tester:
         """Go through all folders with exercises and complete the checks"""
         for d in Path(".").iterdir():
             if d.is_dir() and d.name not in self.ignore_dirs:
+                self.__read_index_json(d)
+                self.__compare_assets(d)
                 dir_with_tests = d / "test"
                 if dir_with_tests.is_dir():
                     self.run_suite(d)
 
+    def __compare_assets(self, path: Path):
+        files_meta = set()
+        if ("assets" in self.exercise_data["details"]
+                and "host01" in self.exercise_data["details"]["assets"]):
+            files_meta = set([data["file"] for data in self.exercise_data["details"]["assets"]["host01"]])
+
+        files_real = set()
+        dir_assets = path / "assets"
+        if dir_assets.exists():
+            files_real = set([f.name for f in dir_assets.iterdir() if f.is_file()])
+
+        if files_meta != files_real:
+            diff_meta = files_meta - files_real
+            diff_real = files_real - files_meta
+            if diff_meta:
+                self.log.warning(f'Lost files "{path}": Файлы описаны, но не созданы: {diff_meta}')
+            if diff_real:
+                self.log.warning(f'Lost files "{path}": Файлы созданы, но не описаны: {diff_real}')
+
     def run_suite(self, path: Path):
         """Run all exercise checks"""
-        self.__read_index_json(path)
         self.log.info(f'Suite: {path}. {self.exercise_data["title"]}')
         self.__read_metadata(path)
         self.__init_path_files(path)

@@ -2,3 +2,7 @@
 .git
 .DS_Store
 temp_test
+venv
+01-Linux
+00-get-files
+prometheus-client-full
