@@ -11,7 +11,7 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'file.bin: Unicode text, UTF-8 text')
+        self.reference_output = kwargs.get("reference_output", 'ffile.bin: UTF-8 Unicode text')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
 

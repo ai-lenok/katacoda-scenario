@@ -4,6 +4,8 @@ suites:
   - name: Success
     script-put-to-checker: ok.sh
     result-text: OK
+    params:
+      reference_output: "file.bin: Unicode text, UTF-8 text"
   - name: Without print
     script-put-to-checker: without-print.sh
     result-text: "FAIL: Скрипт ничего не вывел"
