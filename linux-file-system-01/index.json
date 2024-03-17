@@ -21,6 +21,10 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "file.bin",
+          "target": "/home/ubuntu/"
         }
       ]
     },
