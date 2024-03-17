@@ -20,13 +20,18 @@
       "credits": ""
     },
     "assets": {
-      "host01": []
+      "host01": [
+        {
+          "file": "file.txt",
+          "target": "/home/ubuntu"
+        }
+      ]
     },
     "finish": {
       "text": "finish.md"
     }
   },
-  "files": ["/home/ubuntu/file.txt"],
+  "files": [],
   "environment": {
     "uilayout": "terminal",
     "uisettings": "yaml",
