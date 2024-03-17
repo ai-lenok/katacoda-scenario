@@ -1,6 +1,3 @@
-script-before-each: cleaner.sh
-script-after-all: cleaner.sh
-path-to-checking-script: rules/finish.sh
 suites:
   - name: Success
     script-put-to-checker: ok.sh
@@ -12,7 +9,7 @@ suites:
     result-text: "FAIL: script.sh не существует"
   - name: Wrong output
     script-put-to-checker: wrong-output.sh
-    result-jinja: "FAIL: Неправильный ответ:\n'current dir: {{ pwd }}'\nОжидаемый ответ:\n'Current directory: {{ pwd }}'"
+    result-jinja: "FAIL: Неправильный ответ:\ncurrent dir: {{ pwd }}\n\nОжидаемый ответ:\nCurrent directory: {{ pwd }}"
   - name: Cheating
     script-put-to-checker: cheating.sh
     result-text: 'FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами'

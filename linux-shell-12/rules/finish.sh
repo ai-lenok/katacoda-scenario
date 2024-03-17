@@ -32,7 +32,6 @@ class Checker:
 
         text = str(self.current_dir)
         words = text.split("/")
-        # words.append("/")
         filter_words = filter(None, words)
         if self.check_stop_words(filter_words):
             return f'FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами'
@@ -61,7 +60,7 @@ class Checker:
         if self.stdout == self.reference_output:
             return "OK"
         else:
-            return f"FAIL: Неправильный ответ:\n'{self.stdout}'\nОжидаемый ответ:\n'{self.reference_output}'"
+            return f"FAIL: Неправильный ответ:\n{self.stdout}\n\nОжидаемый ответ:\n{self.reference_output}"
 
 
 if __name__ == '__main__':
