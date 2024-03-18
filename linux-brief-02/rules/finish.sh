@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import json
-import pathlib
+from pathlib import Path
 
 class Checker:
     def __init__(self, **kwargs):
@@ -10,7 +10,7 @@ class Checker:
         self.path = kwargs.get("check_path_exists", '/home/ubuntu/file.txt')
 
     def check(self):
-        if not pathlib.Path(self.path).is_file():
+        if not Path(self.path).is_file():
             return f'FAIL: Файл "{self.path}" не существует'
 
         return "OK"
