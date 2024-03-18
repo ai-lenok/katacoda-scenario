@@ -30,7 +30,7 @@
       "text": "finish.md"
     }
   },
-  "files": [],
+  "files": ["/home/ubuntu/file.txt"],
   "environment": {
     "uilayout": "terminal",
     "uisettings": "yaml",
