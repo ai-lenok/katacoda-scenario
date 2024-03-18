@@ -7,12 +7,12 @@
 А бесконечный поток псевдо-случайных чисел
 
 ```
-head -c 30 if=/dev/random > random1.iso
+head -c 30 /dev/random > random1.iso
 cat random1.iso
 ```{{execute}}
 
 ```
-head -c 30 if=/dev/random > random2.iso
+head -c 30 /dev/random > random2.iso
 cat random2.iso
 ```{{execute}}
 
