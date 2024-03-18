@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -11,9 +12,17 @@ class Checker:
         self.stdout = ''
         self.stderr = ''
         self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
+        self.pattern_memory_human = self.__generate_pattern('[\d\.]+[GMKBi]+')
+        self.pattern_memory_bytes = self.__generate_pattern('[\d\.]+')
         self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
         os.chdir(self.current_dir)
+
+    def __generate_pattern(self, number_pattern: str):
+        space = '\s+'
+        size = f'{number_pattern}{space}'
+        return re.compile(f'\s*total\s+used\s+free\s+shared\s+buff\/cache\s+available\s+'
+                          f'Mem:\s+{size}{size}{size}{size}{size}{size}'
+                          f'Swap:\s+{size}{size}{number_pattern}')
 
     def __run_script(self):
         subprocess.run(['chmod', '+x', self.checking_script])
@@ -38,8 +47,10 @@ class Checker:
         if not self.stdout:
             return f"FAIL: Скрипт ничего не вывел"
 
-        if self.stdout == self.reference_output:
+        if re.match(self.pattern_memory_human, self.stdout):
             return "OK"
+        elif re.match(self.pattern_memory_bytes, self.stdout):
+            return f'FAIL: Нужно вывести ответ в удобном для человека виде'
         else:
             return f'FAIL: Неправильный ответ: "{self.stdout}"'
 
