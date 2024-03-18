@@ -6,12 +6,18 @@
 
 А бесконечный поток псевдо-случайных чисел
 
-`dd if=/dev/random of=random.iso bs=32 count=32`{{execute}}
+```
+head -c 30 if=/dev/random > random1.iso
+cat random1.iso
+```{{execute}}
 
-`random.iso`{{open}}
+```
+head -c 30 if=/dev/random > random2.iso
+cat random2.iso
+```{{execute}}
 
 Обычно этим свойством пользуются, чтобы создать какую-нибудь уникальную сущность
 
-Например: уникальную хэш-сумму:
+Например, уникальную хэш-сумму:
 
-`dd if=/dev/random bs=512 count=1 | sha512sum`{{execute}}
+`head -c 512 if=/dev/random | sha512sum`{{execute}}

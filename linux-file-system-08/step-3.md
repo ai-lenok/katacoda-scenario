@@ -17,14 +17,10 @@ echo "Status: $?"
 
 Например, создать файл, состоящий из одних нулей заданного размера:
 
-`dd if=/dev/zero of=zero.iso bs=32 count=32`{{execute}}
+`head -c 30 /dev/zero > zero.iso`{{execute}}
 
 Теперь можете
 
 `zero.iso`{{open}}
 
 И посмотреть его содержимое
-
-## Чтение /dev/full
-
-Трюк с созданием файла можно повторить с 

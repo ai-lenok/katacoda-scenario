@@ -1,6 +1,6 @@
 Трюк с созданием файла можно повторить с псевдо-устройством `/dev/full`
 
-`dd if=/dev/full of=full.iso bs=32 count=32`{{execute}}
+`head -c 30 /dev/full > full.iso`{{execute}}
 
 `full.iso`{{open}}
 
