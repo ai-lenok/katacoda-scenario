@@ -12,9 +12,10 @@
 
 Добавим в домашний каталог ещё один скрипт:
 
-`echo "echo Wrong app" > mkdir`{{execute}}
-
-`chmod +x mkdir`{{execute}}
+```
+echo "echo Wrong app" > mkdir
+chmod +x mkdir
+`{{execute}}
 
 Попробуем создать директорию `my-dir`:
 
