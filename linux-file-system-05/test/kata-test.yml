@@ -1,0 +1,27 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
+path-to-checking-script: rules/finish.sh
+suites:
+  - name: success
+    script-run-before-checker: ok.sh
+    result-text: OK
+    params:
+      path_source: file.txt
+      path_destination: link-file.txt
+  - name: Link not created
+    result-text: 'FAIL: Файл "link-file.txt" не существует'
+    params:
+      path_source: file.txt
+      path_destination: link-file.txt
+  - name: Remove source
+    result-text: 'FAIL: Файл "file.txt" исчез'
+    script-run-before-checker: remove.sh
+    params:
+      path_source: file.txt
+      path_destination: link-file.txt
+  - name: Not link
+    result-text: 'FAIL: Файл "link-file.txt" не является ссылкой'
+    script-run-before-checker: not-link.sh
+    params:
+      path_source: file.txt
+      path_destination: link-file.txt
