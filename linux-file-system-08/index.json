@@ -24,12 +24,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "file.txt",
-          "target": "/home/ubuntu/"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"

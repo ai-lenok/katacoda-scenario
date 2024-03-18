@@ -17,4 +17,10 @@ echo "Status: $?"
 
 Например, создать файл, состоящий из одних нулей заданного размера:
 
-`dd if=/dev/zero of=zero.iso bs=128 count=128`{{execute}}
+`dd if=/dev/zero of=zero.iso bs=32 count=32`{{execute}}
+
+Теперь можете
+
+`zero.iso`{{open}}
+
+И посмотреть его содержимое
