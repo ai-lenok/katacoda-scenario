@@ -29,6 +29,10 @@
       {
         "title": "/dev/urandom",
         "text": "step-6.md"
+      },
+      {
+        "title": "Способ проверки",
+        "text": "step-7.md"
       }
     ],
     "intro": {

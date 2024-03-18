@@ -17,7 +17,7 @@ echo "Status: $?"
 
 Например, создать файл, состоящий из одних нулей заданного размера:
 
-`head -c 30 /dev/zero > zero.iso`{{execute}}
+`head --bytes=30 /dev/zero > zero.iso`{{execute}}
 
 Теперь можете
 
