@@ -9,6 +9,10 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "/dev/full",
+        "text": "step-2.md"
       }
     ],
     "intro": {
@@ -16,13 +20,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
