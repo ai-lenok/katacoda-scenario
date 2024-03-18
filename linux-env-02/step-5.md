@@ -15,7 +15,7 @@
 ```
 echo "echo Wrong app" > mkdir
 chmod +x mkdir
-`{{execute}}
+```{{execute}}
 
 Попробуем создать директорию `my-dir`:
 
