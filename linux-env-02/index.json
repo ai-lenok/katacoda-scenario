@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Задать путь в переменную окружения PATH",
-  "title": "Задать путь в переменную окружения PATH",
-  "description": "Задать путь в переменную окружения PATH",
+  "pathwayTitle": "Добавить путь в переменную окружения PATH",
+  "title": "Добавить путь в переменную окружения PATH",
+  "description": "Добавить путь в переменную окружения PATH",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
