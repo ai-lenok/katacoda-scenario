@@ -1,4 +1,6 @@
-Файл `/dev/random` является логическим продолжением `/dev/zero`
+Файл `/dev/random` является логическим продолжением 
+
+`/dev/zero`
 
 По всем свойствам он похож на `/dev/zero`
 
@@ -6,15 +8,15 @@
 
 А бесконечный поток псевдо-случайных чисел
 
-```
-head --bytes=30 /dev/random > random1.iso
-cat random1.iso
-```{{execute}}
+Первый поток:
 
-```
-head --bytes=30 /dev/random > random2.iso
-cat random2.iso
-```{{execute}}
+`head --bytes=30 /dev/random`{{execute}}
+
+Второй поток:
+
+`head --bytes=30 /dev/random`{{execute}}
+
+Оба вывода независимы друг от друга
 
 Обычно этим свойством пользуются, чтобы создать какую-нибудь уникальную сущность
 
