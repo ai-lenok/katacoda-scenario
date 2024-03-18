@@ -13,6 +13,10 @@
       {
         "title": "/dev/full",
         "text": "step-2.md"
+      },
+      {
+        "title": "/dev/zero",
+        "text": "step-3.md"
       }
     ],
     "intro": {
