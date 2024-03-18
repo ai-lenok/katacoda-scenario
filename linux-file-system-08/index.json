@@ -17,6 +17,10 @@
       {
         "title": "/dev/zero",
         "text": "step-3.md"
+      },
+      {
+        "title": "Создание файла с помощью /dev/full",
+        "text": "step-4.md"
       }
     ],
     "intro": {
