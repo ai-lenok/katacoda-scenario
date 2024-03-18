@@ -9,15 +9,17 @@
 ```
 head -c 30 /dev/random > random1.iso
 cat random1.iso
+echo
 ```{{execute}}
 
 ```
 head -c 30 /dev/random > random2.iso
 cat random2.iso
+echo ""
 ```{{execute}}
 
 Обычно этим свойством пользуются, чтобы создать какую-нибудь уникальную сущность
 
 Например, уникальную хэш-сумму:
 
-`head -c 512 if=/dev/random | sha512sum`{{execute}}
+`head -c 512 /dev/random | sha512sum`{{execute}}
