@@ -9,6 +9,26 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Запуск в текущем каталоге",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Запуск из любого места",
+        "text": "step-3.md"
+      },
+      {
+        "title": "Проверка",
+        "text": "step-4.md"
+      },
+      {
+        "title": "Неожиданное поведение",
+        "text": "step-5.md"
+      },
+      {
+        "title": "Заключение",
+        "text": "step-6.md"
       }
     ],
     "intro": {
@@ -18,7 +38,12 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
+          "file": "my-app",
           "target": "/home/ubuntu/",
           "chmod": "+x"
         }
