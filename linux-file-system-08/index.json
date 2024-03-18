@@ -21,6 +21,14 @@
       {
         "title": "Создание файла с помощью /dev/full",
         "text": "step-4.md"
+      },
+      {
+        "title": "/dev/random",
+        "text": "step-5.md"
+      },
+      {
+        "title": "/dev/urandom",
+        "text": "step-6.md"
       }
     ],
     "intro": {
