@@ -16,7 +16,7 @@ class Checker(Tester):
         return (self
                 .do(self.run)
                 .do(self.not_empty)
-                .do(self.compare_regex)
+                .do(self.compare_text)
                 .finish())
 
 
