@@ -1,50 +1,24 @@
 #!/usr/bin/env python3
+import sys
 
-import json
-import os
-import subprocess
-from pathlib import Path
+sys.path.insert(1, '/usr/local/lib/')
+
+from ExerciseTester.tester import Tester
 
 
-class Checker:
+class Checker(Tester):
     def __init__(self, **kwargs):
-        self.stdout = ''
-        self.stderr = ''
-        self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.reference_output = kwargs.get("reference_output", 'Hello world')
-        self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
-        os.chdir(self.current_dir)
+        if "reference_output" not in kwargs:
+            kwargs["reference_output"] = "Hello world"
+        super().__init__(**kwargs)
 
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
-
-    def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
-
-        self.stdout, self.stderr = self.__run_script()
-
-        return self.check_script_output()
-
-    def check_script_output(self):
-        if not self.stdout:
-            return f"FAIL: Скрипт ничего не вывел"
-
-        if self.stdout == self.reference_output:
-            return "OK"
-        else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+    def check(self) -> str:
+        return (self
+                .do(self.run)
+                .do(self.not_empty)
+                .do(self.compare_regex)
+                .finish())
 
 
 if __name__ == '__main__':
-    check_result = {"echo": Checker().check()}
-    json_object = json.dumps(check_result)
-    print(json_object)
+    print(Checker().finish_json())
