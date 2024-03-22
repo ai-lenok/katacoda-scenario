@@ -8,8 +8,8 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        if "reference_pattern" not in kwargs:
-            kwargs["reference_pattern"] = r"\s*PID\s+TTY\s+TIME\s+CMD\s+(\s+\d+\s+[\w?\/]+\s+[\d:]+\s+[\w\-\/:\(\)]+)+"
+        kwargs.setdefault("reference_pattern",
+                          r"\s*PID\s+TTY\s+TIME\s+CMD\s+(\s+\d+\s+[\w?\/]+\s+[\d:]+\s+[\w\-\/:\(\)]+)+")
         super().__init__(**kwargs)
 
     def check(self) -> str:
