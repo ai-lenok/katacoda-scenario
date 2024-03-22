@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
-sys.path.insert(0, '/usr/local/lib/')
+sys.path.insert(1, '/usr/local/lib/')
 
 from tester_lib import Tester
 
