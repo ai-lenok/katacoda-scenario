@@ -9,6 +9,7 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         kwargs.setdefault("reference_pattern", r".*[\d\.\-]*-generic.*")
+        kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
         self.reference_short_format = kwargs.get("reference_short_format", "Linux")
 
