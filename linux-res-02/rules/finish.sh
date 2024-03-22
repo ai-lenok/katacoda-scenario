@@ -13,8 +13,8 @@ class Checker(Tester):
 
     def check(self) -> str:
         return (self
-                .do(self.check_and_run)
-                .do(self.check_not_empty)
+                .do(self.run)
+                .do(self.not_empty)
                 .do(self.compare_regex)
                 .finish())
 

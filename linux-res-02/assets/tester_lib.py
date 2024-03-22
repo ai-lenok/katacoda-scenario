@@ -79,13 +79,13 @@ class Tester:
         self.stderr = process.stderr.strip()
         return self
 
-    def check_and_run(self):
+    def run(self):
         if not Path(self.checking_script).is_file():
             return self.fail(f'{self.checking_script} не существует')
 
         return self.run_script()
 
-    def check_not_empty(self):
+    def not_empty(self):
         if not self.stdout:
             return self.fail(f'Скрипт ничего не вывел')
         return self
