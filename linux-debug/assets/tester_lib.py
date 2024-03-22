@@ -54,11 +54,8 @@ class Tester:
         return self
 
     def finish_json(self) -> str:
-        result = {self.check_name: self.check()}
+        result = {self.check_name: self.finish()}
         return json.dumps(result, ensure_ascii=False)
-
-    def check(self):
-        return self.finish()
 
     def finish(self) -> str:
         if self.status == TestStatus.ok:
@@ -94,10 +91,10 @@ class Tester:
         if self.stdout == self.reference_output:
             return self.ok()
         else:
-            return self.fail(f'Неправильный ответ: "{self.stdout}"')
+            return self.fail(f'Неправильный ответ:\n\n{self.stdout}')
 
     def compare_regex(self):
         if re.match(self.reference_pattern, self.stdout):
             return self.ok()
         else:
-            return self.fail(f'Неправильный ответ: "{self.stdout}"')
+            return self.fail(f'Неправильный ответ:\n\n{self.stdout}')
