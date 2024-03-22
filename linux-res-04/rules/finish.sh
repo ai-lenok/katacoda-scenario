@@ -9,7 +9,7 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         if "reference_pattern" not in kwargs:
-            kwargs["reference_pattern"] = r"^([\d.]+[GMKBi]*\s+\/home)$"
+            kwargs["reference_pattern"] = r"[\d.]+[GMKBi]*\s+\/home(\/)*$"
         super().__init__(**kwargs)
 
     def check(self) -> str:
