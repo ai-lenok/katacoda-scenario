@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(1, '/usr/local/lib/')
 
-from tester_lib import Tester
+from ExerciseTester.tester import Tester
 
 import re
 

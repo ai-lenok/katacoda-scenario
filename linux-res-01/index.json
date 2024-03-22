@@ -23,8 +23,13 @@
           "chmod": "+x"
         },
         {
-          "file": "tester_lib.py",
-          "target": "/usr/local/lib/",
+          "file": "__init__.py",
+          "target": "/usr/local/lib/ExerciseTester",
+          "chmod": "+x"
+        },
+        {
+          "file": "tester.py",
+          "target": "/usr/local/lib/ExerciseTester",
           "chmod": "+x"
         }
       ]
