@@ -8,8 +8,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        if "reference_output" not in kwargs:
-            kwargs["reference_output"] = "Hello world"
+        kwargs.setdefault("reference_output", "Hello world")
         super().__init__(**kwargs)
 
     def check(self) -> str:
