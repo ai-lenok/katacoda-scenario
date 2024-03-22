@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 
+import requests
+
 sys.path.insert(1, '/usr/local/lib/')
 
 from ExerciseTester.tester import Tester
@@ -8,9 +10,8 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        if "reference_output" not in kwargs:
-            kwargs["reference_output"] = "Hello world"
         super().__init__(**kwargs)
+        self.address = kwargs.get("address", 'http://localhost:8000')
 
     def check(self) -> str:
         return (self
@@ -18,6 +19,13 @@ class Checker(Tester):
                 .do(self.not_empty)
                 .do(self.compare_text)
                 .finish())
+
+    def request(self):
+        try:
+            requests.get(self.address)
+            return self.fail("Сервер работает")
+        except requests.exceptions.ConnectionError:
+            return self.ok("Сервер выключен")
 
 
 if __name__ == '__main__':
