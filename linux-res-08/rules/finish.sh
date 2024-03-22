@@ -15,9 +15,7 @@ class Checker(Tester):
 
     def check(self) -> str:
         return (self
-                .do(self.run)
-                .do(self.not_empty)
-                .do(self.compare_text)
+                .do(self.request)
                 .finish())
 
     def request(self):
