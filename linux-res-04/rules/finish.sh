@@ -11,7 +11,8 @@ class Checker(Tester):
         if "reference_pattern" not in kwargs:
             line = r"[\d.]+[GMKBi]*\s+\/home"
             pattern = f"^({line}[\\/\\w]+\\s*)*{line}(\\/)*$"
-            kwargs["reference_pattern"] = pattern
+#            kwargs["reference_pattern"] = pattern
+            kwargs["reference_pattern"] = line
         super().__init__(**kwargs)
 
     def check(self) -> str:
