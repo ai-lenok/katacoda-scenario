@@ -21,6 +21,16 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "__init__.py",
+          "target": "/usr/local/lib/ExerciseTester",
+          "chmod": "+x"
+        },
+        {
+          "file": "tester.py",
+          "target": "/usr/local/lib/ExerciseTester",
+          "chmod": "+x"
         }
       ]
     },
@@ -41,8 +51,14 @@
     "userid": 1000,
     "groupid": 1002,
     "envs": [
-      {"name": "HOME", "value": "/home/ubuntu"},
-      {"name": "USER", "value": "ubuntu"}
+      {
+        "name": "HOME",
+        "value": "/home/ubuntu"
+      },
+      {
+        "name": "USER",
+        "value": "ubuntu"
+      }
     ]
   }
 }
