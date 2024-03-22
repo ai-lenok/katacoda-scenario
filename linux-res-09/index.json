@@ -18,7 +18,7 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
+          "file": "prime.py",
           "target": "/home/ubuntu/",
           "chmod": "+x"
         },
