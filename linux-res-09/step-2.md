@@ -12,7 +12,7 @@
 
 `time python3 prime.py 10000`{{execute}}
 
-`time python3 prime.py 20000`{{execute}}
+`time python3 prime.py 15000`{{execute}}
 
 ## Способ проверки
 
