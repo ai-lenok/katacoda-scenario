@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Вывести список процессов в системе",
-  "title": "Вывести список процессов в системе",
-  "description": "Вывести список процессов в системе",
+  "pathwayTitle": "Linux - debug",
+  "title": "Linux - debug",
+  "description": "Linux - debug",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
