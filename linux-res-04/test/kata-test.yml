@@ -1,8 +1,22 @@
+script-before-each: init.sh
+script-after-all: cleaner.sh
 path-to-checking-script: rules/finish.sh
 suites:
-#  - name: Success
-#    script-put-to-checker: ok.sh
-#    result-text: OK
+  - name: Success
+    script-put-to-checker: ok.sh
+    result-text: OK
+    params:
+      reference_pattern: '^([\d.]+\s+\.\.\/temp_test[\/\w]+\s*)*[\d.]+\s+\.\.\/temp_test$'
+  - name: Success human format
+    script-put-to-checker: du-human.sh
+    result-text: OK
+    params:
+      reference_pattern: '^([\d.]+[GMKBi]*\s+\.\.\/temp_test[\/\w]+\s*)*[\d.]+[GMKBi]*\s+\.\.\/temp_test$'
+  - name: Success with slash in the end
+    script-put-to-checker: du-with-slash.sh
+    result-text: OK
+    params:
+      reference_pattern: '^([\d.]+\s+\.\.\/temp_test[\/\w]+\s*)*[\d.]+\s+\.\.\/temp_test(\/)$'
   - name: Wrong output
     script-put-to-checker: wrong-output.sh
     result-text: "FAIL: Неправильный ответ:\n\nHello"
