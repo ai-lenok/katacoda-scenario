@@ -8,8 +8,9 @@ from tester_lib import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
+        if "reference_pattern" not in kwargs:
+            kwargs["reference_pattern"] = r"\s*PID\s+TTY\s+TIME\s+CMD\s+(\s+\d+\s+[\w?\/]+\s+[\d:]+\s+[\w\-\/:\(\)]+)+"
         super().__init__(**kwargs)
-        self.reference_pattern = r"\s*PID\s+TTY\s+TIME\s+CMD\s+(\s+\d+\s+[\w?\/]+\s+[\d:]+\s+[\w\-\/:\(\)]+)+"
 
     def check(self) -> str:
         return (self
