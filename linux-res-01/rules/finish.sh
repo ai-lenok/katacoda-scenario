@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
+import sys
 
-import json
-import os
+sys.path.insert(0, '/usr/local/lib/')
+
+from tester_lib import Tester
+
 import re
-import subprocess
-from pathlib import Path
 
 
-class Checker:
+class Checker(Tester):
     def __init__(self, **kwargs):
-        self.stdout = ''
-        self.stderr = ''
-        self.checking_script = kwargs.get("checking_script", '/home/ubuntu/script.sh')
-        self.pattern_memory_human = self.__generate_pattern('[\d\.]+[GMKBi]+')
         self.pattern_memory_bytes = self.__generate_pattern('[\d\.]+')
-        self.current_dir = kwargs.get("current_dir", '/home/ubuntu')
-        os.chdir(self.current_dir)
+        if "reference_pattern" not in kwargs:
+            kwargs["reference_pattern"] = self.__generate_pattern('[\d\.]+[GMKBi]+')
+        super().__init__(**kwargs)
 
     def __generate_pattern(self, number_pattern: str):
         space = '\s+'
@@ -24,38 +22,19 @@ class Checker:
                           f'Mem:\s+{size}{size}{size}{size}{size}{size}'
                           f'Swap:\s+{size}{size}{number_pattern}')
 
-    def __run_script(self):
-        subprocess.run(['chmod', '+x', self.checking_script])
-        process = subprocess.run([self.checking_script],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
-
-        stdout = process.stdout.strip()
-        stderr = process.stderr.strip()
-        return stdout, stderr
-
     def check(self):
-        if not Path(self.checking_script).is_file():
-            return f'FAIL: {self.checking_script} не существует'
+        return (self
+                .do(self.check_and_run)
+                .do(self.check_not_empty)
+                .do(self.wrong_format)
+                .do(self.compare_regex)
+                .finish())
 
-        self.stdout, self.stderr = self.__run_script()
-
-        return self.check_script_output()
-
-    def check_script_output(self):
-        if not self.stdout:
-            return f"FAIL: Скрипт ничего не вывел"
-
-        if re.match(self.pattern_memory_human, self.stdout):
-            return "OK"
-        elif re.match(self.pattern_memory_bytes, self.stdout):
-            return f'FAIL: Нужно вывести ответ в удобном для человека виде'
-        else:
-            return f'FAIL: Неправильный ответ: "{self.stdout}"'
+    def wrong_format(self):
+        if re.match(self.pattern_memory_bytes, self.stdout):
+            return self.fail(f'Нужно вывести ответ в удобном для человека виде')
+        return self
 
 
 if __name__ == '__main__':
-    check_result = {"echo": Checker().check()}
-    json_object = json.dumps(check_result)
-    print(json_object)
+    print(Checker().finish_json())

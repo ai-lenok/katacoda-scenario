@@ -21,6 +21,11 @@
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
+        },
+        {
+          "file": "tester_lib.py",
+          "target": "/usr/local/lib/",
+          "chmod": "+x"
         }
       ]
     },
@@ -41,8 +46,14 @@
     "userid": 1000,
     "groupid": 1002,
     "envs": [
-      {"name": "HOME", "value": "/home/ubuntu"},
-      {"name": "USER", "value": "ubuntu"}
+      {
+        "name": "HOME",
+        "value": "/home/ubuntu"
+      },
+      {
+        "name": "USER",
+        "value": "ubuntu"
+      }
     ]
   }
 }
