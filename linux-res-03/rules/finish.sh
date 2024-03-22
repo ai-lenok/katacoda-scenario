@@ -8,8 +8,8 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        if "reference_output" not in kwargs:
-            kwargs["reference_output"] = "Hello world"
+        if "reference_pattern" not in kwargs:
+            kwargs["reference_pattern"] = r"Filesystem\s+1K-blocks\s+Used\s+Available\s+Use%\s+Mounted\son\s+([\w_\-\/]+\s+\d+\s+\d+\s+\d+\s+\d+%\s+[\w_\-\/]+\s+)+"
         super().__init__(**kwargs)
 
     def check(self) -> str:
