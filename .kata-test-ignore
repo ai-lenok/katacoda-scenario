@@ -3,6 +3,8 @@
 .DS_Store
 temp_test
 venv
+__pycache__
+ExerciseTester
 01-Linux
 00-get-files
 prometheus-client-full
