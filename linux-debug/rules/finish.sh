@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import sys
 
-sys.path.insert(0, '/usr/local/')
+sys.path.insert(0, '/usr/local/lib/')
 
-from lib.tester_lib import Tester
+from tester_lib import Tester
 
 
 class Checker(Tester):
