@@ -10,7 +10,7 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         kwargs.setdefault("reference_reading_file", "file.txt")
-        kwargs.setdefault("count_file_lines", 4)
+        kwargs.setdefault("count_file_lines", 6)
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
 
@@ -36,7 +36,7 @@ class Checker(Tester):
             count_file_lines = self.params["count_file_lines"]
             reference = text[:10]
             if reference == output_lines:
-                return self.fail(f"Нужно вывести {count_file_lines} строк(и)")
+                return self.fail(f"Нужно вывести {count_file_lines} строк")
 
         return self
 

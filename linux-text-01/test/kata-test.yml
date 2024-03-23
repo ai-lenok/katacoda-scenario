@@ -9,7 +9,7 @@ suites:
     script-put-to-checker: custom-lines.sh
     result-text: OK
     params:
-      count_file_lines: 6
+      count_file_lines: 8
   - name: Without print
     script-put-to-checker: without-print.sh
     result-text: "FAIL: Скрипт ничего не вывел"
@@ -26,4 +26,4 @@ suites:
     result-text: 'FAIL: file.txt не существует'
   - name: Too many text
     script-put-to-checker: many.sh
-    result-text: 'FAIL: Нужно вывести 4 строк(и)'
+    result-text: 'FAIL: Нужно вывести 6 строк'
