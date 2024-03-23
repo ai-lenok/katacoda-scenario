@@ -9,6 +9,18 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Запись ошибок",
+        "text": "step-2.md"
+      },
+      {
+        "title": "stdout и stderr",
+        "text": "step-3.md"
+      },
+      {
+        "title": "Универсальный оператор",
+        "text": "step-4.md"
       }
     ],
     "intro": {

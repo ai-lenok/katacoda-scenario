@@ -4,37 +4,24 @@
 
 Мы будем работать с файлами `stdout.txt` и `stderr.txt`
 
-Сюда будем отправлять обычный вывод:
-`stdout.txt`{{open}}
+В-первый файз записывать обычный текст
 
-Сюда ошибки:
-`stderr.txt`{{open}}
-
+Во-второй ошибки
 
 Для начала выведем текст в терминал:
 `echo "Hello"`{{execute}}
 
+`stdout.txt`{{open}}
+
 Теперь текст, который мы вывели в терминал перенаправим в файл `stdout.txt`:
 `echo "Hello" > stdout.txt`{{execute}}
 
-
+Добавим новую строку:
 `echo "World" >> stdout.txt`{{execute}}
+
+Оператор `>>` запишет текст в конец файла
+
+Оператор `>` сотрёт старое содержимое и запишет вместо него новый текст
+
+Проверим:
 `echo "Rewrite" > stdout.txt`{{execute}}
-
-`ls not-exists`{{execute}}
-
-`ls first 2> stderr.txt`{{execute}}
-`ls second 2>> stderr.txt`{{execute}}
-`ls rewrite 2> stderr.txt`{{execute}}
-
-`echo "Oops" 2> stdout.txt`{{execute}}
-`ls oops > stderr.txt`{{execute}}
-
-`echo "stdout" &> stdout.txt`{{execute}}
-`ls stderr &> stderr.txt`{{execute}}
-
-## Способ проверки
-
-У этого упражнения нет проверки
-
-Когда вы нажмёте **Завершить** - упражнение закроется
