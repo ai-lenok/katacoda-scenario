@@ -34,7 +34,8 @@ class Checker(Tester):
             text = file.read().split("\n")
             output_lines = self.stdout.split("\n")
             count_file_lines = self.params["count_file_lines"]
-            if text[:10] == output_lines:
+            reference = text[:10]
+            if reference == output_lines:
                 return self.fail(f"Нужно вывести {count_file_lines} строк(и)")
 
         return self
@@ -44,7 +45,8 @@ class Checker(Tester):
             text = file.read().split("\n")
             output_lines = self.stdout.split("\n")
             count_file_lines = self.params["count_file_lines"]
-            if text[:count_file_lines] == output_lines:
+            reference = text[:count_file_lines]
+            if reference == output_lines:
                 return self.ok()
 
         return self.fail(f"Неправильный ответ:\n\n{self.stdout}")

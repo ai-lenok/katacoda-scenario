@@ -5,6 +5,11 @@ suites:
   - name: Success
     script-put-to-checker: ok.sh
     result-text: OK
+  - name: Custom count lines
+    script-put-to-checker: custom-lines.sh
+    result-text: OK
+    params:
+      count_file_lines: 6
   - name: Without print
     script-put-to-checker: without-print.sh
     result-text: "FAIL: Скрипт ничего не вывел"
