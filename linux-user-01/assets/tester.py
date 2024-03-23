@@ -27,6 +27,7 @@ class Tester:
 
         self.params.setdefault("reference_output", "")
         self.params.setdefault("reference_pattern", "")
+        self.params.setdefault("reference_stop_words", ["echo", "printf"])
 
         self.params.setdefault("checking_script", '/home/ubuntu/script.sh')
 
@@ -102,3 +103,15 @@ class Tester:
             return self.ok()
         else:
             return self.fail(f"Неправильный ответ:\n\n{self.stdout}")
+
+    def stop_words(self):
+        """Проверяем, что не используем команду echo или printf"""
+        words = self.params.get("reference_stop_words", ["echo", "printf"])
+        with open(self.params["checking_script"], mode='r') as fid:
+            text_file = fid.read()
+            for w in words:
+                if w in text_file:
+                    return self.fail(
+                        "Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами")
+
+        return self
