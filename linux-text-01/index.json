@@ -23,6 +23,11 @@
           "chmod": "+x"
         },
         {
+          "file": "file.txt",
+          "target": "/home/ubuntu/",
+          "chmod": "+x"
+        },
+        {
           "file": "__init__.py",
           "target": "/usr/local/lib/ExerciseTester",
           "chmod": "+x"
