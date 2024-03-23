@@ -5,17 +5,29 @@ suites:
   - name: Success
     script-put-to-checker: ok.sh
     result-text: OK
+    params:
+      reference_reading_file: file.txt
   - name: Without print
     script-put-to-checker: without-print.sh
     result-text: "FAIL: Скрипт ничего не вывел"
+    params:
+      reference_reading_file: file.txt
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"
+    params:
+      reference_reading_file: file.txt
   - name: Wrong output
     script-put-to-checker: wrong-output.sh
     result-regex: 'FAIL: Неправильный ответ:\s'
+    params:
+      reference_reading_file: file.txt
   - name: Cheating
     script-put-to-checker: cheating.sh
     result-text: 'FAIL: Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами'
+    params:
+      reference_reading_file: file.txt
   - name: Remove text
     script-put-to-checker: remove-text.sh
     result-text: 'FAIL: file.txt не существует'
+    params:
+      reference_reading_file: file.txt

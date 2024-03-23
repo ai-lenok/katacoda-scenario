@@ -9,7 +9,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_reading_file", "file.txt")
+        kwargs.setdefault("reference_reading_file", "/home/ubuntu/file.txt")
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
 
