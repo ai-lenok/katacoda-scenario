@@ -13,4 +13,4 @@ suites:
     result-text: "FAIL: script.sh не существует"
   - name: Wrong format
     script-put-to-checker: uname-small.sh
-    result-regex: 'FAIL: Нужно вывести подробную информацию'
+    result-text: 'FAIL: Нужно вывести подробную информацию'
