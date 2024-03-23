@@ -25,16 +25,6 @@
           "file": "prime.py",
           "target": "/home/ubuntu/",
           "chmod": "+x"
-        },
-        {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
         }
       ]
     },
