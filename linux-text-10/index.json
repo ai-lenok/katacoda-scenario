@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Вывести строки отвечающих шаблону",
-  "title": "Вывести строки отвечающих шаблону",
-  "description": "Вывести строки отвечающих шаблону",
+  "pathwayTitle": "Вывести строки отвечающие шаблону",
+  "title": "Вывести строки отвечающие шаблону",
+  "description": "Вывести строки отвечающие шаблону",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -17,6 +17,11 @@
     },
     "assets": {
       "host01": [
+        {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
         {
           "file": "script.sh",
           "target": "/home/ubuntu/",
