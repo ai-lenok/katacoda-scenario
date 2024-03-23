@@ -19,3 +19,6 @@ suites:
   - name: Remove text
     script-put-to-checker: remove-text.sh
     result-text: 'FAIL: file.txt не существует'
+  - name: Too many text
+    script-put-to-checker: many.sh
+    result-text: 'FAIL: Нужно вывести 4 строк(и)'
