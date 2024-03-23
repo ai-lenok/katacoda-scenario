@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Перенаправить текст с перезаписью из stdout",
-  "title": "Перенаправить текст с перезаписью из stdout",
-  "description": "Перенаправить текст с перезаписью из stdout",
+  "pathwayTitle": "Перенаправление текста",
+  "title": "Перенаправление текста",
+  "description": "Перенаправление текста",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -18,19 +18,12 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
+          "file": "stdout.txt",
+          "target": "/home/ubuntu/"
         },
         {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
+          "file": "stderr.txt",
+          "target": "/home/ubuntu/"
         }
       ]
     },
