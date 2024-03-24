@@ -120,6 +120,7 @@ class Tester:
     def reference_command(self):
         process = subprocess.run([self.params["reference_command"]],
                                  stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE,
                                  universal_newlines=True,
                                  shell=True,
                                  executable="/bin/bash")
