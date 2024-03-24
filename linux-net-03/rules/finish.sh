@@ -8,7 +8,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_command", f'nc -zv localhost:8000')
+        kwargs.setdefault("reference_command", f'nc -zv localhost 8000')
         super().__init__(**kwargs)
 
     def check(self) -> str:
