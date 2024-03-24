@@ -17,7 +17,7 @@ class Checker(Tester):
                 .do(self.run)
                 .do(self.not_empty_stderr)
                 .do(self.reference_command_stderr)
-                .do(self.compare_text)
+                .do(self.compare_text_stderr)
                 .finish())
 
     def not_empty_stderr(self):
@@ -35,6 +35,12 @@ class Checker(Tester):
 
         self.params["reference_output"] = process.stderr.strip()
         return self
+
+    def compare_text_stderr(self):
+        if self.stderr == self.params["reference_output"]:
+            return self.ok()
+        else:
+            return self.fail(f"Неправильный ответ:\n\n{self.stderr}")
 
 
 if __name__ == '__main__':
