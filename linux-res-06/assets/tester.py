@@ -28,6 +28,7 @@ class Tester:
         self.params.setdefault("reference_output", "")
         self.params.setdefault("reference_pattern", "")
         self.params.setdefault("reference_stop_words", ["echo", "printf"])
+        kwargs.setdefault("reference_command", "")
 
         self.params.setdefault("checking_script", '/home/ubuntu/script.sh')
 
@@ -114,4 +115,14 @@ class Tester:
                     return self.fail(
                         "Пожалуйста, используйте утилиту, которая подставит нужный текст, а не вводите его сами")
 
+        return self
+
+    def reference_command(self):
+        process = subprocess.run([self.params["reference_command"]],
+                                 stdout=subprocess.PIPE,
+                                 universal_newlines=True,
+                                 shell=True,
+                                 executable="/bin/bash")
+
+        self.params["reference_output"] = process.stdout.strip()
         return self
