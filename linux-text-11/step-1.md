@@ -1,4 +1,12 @@
-Сравните файлы `application-test.yaml` и `application-production.yaml` между собой
+Сравните файлы
+
+`application-test.yaml`
+
+и
+
+`application-production.yaml`
+
+между собой
 
 ## Детали
 
@@ -12,23 +20,3 @@
 Есть ли изменения в этом файле, по сравнению с `application-production.yaml`
 
 И если да, то какие?
-
-Для начала посмотрите глазами на эти файлы
-
-`application-test.yaml`{{open}}
-
-`application-production.yaml`{{open}}
-
-Удастся ли вам сравнить их самостоятельно?
-
-На сколько это сложно сделать?
-
-Теперь сравним их при помощи утилиты `diff`:
-
-`diff application-production.yaml application-test.yaml`{{execute}}
-
-## Способ проверки
-
-У этого упражнения нет проверки
-
-Когда вы нажмёте **Завершить** - упражнение закроется
