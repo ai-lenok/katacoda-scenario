@@ -8,7 +8,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_command", f'sudo journalctl')
+        kwargs.setdefault("reference_command", f'journalctl')
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
 
