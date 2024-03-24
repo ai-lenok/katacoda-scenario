@@ -12,7 +12,6 @@ class Checker(Tester):
     def __init__(self, **kwargs):
         kwargs.setdefault("reference_reading_file", "file.txt")
         kwargs.setdefault("reference_command", f'nl {kwargs["reference_reading_file"]}')
-        kwargs.setdefault("reference_command_wrong", f'wc {kwargs["reference_reading_file"]}')
         kwargs.setdefault("preparatory_command", f'ls -l /dev > {kwargs["reference_reading_file"]}')
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
