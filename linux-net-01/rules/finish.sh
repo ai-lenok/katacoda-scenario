@@ -9,6 +9,7 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         kwargs.setdefault("reference_command", f'curl localhost:8000')
+        self.params.setdefault("reference_stop_words", ["echo", "printf", "cat"])
         super().__init__(**kwargs)
 
     def check(self) -> str:
