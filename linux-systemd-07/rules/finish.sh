@@ -8,7 +8,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_command", f'journalctl --unit cron.service --output=json')
+        kwargs.setdefault("reference_command", f'journalctl --unit cron.service --output=cat')
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
 
