@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import subprocess
 import sys
 
 sys.path.insert(1, '/usr/local/lib/')
@@ -17,9 +18,23 @@ class Checker(Tester):
                 .do(self.run)
                 .do(self.stop_words)
                 .do(self.not_empty)
-                .do(self.reference_command)
+                .do(self.reliable_reference_command)
                 .do(self.compare_text)
                 .finish())
+
+    def reliable_reference_command(self):
+        try:
+            process = subprocess.run([self.params["reference_command"]],
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE,
+                                     universal_newlines=True,
+                                     shell=True,
+                                     executable="/bin/bash")
+
+            self.params["reference_output"] = process.stdout.strip()
+            return self
+        except:
+            return self.fail("Сервер не работает")
 
 
 if __name__ == '__main__':
