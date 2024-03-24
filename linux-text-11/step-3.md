@@ -8,9 +8,9 @@
 
 ```text
 11c22
-<       - Text file 1
+<       - Text file left
 ---
->       - Text file 2
+>       - Text file right
 ```
 
 Первая строка `11c22` - говорит о номере строк в файлах, которые поменялись
