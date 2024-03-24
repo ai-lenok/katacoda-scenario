@@ -24,7 +24,6 @@ class Checker(Tester):
                 .do(self.stop_words)
                 .do(self.reading_file_exists)
                 .do(self.not_empty)
-#                .do(self.reference_command_wrong)
                 .do(self.reference_command)
                 .do(self.compare_text)
                 .finish())
@@ -37,20 +36,6 @@ class Checker(Tester):
     def reading_file_exists(self):
         if not Path(self.params["reference_reading_file"]).is_file():
             return self.fail(f'{self.params["reference_reading_file"]} не существует')
-        return self
-
-    def reference_command_wrong(self):
-        process = subprocess.run([self.params["reference_command_wrong"]],
-                                 stdout=subprocess.PIPE,
-                                 universal_newlines=True,
-                                 shell=True,
-                                 executable="/bin/bash")
-
-        reference_output_wrong_command = process.stdout.strip()
-
-        if reference_output_wrong_command == self.stdout:
-            return self.fail("Нужно вывести только количество строк")
-
         return self
 
 
