@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Сравнить два файла",
-  "title": "Сравнить два файла",
-  "description": "Сравнить два файла",
+  "pathwayTitle": "Сравнение двух файлов",
+  "title": "Сравнение двух файлов",
+  "description": "Сравнение двух файлов",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -18,18 +18,13 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
+          "file": "application-test.yaml",
           "target": "/home/ubuntu/",
           "chmod": "+x"
         },
         {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
+          "file": "application-production.yaml",
+          "target": "/home/ubuntu/",
           "chmod": "+x"
         }
       ]
