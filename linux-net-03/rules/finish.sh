@@ -15,10 +15,15 @@ class Checker(Tester):
     def check(self) -> str:
         return (self
                 .do(self.run)
-                .do(self.not_empty)
+                .do(self.not_empty_stderr)
                 .do(self.reference_command_stderr)
                 .do(self.compare_text)
                 .finish())
+
+    def not_empty_stderr(self):
+        if not self.stderr:
+            return self.fail(f'Скрипт ничего не вывел')
+        return self
 
     def reference_command_stderr(self):
         process = subprocess.run([self.params["reference_command"]],
