@@ -25,7 +25,7 @@ class Checker(Tester):
         for line in lines:
             if re.match(self.params["reference_pattern"], line):
                 return self.ok()
-        return self.fail("Не смог найти запланированную задачу")
+        return self.fail("Не смог найти задачу, которая выполняется каждую минуту")
 
 
 if __name__ == '__main__':
