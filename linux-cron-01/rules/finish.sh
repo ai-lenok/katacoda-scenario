@@ -9,7 +9,7 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_command", "crontab -l")
+        kwargs.setdefault("reference_command", "crontab -u ubuntu -l")
         kwargs.setdefault("reference_pattern", r'^(\*\s+){5}')
         super().__init__(**kwargs)
 
