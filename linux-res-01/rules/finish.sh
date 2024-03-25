@@ -11,8 +11,8 @@ import re
 class Checker(Tester):
     def __init__(self, **kwargs):
         self.pattern_memory_bytes = self.__generate_pattern('[\d\.]+')
-        if "reference_pattern" not in kwargs:
-            kwargs["reference_pattern"] = self.__generate_pattern('[\d\.]+[GMKBi]+')
+        kwargs.setdefault("reference_pattern",
+                          self.__generate_pattern('[\d\.]+[GMKBi]+'))
         super().__init__(**kwargs)
 
     def __generate_pattern(self, number_pattern: str):
