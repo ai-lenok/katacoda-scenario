@@ -103,7 +103,7 @@ class Tester:
         if re.match(self.params["reference_pattern"], self.stdout):
             return self.ok()
         else:
-            return self.fail(f"Неправильный ответ:\n\n{self.stdout}")
+            return self.fail(f"Неправильный ответ:\n```text\n{self.stdout}\n```")
 
     def stop_words(self):
         """Проверяем, что не используем команду echo или printf"""
