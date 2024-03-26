@@ -43,7 +43,8 @@ class Checker(Tester):
             process = subprocess.run([self.params["checking_script"]],
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE,
-                                     universal_newlines=True)
+                                     shell=True,
+                                     executable="/bin/bash")
 
             self.stdout = process.stdout.strip()
             self.stderr = process.stderr.strip()
