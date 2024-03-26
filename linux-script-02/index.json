@@ -18,6 +18,11 @@
     "assets": {
       "host01": [
         {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        },
+        {
           "file": "__init__.py",
           "target": "/usr/local/lib/ExerciseTester",
           "chmod": "+x"
