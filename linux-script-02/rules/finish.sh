@@ -39,14 +39,17 @@ class Checker(Tester):
         return self
 
     def run_script(self):
-        process = subprocess.run([self.params["checking_script"]],
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 universal_newlines=True)
+        try:
+            process = subprocess.run([self.params["checking_script"]],
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE,
+                                     universal_newlines=True)
 
-        self.stdout = process.stdout.strip()
-        self.stderr = process.stderr.strip()
-        self.return_code = process.returncode
+            self.stdout = process.stdout.strip()
+            self.stderr = process.stderr.strip()
+            self.return_code = process.returncode
+        except:
+            self.fail(f'Во время выполнения скрипта возникла ошибка')
         return self
 
     def user_exists(self):

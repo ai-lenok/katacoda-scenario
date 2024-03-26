@@ -21,8 +21,8 @@ suites:
     params:
       reference_command: "rm file.txt"
   - name: Without print
-    script-put-to-checker: without-print.sh
-    result-text: "FAIL: Пользователь user не существует, но получен статус: 0"
+    script-put-to-checker: without-text.sh
+    result-text: "FAIL: Во время выполнения скрипта возникла ошибка"
     params:
       reference_command: "rm file.txt"
   - name: False negative
