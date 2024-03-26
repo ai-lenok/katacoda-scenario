@@ -9,6 +9,14 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Переписать в Python-скрипт",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Модифицировать Shebang",
+        "text": "step-3.md"
       }
     ],
     "intro": {
