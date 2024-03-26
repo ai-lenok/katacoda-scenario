@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Создание простого скрипта",
-  "title": "Создание простого скрипта",
-  "description": "Создание простого скрипта",
+  "pathwayTitle": "Создание скрипта",
+  "title": "Создание скрипта",
+  "description": "Создание скрипта",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -9,6 +9,10 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Подсказка",
+        "text": "step-2.md"
       }
     ],
     "intro": {
