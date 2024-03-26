@@ -18,11 +18,6 @@
     "assets": {
       "host01": [
         {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        },
-        {
           "file": "__init__.py",
           "target": "/usr/local/lib/ExerciseTester",
           "chmod": "+x"
