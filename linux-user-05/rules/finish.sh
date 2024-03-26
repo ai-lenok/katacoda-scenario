@@ -25,7 +25,7 @@ class Checker(Tester):
         if not re.match(self.params["reference_pattern"], self.params["reference_output"]):
             return self.ok()
         else:
-            return self.fail(f'Пользователь {self.params["creating_user"]} не найден')
+            return self.fail(f'Пользователь {self.params["creating_user"]} существует')
 
 
 if __name__ == '__main__':
