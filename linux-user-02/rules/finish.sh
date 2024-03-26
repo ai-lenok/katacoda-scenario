@@ -18,13 +18,8 @@ class Checker(Tester):
     def check(self) -> str:
         return (self
                 .do(self.reference_command)
-                .do(self.reference_text_to_stdout)
                 .do(self.compare_regex)
                 .finish())
-
-    def reference_text_to_stdout(self):
-        self.stdout = self.params["reference_output"]
-        return self
 
     def compare_regex(self):
         if re.match(self.params["reference_pattern"], self.params["reference_output"]):
