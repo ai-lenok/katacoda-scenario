@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import subprocess
 import sys
+from pathlib import Path
 
 sys.path.insert(1, '/usr/local/lib/')
 
@@ -8,15 +10,55 @@ from ExerciseTester.tester import Tester
 
 class Checker(Tester):
     def __init__(self, **kwargs):
-        kwargs.setdefault("reference_output", "Hello world")
+        self.return_code = 0
+        kwargs.setdefault("creating_user", 'user')
+        kwargs.setdefault("reference_command", f'userdel {kwargs["creating_user"]}')
         super().__init__(**kwargs)
 
     def check(self) -> str:
         return (self
-                .do(self.run)
-                .do(self.not_empty)
-                .do(self.compare_text)
+                .do(self.script_exists)
+                .do(self.is_execution)
+                .do(self.run_script)
+                .do(self.user_exists)
+                .do(self.reference_command)
+                .do(self.run_script)
+                .do(self.user_not_exists)
                 .finish())
+
+    def script_exists(self):
+        if not Path(self.params["checking_script"]).is_file():
+            return self.fail(f'{self.params["checking_script"]} не существует')
+        return self
+
+    def is_execution(self):
+        Path(self.params["checking_script"]).stat()
+        return self
+
+    def run_script(self):
+        process = subprocess.run([self.params["checking_script"]],
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE,
+                                 universal_newlines=True)
+
+        self.stdout = process.stdout.strip()
+        self.stderr = process.stderr.strip()
+        self.return_code = process.returncode
+        return self
+
+    def user_exists(self):
+        if self.return_code == 0:
+            return self.ok()
+        else:
+            return self.fail(
+                f'Пользователь {self.params["creating_user"]} существует, но получен ответ: {self.return_code}')
+
+    def user_not_exists(self):
+        if self.return_code != 0:
+            return self.ok()
+        else:
+            return self.fail(
+                f'Пользователь {self.params["creating_user"]} не существует, но получен ответ: {self.return_code}')
 
 
 if __name__ == '__main__':
