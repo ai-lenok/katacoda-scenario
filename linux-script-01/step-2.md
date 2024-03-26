@@ -1,6 +1,6 @@
 Заменим команду Bash на команду Python:
 
-<pre class="file" data-filename="./script.sh" data-target="insert" data-marker="echo 'Hello world'">
+<pre class="file" data-filename="script.sh" data-target="insert" data-marker="echo 'Hello world'">
 print("Hello world")
 </pre>
 

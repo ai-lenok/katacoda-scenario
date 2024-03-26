@@ -1,6 +1,6 @@
 Поменяем первую строку - `Shebang`
 
-<pre class="file" data-filename="./script.sh" data-target="insert" data-marker="#!/usr/bin/env bash">
+<pre class="file" data-filename="script.sh" data-target="insert" data-marker="#!/usr/bin/env bash">
 #!/usr/bin/env python3
 </pre>
 
