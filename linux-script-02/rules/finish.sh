@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import stat
 import subprocess
 import sys
 from pathlib import Path
@@ -32,7 +33,9 @@ class Checker(Tester):
         return self
 
     def is_execution(self):
-        Path(self.params["checking_script"]).stat()
+        file_mode = Path(self.params["checking_script"]).stat().st_mode
+        if not stat.S_IXUSR & file_mode:
+            return self.fail(f'У файла {self.params["checking_script"]} нет права выполнения')
         return self
 
     def run_script(self):
@@ -47,18 +50,17 @@ class Checker(Tester):
         return self
 
     def user_exists(self):
-        if self.return_code == 0:
-            return self.ok()
-        else:
+        if self.return_code != 0:
             return self.fail(
-                f'Пользователь {self.params["creating_user"]} существует, но получен ответ: {self.return_code}')
+                f'Пользователь {self.params["creating_user"]} существует, но получен статус: {self.return_code}')
+        return self
 
     def user_not_exists(self):
         if self.return_code != 0:
             return self.ok()
         else:
             return self.fail(
-                f'Пользователь {self.params["creating_user"]} не существует, но получен ответ: {self.return_code}')
+                f'Пользователь {self.params["creating_user"]} не существует, но получен статус: {self.return_code}')
 
 
 if __name__ == '__main__':
