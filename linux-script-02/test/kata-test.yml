@@ -7,6 +7,11 @@ suites:
     result-text: OK
     params:
       checking_script: "{{ pwd }}/script.sh"
+  - name: Success v2
+    script-run-before-checker: ok-v2.sh
+    result-text: OK
+    params:
+      checking_script: "{{ pwd }}/script.sh"
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"
   - name: Without permission
