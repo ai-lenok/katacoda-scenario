@@ -3,7 +3,8 @@
 cat >script.sh <<EOL
 #!/usr/bin/env bash
 
-exit 1
+mkdir dir
+mkdir dir
 EOL
 
 chmod +x script.sh
