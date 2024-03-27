@@ -24,7 +24,7 @@ class Checker(Tester):
                 .finish())
 
     def compare_regex(self):
-        if re.match(self.params["reference_pattern"], self.params["reference_output"]):
+        if re.search(self.params["reference_pattern"], self.params["reference_output"]):
             return self.ok()
         else:
             return self.fail(f'Пользователя {self.params["adding_user"]} нет в группе {self.params["adding_user"]}')

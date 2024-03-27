@@ -22,7 +22,7 @@ class Checker(Tester):
                 .finish())
 
     def compare_regex(self):
-        if not re.match(self.params["reference_pattern"], self.params["reference_output"]):
+        if not re.search(self.params["reference_pattern"], self.params["reference_output"]):
             return self.ok()
         else:
             return self.fail(f'Пользователь {self.params["creating_user"]} существует')
