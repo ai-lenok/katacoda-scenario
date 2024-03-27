@@ -1,18 +1,22 @@
-script-before-each: init.sh
+script-before-each: cleaner.sh
 script-after-all: cleaner.sh
 path-to-checking-script: rules/finish.sh
 suites:
-  - name: Success easy
-    script-put-to-checker: ok.sh
+  - name: Success
+    script-run-before-checker: ok.sh
     result-text: OK
+    params:
+      checking_script: "{{ pwd }}/script.sh"
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"
   - name: Without permission
     script-run-before-checker: without-permission.sh
     result-text: "FAIL: У файла script.sh нет права выполнения"
-  - name: Without print
-    script-put-to-checker: without-text.sh
-    result-text: "FAIL: Пользователь user не существует, но получен статус: 0"
+  - name: Without text
+    script-run-before-checker: without-text.sh
+    result-text: "FAIL: Скрипт вернул успешный статус"
+    params:
+      checking_script: "{{ pwd }}/script.sh"
   - name: False positive
     script-put-to-checker: false-positive.sh
-    result-text: "FAIL: Пользователь user не существует, но получен статус: 0"
+    result-text: "FAIL: Скрипт вернул успешный статус"

@@ -19,7 +19,7 @@ class Checker(Tester):
                 .do(self.script_exists)
                 .do(self.is_execution)
                 .do(self.run_script)
-                .do(self.status)
+                .do(self.check_status)
                 .finish())
 
     def script_exists(self):
@@ -48,12 +48,12 @@ class Checker(Tester):
             self.fail(f'Во время выполнения скрипта возникла ошибка')
         return self
 
-    def status(self):
+    def check_status(self):
         if self.return_code != 0:
             return self.ok()
         else:
             return self.fail(
-                f'Скрипт {self.params["checking_script"]} вернул успешный статус')
+                f'Скрипт вернул успешный статус')
 
 
 if __name__ == '__main__':
