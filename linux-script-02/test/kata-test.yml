@@ -3,41 +3,16 @@ script-after-all: cleaner.sh
 path-to-checking-script: rules/finish.sh
 suites:
   - name: Success easy
-    script-put-to-checker: ok.py
+    script-put-to-checker: ok.sh
     result-text: OK
-    params:
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"
-  - name: Success full
-    script-run-before-checker: success-full.sh
-    result-text: OK
-    params:
-      checking_script: "{{ pwd }}/script.sh"
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"
   - name: The file does not exist
     result-text: "FAIL: script.sh не существует"
   - name: Without permission
     script-run-before-checker: without-permission.sh
     result-text: "FAIL: У файла script.sh нет права выполнения"
-    params:
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"
   - name: Without print
     script-put-to-checker: without-text.sh
     result-text: "FAIL: Пользователь user не существует, но получен статус: 0"
-    params:
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"
-  - name: False negative
-    script-put-to-checker: false-negative.sh
-    result-text: "FAIL: Пользователь user существует, но получен статус: 1"
-    params:
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"
   - name: False positive
     script-put-to-checker: false-positive.sh
     result-text: "FAIL: Пользователь user не существует, но получен статус: 0"
-    params:
-      reference_command: "touch file.txt"
-      reference_command_second: "rm file.txt"

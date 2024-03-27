@@ -12,14 +12,22 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         self.return_code = 0
+        kwargs.setdefault("creating_user", 'user')
+        kwargs.setdefault("reference_command", f'useradd {kwargs["creating_user"]}')
+        kwargs.setdefault("reference_command_second", f'userdel {kwargs["creating_user"]}')
         super().__init__(**kwargs)
 
     def check(self) -> str:
         return (self
                 .do(self.script_exists)
                 .do(self.is_execution)
+                .do(self.reference_command)
                 .do(self.run_script)
-                .do(self.status)
+                .do(self.user_exists)
+                .do(self.change_reference_command)
+                .do(self.reference_command)
+                .do(self.run_script)
+                .do(self.user_not_exists)
                 .finish())
 
     def script_exists(self):
@@ -48,12 +56,22 @@ class Checker(Tester):
             self.fail(f'Во время выполнения скрипта возникла ошибка')
         return self
 
-    def status(self):
+    def user_exists(self):
+        if self.return_code != 0:
+            return self.fail(
+                f'Пользователь {self.params["creating_user"]} существует, но получен статус: {self.return_code}')
+        return self
+
+    def change_reference_command(self):
+        self.params["reference_command"] = self.params["reference_command_second"]
+        return self
+
+    def user_not_exists(self):
         if self.return_code != 0:
             return self.ok()
         else:
             return self.fail(
-                f'Скрипт {self.params["checking_script"]} вернул успешный статус')
+                f'Пользователь {self.params["creating_user"]} не существует, но получен статус: {self.return_code}')
 
 
 if __name__ == '__main__':
