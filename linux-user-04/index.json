@@ -16,7 +16,13 @@
       "credits": ""
     },
     "assets": {
-      "host01": []
+      "host01": [
+        {
+          "file": "autostart.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        }
+      ]
     },
     "finish": {
       "text": "finish.md"
