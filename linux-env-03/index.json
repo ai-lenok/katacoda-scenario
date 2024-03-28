@@ -1,7 +1,7 @@
 {
-  "pathwayTitle": "Задать и вывести переменные окружения разными способами",
-  "title": "Задать и вывести переменные окружения разными способами",
-  "description": "Задать и вывести переменные окружения разными способами",
+  "pathwayTitle": "Вывести переменные окружения разными способами",
+  "title": "Вывести переменные окружения разными способами",
+  "description": "Вывести переменные окружения разными способами",
   "difficulty": "beginner",
   "time": "30 minutes",
   "details": {
@@ -16,23 +16,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        },
-        {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
