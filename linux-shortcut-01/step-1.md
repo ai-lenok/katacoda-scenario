@@ -1,15 +1,21 @@
-
+Поработайте с историей команд
 
 ## Детали
 
-Откройте файл `script.sh`{{open}}
+`history`{{execute}}
+`touch file`{{execute}}
+`ls -l`{{execute}}
+`!!`{{execute}}
+`!3`{{execute}}
+`ssh remote@localhost`{{execute}}
+`curl --user login:password localhost`{{execute}}
+`history`{{execute}}
 
-Напишите команду, которая
 
 
 
 ## Способ проверки
 
-Автотест выполнит команду в `script.sh`
+У этого упражнения нет проверки
 
-И проверит: полученный результат верен ожидаемому
+Когда вы нажмёте **Завершить** - упражнение закроется
