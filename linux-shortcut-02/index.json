@@ -9,6 +9,18 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Поиск команды",
+        "text": "step-2.md"
+      },
+      {
+        "title": "Выход из режима поиска",
+        "text": "step-3.md"
+      },
+      {
+        "title": "Очистить экран",
+        "text": "step-4.md"
       }
     ],
     "intro": {
@@ -16,23 +28,7 @@
       "credits": ""
     },
     "assets": {
-      "host01": [
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        },
-        {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        }
-      ]
+      "host01": []
     },
     "finish": {
       "text": "finish.md"
