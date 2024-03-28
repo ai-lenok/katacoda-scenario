@@ -9,6 +9,10 @@
       {
         "title": "Задание",
         "text": "step-1.md"
+      },
+      {
+        "title": "Дочерний процесс",
+        "text": "step-2.md"
       }
     ],
     "intro": {
