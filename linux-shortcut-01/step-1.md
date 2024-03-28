@@ -7,7 +7,7 @@
 `ls -l`{{execute}}
 `!!`{{execute}}
 `!3`{{execute}}
-`curl --user login:password localhost`{{execute}}
+`curl --user login:password localhost:8000`{{execute}}
 `history`{{execute}}
 
 ## Способ проверки
