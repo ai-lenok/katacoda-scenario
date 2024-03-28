@@ -21,6 +21,10 @@
           "file": "autostart.sh",
           "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
+        },
+        {
+          "file": "index.html",
+          "target": "/home/ubuntu/web"
         }
       ]
     },

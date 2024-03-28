@@ -7,12 +7,8 @@
 `ls -l`{{execute}}
 `!!`{{execute}}
 `!3`{{execute}}
-`ssh remote@localhost`{{execute}}
 `curl --user login:password localhost`{{execute}}
 `history`{{execute}}
-
-
-
 
 ## Способ проверки
 
