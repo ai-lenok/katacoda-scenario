@@ -10,7 +10,6 @@ from ExerciseTester.tester import Tester
 class Checker(Tester):
     def __init__(self, **kwargs):
         kwargs.setdefault("reference_reading_file", "file.txt")
-        kwargs.setdefault("reference_stop_words", ["echo", "printf", "cat"])
         kwargs.setdefault("reference_command", f'head  -n 16 {kwargs["reference_reading_file"]} | tail')
         kwargs.setdefault("is_message_success_from_stdout", True)
         super().__init__(**kwargs)
