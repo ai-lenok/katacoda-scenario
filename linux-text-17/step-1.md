@@ -81,19 +81,33 @@ Escape
 
 ## Режим последней строки???
 
-`:q`{{execute}}
-`:w`{{execute}}
-`:q!`{{execute}}
+```text
+:q
+```
+```text
+:w
+```
+```text
+:q!
+```
 
 ## Поиск
 
-`/read`{{execute}}
-`n`{{execute}}
-`n`{{execute}}
-`n`{{execute}}
-`N`{{execute}}
-`N`{{execute}}
-`N`{{execute}}
+```text
+/
+```
+
+```text
+then
+```
+
+```text
+n
+```
+
+```text
+N
+```
 
 ## Способ проверки
 
