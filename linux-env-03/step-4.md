@@ -13,10 +13,10 @@
 
 Если задать значение переменной:
 
-```
+`
 check_if_set="Value"
 echo ${check_if_set:+variable set}
-```{{execute}}
+`{{execute}}
 
 Оператор **`:+`** выводит своё значение
 
