@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cat file.txt
+ls -l /dev

@@ -1,6 +1,6 @@
 script-before-each: init.sh
 script-after-all: cleaner.sh
-path-to-checking-script: rules/finish.py
+path-to-checking-script: rules/finish.sh
 suites:
   - name: Success
     script-put-to-checker: ok.sh
