@@ -1,10 +1,44 @@
-
+Поработайте с текстовым редактором `vi`
 
 ## Детали
 
-Откройте файл `script.sh`{{open}}
+`vi file.txt`{{execute}}
+`j`{{execute}}
+`k`{{execute}}
+`10j`{{execute}}
+`10k`{{execute}}
 
-Напишите команду, которая
+Стрелка вниз
+
+Стрелка вверх
+
+`G`{{execute}}
+`10G`{{execute}}
+`gg`{{execute}}
+
+CTRL+d
+CTRL+u
+
+`i`{{execute}}
+Escape
+
+`a`{{execute}}
+Escape
+
+`GoLang`{{execute}}
+
+`:q`{{execute}}
+`:w`{{execute}}
+`:q!`{{execute}}
+`/read`{{execute}}
+`n`{{execute}}
+`n`{{execute}}
+`n`{{execute}}
+`N`{{execute}}
+`N`{{execute}}
+`N`{{execute}}
+
+
 
 
 
