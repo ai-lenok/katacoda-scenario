@@ -18,6 +18,11 @@
     "assets": {
       "host01": [
         {
+          "file": "mvnw.sh",
+          "target": "/home/ubuntu/",
+          "chmod": "+x"
+        },
+        {
           "file": "script.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
