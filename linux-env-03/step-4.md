@@ -1,5 +1,23 @@
+Следующая переменная окружения называется `check_if_set`:
 `echo ${check_if_set}`{{execute}}
+
+Как работает оператор `:+`
 `echo ${check_if_set:+variable set}`{{execute}}
+
+Ничего не выведено
+
+И значение не задано:
 `echo ${check_if_set}`{{execute}}
-`check_if_set="10"`{{execute}}
-`echo ${check_if_set:+variable set}`{{execute}}
+
+Теперь проверим, как отработает `:+`
+
+Если задать значение переменной:
+
+```
+check_if_set="Value"
+echo ${check_if_set:+variable set}
+```{{execute}}
+
+Оператор `:+` выводит своё значение
+
+Только если переменная имеет значение
