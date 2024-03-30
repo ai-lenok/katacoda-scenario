@@ -53,21 +53,6 @@
           "file": "mvnw.sh",
           "target": "/home/ubuntu/",
           "chmod": "+x"
-        },
-        {
-          "file": "script.sh",
-          "target": "/home/ubuntu/",
-          "chmod": "+x"
-        },
-        {
-          "file": "__init__.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
-        },
-        {
-          "file": "tester.py",
-          "target": "/usr/local/lib/ExerciseTester",
-          "chmod": "+x"
         }
       ]
     },
